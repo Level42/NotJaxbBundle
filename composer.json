@@ -1,5 +1,5 @@
 {
-    "name": "level42/notjaxb-bundle",
+    "name": "Level42/notjaxb-bundle",
     "description": "A Symfony 2 bundle to bind XML to PHP objects using annotations",
     "version": "1.0-dev",
     "support": {
