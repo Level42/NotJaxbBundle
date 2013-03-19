@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test:personnes xmlns:test="http://test/namespace#">
+	<test:personne>
+		<test:nom>Dupond</test:nom>
+		<test:service>Achats</test:service>
+	</test:personne>
+</test:personnes>
