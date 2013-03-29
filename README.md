@@ -74,7 +74,7 @@ XML
 PHP
 
         /**
-         * @XmlList([name="adresse",] [wrapper="adresses",] [type="Namespace\Adresse"])
+         * @XmlList([name="adresse",] [wrapper="adresses",] [type="Namespace\Adresse",] [ns="http://..."])
          */
         private $adresses;
 
@@ -118,11 +118,14 @@ PHP
 Voir https://github.com/Level42/NotJaxbBundle/tree/master/Tests/Entity
 
 ### 2.3) Roadmap
-1. Prise en charge des namespaces XML multiples
-2. Serialisation vers XML
+1. Serialisation vers XML
+2. Génération des entités à partir d'un XSD
 3. Ajout d'un serialiseur/deserialiseur Json
 
 ### 2.4) Changelog
+#### Version 1.1
+Date : 2013-03-29
+Ajout du support pour les multiples namespaces
 #### Version 1.0
 Date : 2013-03-19
 Première version stable
@@ -204,7 +207,7 @@ XML
 PHP
 
         /**
-         * @XmlList([name="attribute",] [wrapper="attributes",] [type="Namespace\Attribute"])
+         * @XmlList([name="attribute",] [wrapper="attributes",] [type="Namespace\Attribute"], [ns="http://..."])
          */
         private $attributes;
 
@@ -248,11 +251,14 @@ PHP
 See https://github.com/Level42/NotJaxbBundle/tree/master/Tests/Entity
 
 ### 2.3) Roadmap
-1. Coverage of the multiple namespaces XML
-2. Serialization to XML from object
+1. Serialization to XML from object
+2. Add XSD Entity generator
 3. Add Json serializer/unserializer
 
 ### 2.4) Changelog
+#### Version 1.1
+Date : 2013-03-29
+Add multiple namespace support
 #### Version 1.0
 Date : 2013-03-19
 First stable version
