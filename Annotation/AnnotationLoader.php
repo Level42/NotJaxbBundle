@@ -99,7 +99,7 @@ class AnnotationLoader
                 {
                     $attributeName = !is_null($annotation->name) ? $annotation->name : $property->getName();
                     $nodeName = $annotation->node;
-                    $metadata->addAttribute($attributeName, $property->getName(), $nodeName);
+                    $metadata->addAttribute($attributeName, $property->getName(), $nodeName, $annotation->ns);
                 }
             }
         }
@@ -171,8 +171,8 @@ class AnnotationLoader
                         } else {
                             $embeddedMetadata = null;
                         }
-
-                        $metadata->addList($property->getName(), $nodeName, $annotation->wrapper, $embeddedMetadata);
+                            
+                        $metadata->addList($property->getName(), $nodeName, $annotation->wrapper, $embeddedMetadata, $annotation->ns);
                     }
                 }
             }

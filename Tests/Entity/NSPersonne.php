@@ -41,7 +41,7 @@ class NSPersonne
     private $service;
 
     /**
-     * @XmlList(name="adresse", wrapper="adresses", type="Level42\NotJaxbBundle\Tests\Entity\NSAdresse")
+     * @XmlList(name="adresse", wrapper="adresses", type="Level42\NotJaxbBundle\Tests\Entity\NSAdresse", ns="http://test/namespace#")
      */
     private $adresses;
     

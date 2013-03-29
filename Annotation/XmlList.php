@@ -35,4 +35,10 @@ class XmlList extends Annotation
 	 * @var string
 	 */
 	public $wrapper;
+	
+	/**
+	 * Wrapper namespace
+	 * @var string
+	 */
+	public $ns;
 }

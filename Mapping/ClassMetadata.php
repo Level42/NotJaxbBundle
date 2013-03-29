@@ -178,9 +178,9 @@ class ClassMetadata
 	 * @param string $wrapperNode
 	 * @param ClassMetadata $metadata
 	 */
-	public function addList($property, $nodeName, $wrapperNode = null, ClassMetadata $metadata = null)
+	public function addList($property, $nodeName, $wrapperNode = null, ClassMetadata $metadata = null, $namespace = null)
 	{
-		$this->lists[$nodeName] = array($property, $wrapperNode, $metadata);
+		$this->lists[$nodeName] = array($property, $wrapperNode, $metadata, $namespace);
 	}
 
 	/**

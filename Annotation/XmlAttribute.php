@@ -29,4 +29,10 @@ class XmlAttribute extends Annotation
 	 * @var string
 	 */
 	public $node;
+	
+	/**
+	 * Attribute namespace
+	 * @var string
+	 */
+	public $ns;
 }

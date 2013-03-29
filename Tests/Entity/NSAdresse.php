@@ -46,7 +46,7 @@ class NSAdresse
     private $ville;
 
     /**
-     * @XmlList(name="complement", type="Level42\NotJaxbBundle\Tests\Entity\NSComplement")
+     * @XmlList(name="complement", type="Level42\NotJaxbBundle\Tests\Entity\NSComplement", ns="http://test/namespace#")
      */
     private $complements;
     

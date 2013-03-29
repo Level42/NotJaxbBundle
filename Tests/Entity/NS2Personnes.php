@@ -16,12 +16,12 @@ use Level42\NotJaxbBundle\Annotation\XmlElement;
 use Level42\NotJaxbBundle\Annotation\XmlList;
 
 /**
- * @XmlObject(ns="http://test/namespace#")
+ * @XmlObject(ns="http://test/namespace1#")
  */
 class NS2Personnes
 {
     /**
-     * @XmlList(name="personne", type="Level42\NotJaxbBundle\Tests\Entity\NS2Personne")
+     * @XmlList(name="personne", type="Level42\NotJaxbBundle\Tests\Entity\NS2Personne", ns="http://test/namespace1#")
      */
     private $personnes;
 

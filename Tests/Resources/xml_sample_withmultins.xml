@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<test:personnes xmlns:test="http://test/namespace#" xmlns:test2="http://test/namespace2#">
-	<test:personne id="1">
-		<test:nom>Dupond</test:nom>
-		<test:service>Achats</test:service>
-	</test:personne>
-	<test:personne id="2">
-		<test:nom>Durand</test:nom>
-		<test:service>Achats</test:service>
-	</test:personne>
-	<test:personne id="3">
-		<test:nom>Dupuis</test:nom>
-		<test:service>Courrier</test:service>
-	</test:personne>
-	<test:personne id="4">
-		<test:nom>Dupont</test:nom>
-		<test:service>Personnel</test:service>
+<test1:personnes xmlns:test1="http://test/namespace1#" xmlns:test2="http://test/namespace2#" xmlns:test3="http://test/namespace3#">
+	<test1:personne id="1">
+		<test1:nom>Dupond</test1:nom>
+		<test1:service>Achats</test1:service>
+	</test1:personne>
+	<test1:personne id="2">
+		<test1:nom>Durand</test1:nom>
+		<test1:service>Achats</test1:service>
+	</test1:personne>
+	<test1:personne id="3">
+		<test1:nom>Dupuis</test1:nom>
+		<test1:service>Courrier</test1:service>
+	</test1:personne>
+	<test1:personne id="4">
+		<test1:nom>Dupont</test1:nom>
+		<test1:service>Personnel</test1:service>
 		<test2:adresses>
 		    <test2:adresse id="1">
 		        <test2:numero>12</test2:numero>
@@ -33,10 +33,10 @@
 		        <test2:rue>place de la libération</test2:rue>
 		        <test2:cp>75000</test2:cp>
 		        <test2:ville>PARIS</test2:ville>
-		        <test2:complement>Complément 1</test2:complement>
-		        <test2:complement>Complément 2</test2:complement>
-		        <test2:complement>Complément 3</test2:complement>
+		        <test3:complement>Complément 1</test3:complement>
+		        <test3:complement>Complément 2</test3:complement>
+		        <test3:complement>Complément 3</test3:complement>
 		    </test2:adresse>
 		</test2:adresses>
-	</test:personne>
-</test:personnes>
+	</test1:personne>
+</test1:personnes>

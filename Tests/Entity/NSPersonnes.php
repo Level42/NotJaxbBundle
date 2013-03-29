@@ -21,7 +21,7 @@ use Level42\NotJaxbBundle\Annotation\XmlList;
 class NSPersonnes
 {
     /**
-     * @XmlList(name="personne", type="Level42\NotJaxbBundle\Tests\Entity\NSPersonne")
+     * @XmlList(name="personne", type="Level42\NotJaxbBundle\Tests\Entity\NSPersonne", ns="http://test/namespace#")
      */
     private $personnes;
 

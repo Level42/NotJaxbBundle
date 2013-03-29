@@ -9,6 +9,8 @@
  */
 namespace Level42\NotJaxbBundle\Manager;
 
+use Monolog\Logger;
+
 use Level42\NotJaxbBundle\Mapping\ClassMetadata;
 use Level42\NotJaxbBundle\Mapping\ClassMetaDataFactory;
 use Doctrine\Common\Cache\Cache;
@@ -32,6 +34,8 @@ class Manager
      * @var array
      */
     protected $rootClasses = array();
+    
+    protected $currentNS = null;
 
     /**
      * Manager constructor with required dependecy injection
@@ -65,7 +69,9 @@ class Manager
         $metadata = $this->classMetadataFactory->getClassMetadata($rootClass);
         $xml = new SimpleXMLElement($xmlString, null, null,
                 $metadata->getNamespace());
-
+        
+        $this->currentNS = $metadata->getNamespace();
+        
         return $this->parseObject($xml, $metadata);
     }
 
@@ -108,11 +114,11 @@ class Manager
     protected function parseAttributes(\SimpleXmlElement $xml, ClassMetadata $metadata, $obj)
     {
         foreach ($metadata->getAttributes() as $name => $info) 
-        {
+        {            
             $property = $info[0];
             $nodeName = $info[1];
             $namespace = $info[2];
-
+            
             if (!is_null($nodeName)) 
             {
                 $node = $xml->$nodeName;
@@ -144,7 +150,6 @@ class Manager
         foreach ($metadata->getElements() as $name => $property) 
         {
             $value = (string) $xml->$name;
-
             $setter = 'set' . ucfirst($property);
             $obj->$setter($value);
         }
@@ -162,10 +167,11 @@ class Manager
     {
         foreach ($metadata->getEmbeds() as $nodeName => $info) 
         {
-
             $property = $info[0];
             $tempMetaData = $info[1];
+            $namespace = $info[2];
 
+            // TODO Ajouter la lecture avec namespace
             $tempXml = $xml->$nodeName;
             if ($tempXml != null) 
             {
@@ -190,21 +196,24 @@ class Manager
     protected function parseLists(\SimpleXmlElement $xml, ClassMetadata $metadata, $obj)
     {
         foreach ($metadata->getLists() as $nodeName => $info) 
-        {
+        {            
             $property = $info[0];
             $wrapperNode = $info[1];
             $listMetadata = $info[2];
-
+            $namespace = $info[3];
+            
             $tempList = array();
 
             if (!is_null($wrapperNode)) 
             {
-
+                $xml = $xml->children($namespace);
                 if (isset($xml->$wrapperNode)) 
                 {
                     foreach ($xml->$wrapperNode->$nodeName as $item) 
                     {
-                        if (!is_null($listMetadata)) 
+                        if ($item == null) {
+                            continue;
+                        } elseif (!is_null($listMetadata)) 
                         {
                             $tempObj = $this->parseObject($item, $listMetadata);
                             $tempList[] = $tempObj;
@@ -215,7 +224,7 @@ class Manager
                 }
 
             } else {
-
+                $xml = $xml->children($namespace);
                 foreach ($xml->$nodeName as $item) 
                 {
                     if (!is_null($listMetadata)) 
@@ -268,5 +277,4 @@ class Manager
             $this->classMetadataFactory->getClassMetadata($class);
         }
     }
-
 }

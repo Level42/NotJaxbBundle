@@ -16,7 +16,7 @@ use Level42\NotJaxbBundle\Annotation\XmlElement;
 use Level42\NotJaxbBundle\Annotation\XmlList;
 
 /**
- * @XmlObject(ns="http://test/namespace#")
+ * @XmlObject(ns="http://test/namespace1#")
  */
 class NS2Personne
 {
@@ -41,7 +41,7 @@ class NS2Personne
     private $service;
 
     /**
-     * @XmlList(name="adresse", wrapper="adresses", type="Level42\NotJaxbBundle\Tests\Entity\NS2Adresse")
+     * @XmlList(name="adresse", wrapper="adresses", type="Level42\NotJaxbBundle\Tests\Entity\NS2Adresse", ns="http://test/namespace2#")
      */
     private $adresses;
     
