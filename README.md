@@ -122,7 +122,7 @@ Pour déserialiser un XML en objet, utiliser le service "notjaxb.xml_marshalling
 Voir https://github.com/Level42/NotJaxbBundle/tree/master/Tests/Entity
 
 ### 2.3) Roadmap
-1. Serialisation vers XML
+1. Gestion des namespaces dans la serialisation XML
 2. Génération des entités à partir d'un XSD
 3. Ajout d'un serialiseur/deserialiseur Json
 
@@ -263,7 +263,7 @@ To unserialize XML XML to object, use "notjaxb.xml_marshalling" service.
 See https://github.com/Level42/NotJaxbBundle/tree/master/Tests/Entity
 
 ### 2.3) Roadmap
-1. Serialization to XML from object
+1. Namespace support in XML serialization
 2. Add XSD Entity generator
 3. Add Json serializer/unserializer
 
