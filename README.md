@@ -1,7 +1,7 @@
 NotJaxbBundle (fr)
 =========
 
-Ce bundle permet d'hydrater des objets PHP à partir d'un fichier XML en utilisant des annotations. Un peu comme JaxB...
+Ce bundle permet d'hydrater des objets PHP à partir d'un fichier XML en utilisant des annotations ou de la même manière, de générer un flux XML à partir d'un objet. Un peu comme JaxB...
 A l'origine il s'agit de l'outil https://raw.github.com/lampjunkie/xml-hitch intégré dans un bundle et avec quelques fonctionnalités supplémentaires (namespace, recursivité des objets)
 
 1) Installation
@@ -142,7 +142,7 @@ Première version stable
 NotJaxbBundle (en)
 =========
 
-A Symfony 2 bundle to bind XML to PHP objects using annotations
+A Symfony 2 bundle to bind XML to PHP objects using annotations or generate XML from PHP object.
 
 1) Installation
 ----------------------------------
