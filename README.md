@@ -114,6 +114,10 @@ PHP
         private $poste;
         
 
+
+Pour serialiser un objet en XML, utiliser le service "notjaxb.xml_unmarshalling".
+Pour déserialiser un XML en objet, utiliser le service "notjaxb.xml_marshalling".
+
 ### 2.2) Exemples
 Voir https://github.com/Level42/NotJaxbBundle/tree/master/Tests/Entity
 
@@ -249,6 +253,11 @@ PHP
          */
         private $description;
         
+        
+        
+To serialize an object to XML, use "notjaxb.xml_unmarshalling" service.
+To unserialize XML XML to object, use "notjaxb.xml_marshalling" service.
+
 
 ### 2.2) Examples
 See https://github.com/Level42/NotJaxbBundle/tree/master/Tests/Entity
