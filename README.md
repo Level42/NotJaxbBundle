@@ -123,6 +123,9 @@ Voir https://github.com/Level42/NotJaxbBundle/tree/master/Tests/Entity
 3. Ajout d'un serialiseur/deserialiseur Json
 
 ### 2.4) Changelog
+#### Version 1.2
+Date : 2013-04-06
+Ajout de la serialisation XML (sans namespaces)
 #### Version 1.1
 Date : 2013-03-29
 Ajout du support pour les multiples namespaces
@@ -256,6 +259,9 @@ See https://github.com/Level42/NotJaxbBundle/tree/master/Tests/Entity
 3. Add Json serializer/unserializer
 
 ### 2.4) Changelog
+#### Version 1.2
+Date : 2013-04-06
+Add XML serialization (without namespaces)
 #### Version 1.1
 Date : 2013-03-29
 Add multiple namespace support

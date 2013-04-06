@@ -41,4 +41,10 @@ class XmlList extends Annotation
 	 * @var string
 	 */
 	public $ns;
+	
+	/**
+	 * Attribute namespace prefix
+	 * @var string
+	 */
+	public $prefix;
 }

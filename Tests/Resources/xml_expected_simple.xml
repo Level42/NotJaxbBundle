@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<personnes>
+  <personne id="1">
+    <nom>PERINEL</nom>
+    <service>Ingénieurie</service>
+  </personne>
+</personnes>

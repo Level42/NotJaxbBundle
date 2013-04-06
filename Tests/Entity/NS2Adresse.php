@@ -16,7 +16,7 @@ use Level42\NotJaxbBundle\Annotation\XmlElement;
 use Level42\NotJaxbBundle\Annotation\XmlList;
 
 /**
- * @XmlObject(ns="http://test/namespace2#")
+ * @XmlObject(ns="http://test/namespace2#", name="adresse", prefix="test2")
  */
 class NS2Adresse
 {
@@ -46,7 +46,7 @@ class NS2Adresse
     private $ville;
 
     /**
-     * @XmlList(name="complement", type="Level42\NotJaxbBundle\Tests\Entity\NS2Complement", ns="http://test/namespace3#")
+     * @XmlList(name="complement", type="Level42\NotJaxbBundle\Tests\Entity\NS2Complement", ns="http://test/namespace3#", prefix="test3")
      */
     private $complements;
     

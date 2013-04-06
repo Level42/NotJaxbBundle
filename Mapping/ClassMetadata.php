@@ -21,6 +21,13 @@ class ClassMetadata
     protected $reflClass;
 
     /**
+     * The name of xml node
+     *
+     * @var string
+     */
+    protected $name;
+
+    /**
      * The class name
      *
      * @var string
@@ -33,6 +40,13 @@ class ClassMetadata
      * @var string
      */
     protected $namespace;
+    
+    /**
+     * The class namespace prefix
+     *
+     * @var string
+     */
+    protected $prefix;
 
     /**
      * Array of xml attributes
@@ -112,9 +126,9 @@ class ClassMetadata
      * @param string $nodeName
      * @param string $namespace
      */
-	public function addAttribute($name, $property, $nodeName, $namespace = null)
+	public function addAttribute($name, $property, $nodeName, $namespace = null, $prefix = null)
 	{
-		$this->attributes[$name] = array($property, $nodeName, $namespace);
+		$this->attributes[$name] = array($property, $nodeName, $namespace, $prefix);
 	}
 
 	/**
@@ -178,9 +192,9 @@ class ClassMetadata
 	 * @param string $wrapperNode
 	 * @param ClassMetadata $metadata
 	 */
-	public function addList($property, $nodeName, $wrapperNode = null, ClassMetadata $metadata = null, $namespace = null)
+	public function addList($property, $nodeName, $wrapperNode = null, ClassMetadata $metadata = null, $namespace = null, $prefix = null)
 	{
-		$this->lists[$nodeName] = array($property, $wrapperNode, $metadata, $namespace);
+		$this->lists[$nodeName] = array($property, $wrapperNode, $metadata, $namespace, $nodeName, $prefix);
 	}
 
 	/**
@@ -229,5 +243,30 @@ class ClassMetadata
     public function setNamespace($namespace)
     {
         $this->namespace = $namespace;
+    }
+
+    public function getName()
+    {
+        if ($this->name == null) {
+            $parts = explode("\\", $this->className);
+            $this->name = $parts[count($parts) - 1];  
+        }
+        
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    public function getPrefix()
+    {
+        return $this->prefix;
+    }
+
+    public function setPrefix($prefix)
+    {
+        $this->prefix = $prefix;
     }
 }

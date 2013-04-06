@@ -64,10 +64,22 @@ class AnnotationLoader
                 {
                     if ($annotation instanceof XmlObject) 
                     {
+                        // If class have name
+                        if ($annotation->name != null) 
+                        {
+                            $metadata->setName($annotation->name);
+                        }
+                        
                         // If class have namespace
                         if ($annotation->ns != null) 
                         {
                             $metadata->setNamespace($annotation->ns);
+                        }
+                        
+                        // If class have namespace prefix
+                        if ($annotation->prefix != null) 
+                        {
+                            $metadata->setPrefix($annotation->prefix);
                         }
 
                         $this->loadClassAttributes($metadata);
@@ -99,7 +111,7 @@ class AnnotationLoader
                 {
                     $attributeName = !is_null($annotation->name) ? $annotation->name : $property->getName();
                     $nodeName = $annotation->node;
-                    $metadata->addAttribute($attributeName, $property->getName(), $nodeName, $annotation->ns);
+                    $metadata->addAttribute($attributeName, $property->getName(), $nodeName, $annotation->ns, $annotation->prefix);
                 }
             }
         }
@@ -172,7 +184,7 @@ class AnnotationLoader
                             $embeddedMetadata = null;
                         }
                             
-                        $metadata->addList($property->getName(), $nodeName, $annotation->wrapper, $embeddedMetadata, $annotation->ns);
+                        $metadata->addList($property->getName(), $nodeName, $annotation->wrapper, $embeddedMetadata, $annotation->ns, $annotation->prefix);
                     }
                 }
             }

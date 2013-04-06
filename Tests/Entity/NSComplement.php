@@ -16,7 +16,7 @@ use Level42\NotJaxbBundle\Annotation\XmlElement;
 use Level42\NotJaxbBundle\Annotation\XmlList;
 
 /**
- * @XmlObject(ns="http://test/namespace#")
+ * @XmlObject(ns="http://test/namespace#", name="complement", prefix="test")
  */
 class NSComplement
 {

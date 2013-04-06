@@ -19,7 +19,7 @@ use \SimpleXmlElement;
 /**
  * Manager manages all operations
  */
-class Manager
+class XmlUnmarshalling
 {
     /**
      * The ClassMetadata factory
@@ -34,8 +34,6 @@ class Manager
      * @var array
      */
     protected $rootClasses = array();
-    
-    protected $currentNS = null;
 
     /**
      * Manager constructor with required dependecy injection
@@ -69,8 +67,6 @@ class Manager
         $metadata = $this->classMetadataFactory->getClassMetadata($rootClass);
         $xml = new SimpleXMLElement($xmlString, null, null,
                 $metadata->getNamespace());
-        
-        $this->currentNS = $metadata->getNamespace();
         
         return $this->parseObject($xml, $metadata);
     }

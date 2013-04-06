@@ -6,9 +6,13 @@
 
     <services>
 
-        <service id="notjaxb.manager" class="Level42\NotJaxbBundle\Manager\Manager">
+        <service id="notjaxb.xml_unmarshalling" class="Level42\NotJaxbBundle\Manager\XmlUnmarshalling">
         	<argument type="service" id="notjaxb.metadata.factory" />
         </service>        
+        
+        <service id="notjaxb.xml_marshalling" class="Level42\NotJaxbBundle\Manager\XmlMarshalling">
+        	<argument type="service" id="notjaxb.metadata.factory" />
+        </service>
         
         <service id="notjaxb.metadata.factory" class="Level42\NotJaxbBundle\Mapping\ClassMetadataFactory">
         	<argument type="service" id="notjaxb.annotation.loader" />

@@ -15,7 +15,7 @@ use Level42\NotJaxbBundle\Mapping\ClassMetadataFactory;
 use Level42\NotJaxbBundle\Tests\Entity\Personnes;
 use Level42\NotJaxbBundle\Tests\Entity\Produits;
 
-class ManagerTest extends TestCase
+class XmlUnmarshallingTest extends TestCase
 {
     /**
      * Service
@@ -29,7 +29,7 @@ class ManagerTest extends TestCase
     public function __construct()
     {
         parent::__construct();        
-        $this->service = $this->container->get('notjaxb.manager');
+        $this->service = $this->container->get('notjaxb.xml_unmarshalling');
     }
         
     /**
