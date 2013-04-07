@@ -26,6 +26,7 @@ Si vous n'avez pas encore composer, téléchargez le et suivez la procédure d'i
 Cette annotation est à ajouter sur toutes les classes qui doivent être liées à un noeud XML.
 Options :
 - ns : namespace de l'élément dans le XML
+- name : Nom du noeud XML lors de la serialisation
 
 XML
 
@@ -36,7 +37,7 @@ XML
 PHP
 
         /**
-         * @XmlObject([ns="http://..."])
+         * @XmlObject([ns="http://...",] [name="personne"])
          */
         class Personne
         {
@@ -165,6 +166,7 @@ If you don't have Composer yet, download it following the instructions on
 Any class that needs to be mapped to an XML document will need this annotation defined on the class level.
 Options :
 - ns : XML Element namespace
+- ns : XML Element name (for XML serialization)
 
 XML
 
@@ -175,7 +177,7 @@ XML
 PHP
 
         /**
-         * @XmlObject([ns="http://..."])
+         * @XmlObject([ns="http://...",] [name="product"])
          */
         class Product
         {
