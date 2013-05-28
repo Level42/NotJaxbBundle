@@ -140,7 +140,7 @@ class AnnotationLoader
                         $nodeName = !is_null($annotation->name) ? $annotation->name : $property->getName();
                         if (is_null($annotation->type)) 
                         {
-                            $metadata->addElement($nodeName, $property->getName());
+                            $metadata->addElement($nodeName, $property->getName(), $annotation->ns);
                         } else {
                             $embeddedMetadata = new ClassMetadata(
                                     $annotation->type);

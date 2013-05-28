@@ -147,9 +147,9 @@ class ClassMetadata
 	 * @param string $name
 	 * @param string $property
 	 */
-	public function addElement($name, $property)
+	public function addElement($name, $property, $ns = null)
 	{
-		$this->elements[$name] = $property;
+		$this->elements[$name] = array($property, $ns);
 	}
 
 	/**

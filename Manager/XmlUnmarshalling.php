@@ -143,9 +143,21 @@ class XmlUnmarshalling
      */
     protected function parseElements(\SimpleXmlElement $xml, ClassMetadata $metadata, $obj)
     {
-        foreach ($metadata->getElements() as $name => $property) 
+        foreach ($metadata->getElements() as $name => $properties) 
         {
-            $value = (string) $xml->$name;
+            $property = $properties[0];
+            $namespace = $properties[1];
+            
+            if ($namespace == null) 
+            {
+                $value = (string) $xml->$name;
+            } 
+            else 
+            {
+                $elements = $xml->children($namespace);
+                $value = (string) $elements->$name;
+            }
+            
             $setter = 'set' . ucfirst($property);
             $obj->$setter($value);
         }
@@ -165,9 +177,7 @@ class XmlUnmarshalling
         {
             $property = $info[0];
             $tempMetaData = $info[1];
-            $namespace = $info[2];
 
-            // TODO Ajouter la lecture avec namespace
             $tempXml = $xml->$nodeName;
             if ($tempXml != null) 
             {
