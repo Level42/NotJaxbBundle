@@ -12,7 +12,7 @@ ou plus moderne, l'ajouter à votre fichier composer.json
 
     "require": {
         ...
-        "Level42/notjaxb-bundle": "1.0"
+        "Level42/notjaxb-bundle": "1.3"
         ...
     },
 
@@ -27,6 +27,7 @@ Cette annotation est à ajouter sur toutes les classes qui doivent être liées 
 Options :
 - ns : namespace de l'élément dans le XML
 - name : Nom du noeud XML lors de la serialisation
+- namespace : Namespace de l'objet dans le XML
 
 XML
 
@@ -48,6 +49,7 @@ Cette annotation est utilisée sur les attributs d'une classe qui sont liés à 
 Options :
 - name : Nom du noeud dans le XML (si différent du nom de l'attribut)
 - type : Type d'objet (chemin complet de la classe)
+- namespace : Namespace de l'objet dans le XML
 
 XML
 
@@ -58,12 +60,17 @@ XML
 PHP
 
         /**
-         * @XmlElement([name="adresse",] [type="Namespace\Adresse"])
+         * @XmlElement([name="adresse",] [type="Namespace\Adresse",] [ns="http://..."])
          */
         private $adresse;
 
 #### @XmlList
 Cette annotation est utilisée sur les attributs d'une classe qui sont liés à un ensemble de noeuds enfant XML.
+Options :
+- name : Nom du noeud dans le XML (si différent du nom de l'attribut)
+- type : Type d'objet (chemin complet de la classe)
+- wrapper : Noeud contenant l'itération
+- namespace : Namespace de l'objet dans le XML
 
 XML
 
@@ -84,6 +91,7 @@ PHP
 Cette annotation est utilisée sur les attributs d'une classe qui sont liés à un attribut XML.
 Options :
 - name : Nom de l'attribut dans le XML (si différent du nom de l'attribut de la classe)
+- namespace : Namespace de l'objet dans le XML
 
 XML
 
@@ -99,7 +107,7 @@ PHP
         private $identifiant;
 
 #### @XmlValue
-Cette annoation est utilisée pour les attributs à la valeur d'un noeud XML.
+Cette annotation est utilisée pour les attributs à la valeur d'un noeud XML.
 
 XML
 
@@ -127,6 +135,9 @@ Voir https://github.com/Level42/NotJaxbBundle/tree/master/Tests/Entity
 3. Ajout d'un serialiseur/deserialiseur Json
 
 ### 2.4) Changelog
+#### Version 1.3
+Date : 2013-05-28
+Correction de la gestion des namespace sur les XmlElements
 #### Version 1.2
 Date : 2013-04-06
 Ajout de la serialisation XML (sans namespaces)
@@ -152,7 +163,7 @@ or add in your composer.json file
 
     "require": {
         ...
-        "Level42/notjaxb-bundle": "1.0"
+        "Level42/notjaxb-bundle": "1.3"
         ...
     },
 
@@ -166,7 +177,6 @@ If you don't have Composer yet, download it following the instructions on
 Any class that needs to be mapped to an XML document will need this annotation defined on the class level.
 Options :
 - ns : XML Element namespace
-- ns : XML Element name (for XML serialization)
 
 XML
 
@@ -188,6 +198,7 @@ This annotation will map a class property to a node within the XML document. An 
 Options :
 - name : Node name if different in XML
 - type : Object type (fullclass path)
+- ns : Element namespace
 
 XML
 
@@ -204,6 +215,11 @@ PHP
 
 #### @XmlList
 This annotation allows you to map collections of XML nodes to arrays of objects.
+Options :
+- name : Node name if different in XML
+- type : Object type (fullclass path)
+- wrapper : Paren object name
+- ns : Element namespace
 
 XML
 
@@ -224,6 +240,7 @@ PHP
 This annotation will map a class property to an attribute within an XML node.
 Options :
 - name : Attribute name in XML (if different of class attribute name)
+- ns : Attribute namespace
 
 XML
 
@@ -267,6 +284,9 @@ See https://github.com/Level42/NotJaxbBundle/tree/master/Tests/Entity
 3. Add Json serializer/unserializer
 
 ### 2.4) Changelog
+#### Version 1.3
+Date : 2013-05-28
+Fix namespace support on XmlElements
 #### Version 1.2
 Date : 2013-04-06
 Add XML serialization (without namespaces)

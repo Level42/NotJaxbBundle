@@ -31,6 +31,12 @@ class XmlElement extends Annotation
 	public $type;
 	
 	/**
+	 * Element namespace prefix
+	 * @var string
+	 */
+	public $prefix;
+	
+	/**
 	 * Element namespace
 	 * @var string
 	 */
