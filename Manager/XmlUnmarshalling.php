@@ -214,9 +214,6 @@ class XmlUnmarshalling
             {
                 $xmlChild = $xml->children($namespace);
 
-                echo $wrapperNode;
-                \Zend_Debug::dump($xmlChild->asXML());
-
                 if (isset($xmlChild->$wrapperNode))
                 {
                     foreach ($xmlChild->$wrapperNode->$nodeName as $item)
