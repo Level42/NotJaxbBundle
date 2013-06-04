@@ -48,7 +48,8 @@ class XmlMarshallingTest extends TestCase
     public function testMarshallingSimple()
     {
         $expected = file_get_contents(__DIR__.'/Resources/xml_expected_simple.xml');
-
+        $expected = str_replace("\r", "", $expected);
+        
         $personnes = new Personnes();
         
             $personne = new Personne();
@@ -59,6 +60,7 @@ class XmlMarshallingTest extends TestCase
         $personnes->setPersonnes(array($personne));
         
         $result = $this->service->marshall($personnes);
+        
         $this->assertEquals($expected, $result);    
     }
         
@@ -68,7 +70,7 @@ class XmlMarshallingTest extends TestCase
     public function testMarshallingAfterMarshallingSimple()
     {
         $expected = file_get_contents(__DIR__.'/Resources/xml_sample_simple.xml');
-        $expected = str_replace("\t", "  ", $expected);
+        $expected = str_replace("\r", "", $expected);
         
         $personnes = $this->serviceUnmarshaling->unmarshall($expected, 'Level42\NotJaxbBundle\Tests\Entity\Personnes');
         $result = $this->service->marshall($personnes);
@@ -82,7 +84,7 @@ class XmlMarshallingTest extends TestCase
     public function testMarshallingAfterMarshallingRecursive()
     {
         $expected = file_get_contents(__DIR__.'/Resources/xml_sample_recursive.xml');
-        $expected = str_replace("\t", "  ", $expected);
+        $expected = str_replace("\r", "", $expected);
         
         $produits = $this->serviceUnmarshaling->unmarshall($expected, 'Level42\NotJaxbBundle\Tests\Entity\Produits');
         $result = $this->service->marshall($produits);
@@ -96,7 +98,7 @@ class XmlMarshallingTest extends TestCase
     public function _testMarshallingAfterMarshallingWithNamespace()
     {
         $expected = file_get_contents(__DIR__.'/Resources/xml_sample_withns.xml');
-        $expected = str_replace("\t", "  ", $expected);
+        $expected = str_replace("\r", "", $expected);
         
         $produits = $this->serviceUnmarshaling->unmarshall($expected, 'Level42\NotJaxbBundle\Tests\Entity\NSPersonnes');
         $result = $this->service->marshall($produits);
@@ -110,7 +112,7 @@ class XmlMarshallingTest extends TestCase
     public function _testMarshallingAfterMarshallingWithMultipleNamespaces()
     {
         $expected = file_get_contents(__DIR__.'/Resources/xml_sample_withmultins.xml');
-        $expected = str_replace("\t", "  ", $expected);
+        $expected = str_replace("\r", "", $expected);
         
         $produits = $this->serviceUnmarshaling->unmarshall($expected, 'Level42\NotJaxbBundle\Tests\Entity\NS2Personnes');
         $result = $this->service->marshall($produits);

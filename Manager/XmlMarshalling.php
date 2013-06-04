@@ -155,8 +155,10 @@ class XmlMarshalling
      */
     protected function parseElements($obj, ClassMetadata $metadata, \DOMElement $xml)
     {
-        foreach ($metadata->getElements() as $name => $property) 
+        foreach ($metadata->getElements() as $name => $properties) 
         {
+            $property = $properties[0];
+            
             $value = $this->getValueFromProperty($obj, $property);
             
             if ($value != null) {
