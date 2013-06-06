@@ -177,11 +177,15 @@ class XmlUnmarshalling
         {
             $property = $info[0];
             $tempMetaData = $info[1];
+            $namespace = $tempMetaData->getNamespace();
 
-            $tempXml = $xml->$nodeName;
-            if ($tempXml != null)
+            //$tempXml = $xml->$nodeName;
+            $tempXml = $xml->children($namespace);
+            
+            if ($tempXml != null && $tempXml->$nodeName != null)
             {
-                $tempObj = $this->parseObject($tempXml, $tempMetaData);
+                $tempObj = $this->parseObject($tempXml->$nodeName, $tempMetaData);
+                //$tempObj = $this->parseObject($tempXml, $tempMetaData);
                 if ($tempObj != null)
                 {
                     $setter = 'set' . ucfirst($property);

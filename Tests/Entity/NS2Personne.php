@@ -24,12 +24,12 @@ class NS2Personne
      * @XmlAttribute
      */
     private $id;
-    
+
     /**
      * @XmlAttribute
      */
     private $enabled;
-    
+
     /**
      * @XmlElement
      */
@@ -41,10 +41,14 @@ class NS2Personne
     private $service;
 
     /**
+     * @XmlElement(name="adresse", type="Level42\NotJaxbBundle\Tests\Entity\NS2Adresse", ns="http://test/namespace2#", prefix="test2")
+     */
+    private $adressePrincipale;
+
+    /**
      * @XmlList(name="adresse", wrapper="adresses", type="Level42\NotJaxbBundle\Tests\Entity\NS2Adresse", ns="http://test/namespace2#", prefix="test2")
      */
     private $adresses;
-    
 
     /**
      * 
@@ -135,4 +139,15 @@ class NS2Personne
     {
         $this->enabled = $enabled;
     }
+
+    public function getAdressePrincipale()
+    {
+        return $this->adressePrincipale;
+    }
+
+    public function setAdressePrincipale($adressePrincipale)
+    {
+        $this->adressePrincipale = $adressePrincipale;
+    }
+
 }
