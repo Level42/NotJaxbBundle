@@ -2,6 +2,7 @@
     "name": "level42/notjaxb-bundle",
     "description": "A Symfony 2 bundle to bind XML to PHP objects using annotations",
     "version": "1.3",
+	"license": "MIT",
     "support": {
         "email": "level42.dev@gmail.com"
     },
