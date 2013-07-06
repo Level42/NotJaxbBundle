@@ -9,11 +9,9 @@ ou plus moderne, l'ajouter à votre fichier composer.json
 
     "require": {
         ...
-        "Level42/notjaxb-bundle": "1.3"
+        "level42/notjaxb-bundle": "1.3"
         ...
     },
-    
-Il faudra au préalable ajouter Github comme repository.
 
 Si vous n'avez pas encore composer, téléchargez le et suivez la procédure d'installation sur
 [http://getcomposer.org/](http://getcomposer.org/ "http://getcomposer.org/").

@@ -1,4 +1,4 @@
-[< Retour](https://github.com/Level42/NotJaxbBundle/blob/master/README.md "< Retour")
+[< Return](https://github.com/Level42/NotJaxbBundle/blob/master/README.md "< Return")
 
 
 1) Installation
@@ -9,11 +9,9 @@ or add in your composer.json file
 
     "require": {
         ...
-        "Level42/notjaxb-bundle": "1.3"
+        "level42/notjaxb-bundle": "1.3"
         ...
     },
-    
-You need to add Github like repository.
 
 If you don't have Composer yet, download it following the instructions on 
 [http://getcomposer.org/](http://getcomposer.org/ "http://getcomposer.org/").
