@@ -7,12 +7,15 @@
         "email": "level42.dev@gmail.com"
     },
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-0": { "Level42\\NotJaxbBundle": "" }
     },
     "require": {
         "php": ">=5.3.3",
-        "doctrine/common": "2.3.*"
+        "doctrine/common": "2.3.*",
+        "symfony/symfony": ">=2.1-dev,<2.4-dev",
+        "doctrine/doctrine-bundle": "1.0.*"
     },
+    "target-dir": "Level42/JUnitIssuesBundle",
     "require-dev": {
         "phpunit/phpunit": "3.7.*"
     },
