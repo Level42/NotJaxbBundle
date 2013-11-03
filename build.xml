@@ -60,7 +60,7 @@
 				line="--jdepend-xml=${build.dir}/qualimetry/jdepend-result.xml 
 				--jdepend-chart=${build.dir}/qualimetry/jdepend-chart.svg 
 				--overview-pyramid=${build.dir}/qualimetry/jdepend-pyramid.svg 
-				--ignore=${env.WORKSPACE}/vendor/**,${env.WORKSPACE}/Tests/app/cache/**,${env.WORKSPACE}/Tests/app/logs/**
+				--ignore=${env.WORKSPACE}/vendor/**,${env.WORKSPACE}/Tests/**
 		  		${env.WORKSPACE}" />
 		</exec>
 	</target>
@@ -69,7 +69,7 @@
 		<exec executable="phpmd">
 			<arg
 				line="${env.WORKSPACE} xml codesize,unusedcode,naming
-			--exclude ${env.WORKSPACE}/vendor/**,${env.WORKSPACE}/Tests/app/cache/**,${env.WORKSPACE}/Tests/app/logs/**
+			--exclude ${env.WORKSPACE}/vendor/**,${env.WORKSPACE}/Tests/**
 			--reportfile ${build.dir}/qualimetry/phpmd-result.xml" />
 		</exec>
 	</target>
@@ -87,7 +87,7 @@
 	<target name="phpdoc" description="Génération de la documentation">
 		<exec executable="phpdoc">
 			<arg
-				line="-d ${env.WORKSPACE}/ -t ${build.dir}/doc/ --ignore=${env.WORKSPACE}/vendor/**,${env.WORKSPACE}/Tests/app/cache/**,${env.WORKSPACE}/Tests/app/logs/**" />
+				line="-d ${env.WORKSPACE}/ -t ${build.dir}/doc/ --ignore=${env.WORKSPACE}/vendor/**,${env.WORKSPACE}/Tests/**" />
 		</exec>
 	</target>
 
@@ -97,7 +97,7 @@
 				line="--report=checkstyle 
 				--standard=Symfony2
 				--extensions=php 
-        		--ignore=${env.WORKSPACE}/vendor/**,${env.WORKSPACE}/Tests/app/cache/**,${env.WORKSPACE}/Tests/app/logs/**
+        		--ignore=${env.WORKSPACE}/vendor/**,${env.WORKSPACE}/Tests/**
 				${env.WORKSPACE}" />
 		</exec>
 	</target>

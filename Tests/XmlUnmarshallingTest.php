@@ -44,12 +44,12 @@ class XmlUnmarshallingTest extends TestCase
 
         $result = $this->service
                 ->unmarshall($xml,
-                        'Level42\NotJaxbBundle\Tests\Entity\Personnes');
+                    'Level42\NotJaxbBundle\Tests\Entity\Personnes');
 
         $this
                 ->assertInstanceOf(
-                        'Level42\NotJaxbBundle\Tests\Entity\Personnes',
-                        $result);
+                    'Level42\NotJaxbBundle\Tests\Entity\Personnes',
+                    $result);
 
         $this->assertNotNull($result->getPersonnes());
         $this->assertCount(4, $result->getPersonnes());
@@ -100,8 +100,8 @@ class XmlUnmarshallingTest extends TestCase
      */
     public function testMetadataRecursive()
     {
-        $xml = file_get_contents(__DIR__
-                . '/Resources/xml_sample_recursive.xml');
+        $xml = file_get_contents(
+                __DIR__ . '/Resources/xml_sample_recursive.xml');
 
         $metaFactory = $this->container->get('notjaxb.metadata.factory');
 
@@ -109,12 +109,12 @@ class XmlUnmarshallingTest extends TestCase
 
         $meta = $metaFactory
                 ->getClassMetadata(
-                        'Level42\NotJaxbBundle\Tests\Entity\Personnes');
+                    'Level42\NotJaxbBundle\Tests\Entity\Personnes');
         $this->assertNotNull($meta, 'Metadata failed for Personnes class');
 
         $meta = $metaFactory
                 ->getClassMetadata(
-                        'Level42\NotJaxbBundle\Tests\Entity\Produits');
+                    'Level42\NotJaxbBundle\Tests\Entity\Produits');
         $this->assertNotNull($meta, 'Metadata failed for Produits class');
     }
 
@@ -123,16 +123,16 @@ class XmlUnmarshallingTest extends TestCase
      */
     public function testUnmarshallingRecursive()
     {
-        $xml = file_get_contents(__DIR__
-                . '/Resources/xml_sample_recursive.xml');
+        $xml = file_get_contents(
+                __DIR__ . '/Resources/xml_sample_recursive.xml');
 
         $result = $this->service
                 ->unmarshall($xml,
-                        'Level42\NotJaxbBundle\Tests\Entity\Produits');
+                    'Level42\NotJaxbBundle\Tests\Entity\Produits');
 
         $this
                 ->assertInstanceOf(
-                        'Level42\NotJaxbBundle\Tests\Entity\Produits', $result);
+                    'Level42\NotJaxbBundle\Tests\Entity\Produits', $result);
 
         $this->assertNotNull($result->getProduits());
         $this->assertCount(1, $result->getProduits());
@@ -149,24 +149,24 @@ class XmlUnmarshallingTest extends TestCase
         $this->assertEquals('789123', $produitsLies[0]->getSku());
         $this
                 ->assertEquals('Produit lié 789123',
-                        $produitsLies[0]->getLibelle());
+                    $produitsLies[0]->getLibelle());
 
         $this->assertEquals('456123', $produitsLies[1]->getSku());
         $this
                 ->assertEquals('Produit lié 456123',
-                        $produitsLies[1]->getLibelle());
+                    $produitsLies[1]->getLibelle());
 
         $produitsLies = $produitsLies[1]->getProduitsLies();
 
         $this->assertEquals('789123', $produitsLies[0]->getSku());
         $this
                 ->assertEquals('Produit lié 789123',
-                        $produitsLies[0]->getLibelle());
+                    $produitsLies[0]->getLibelle());
 
         $this->assertEquals('123456', $produitsLies[1]->getSku());
         $this
                 ->assertEquals('Produit lié 123456',
-                        $produitsLies[1]->getLibelle());
+                    $produitsLies[1]->getLibelle());
     }
 
     /**
@@ -182,11 +182,11 @@ class XmlUnmarshallingTest extends TestCase
 
         $meta = $metaFactory
                 ->getClassMetadata(
-                        'Level42\NotJaxbBundle\Tests\Entity\NSPersonnes');
+                    'Level42\NotJaxbBundle\Tests\Entity\NSPersonnes');
         $this->assertNotNull($meta, 'Metadata failed for Personnes class');
         $this
                 ->assertEquals('http://test/namespace#', $meta->getNamespace(),
-                        'Namespace not found');
+                    'Namespace not found');
     }
 
     /**
@@ -198,12 +198,12 @@ class XmlUnmarshallingTest extends TestCase
 
         $result = $this->service
                 ->unmarshall($xml,
-                        'Level42\NotJaxbBundle\Tests\Entity\NSPersonnes');
+                    'Level42\NotJaxbBundle\Tests\Entity\NSPersonnes');
 
         $this
                 ->assertInstanceOf(
-                        'Level42\NotJaxbBundle\Tests\Entity\NSPersonnes',
-                        $result);
+                    'Level42\NotJaxbBundle\Tests\Entity\NSPersonnes',
+                    $result);
 
         $this->assertNotNull($result->getPersonnes());
         $this->assertCount(4, $result->getPersonnes());
@@ -258,12 +258,12 @@ class XmlUnmarshallingTest extends TestCase
 
         $result = $this->service
                 ->unmarshall($xml,
-                        'Level42\NotJaxbBundle\Tests\Entity\NSPersonnes');
+                    'Level42\NotJaxbBundle\Tests\Entity\NSPersonnes');
 
         $this
                 ->assertInstanceOf(
-                        'Level42\NotJaxbBundle\Tests\Entity\NSPersonnes',
-                        $result);
+                    'Level42\NotJaxbBundle\Tests\Entity\NSPersonnes',
+                    $result);
         $this->assertNotNull($result->getPersonnes());
         $this->assertCount(1, $result->getPersonnes());
 
@@ -284,12 +284,12 @@ class XmlUnmarshallingTest extends TestCase
 
         $result = $this->service
                 ->unmarshall($xml,
-                        'Level42\NotJaxbBundle\Tests\Entity\NSPersonnes');
+                    'Level42\NotJaxbBundle\Tests\Entity\NSPersonnes');
 
         $this
                 ->assertInstanceOf(
-                        'Level42\NotJaxbBundle\Tests\Entity\NSPersonnes',
-                        $result);
+                    'Level42\NotJaxbBundle\Tests\Entity\NSPersonnes',
+                    $result);
         $this->assertNotNull($result->getPersonnes());
         $this->assertCount(2, $result->getPersonnes());
 
@@ -316,12 +316,12 @@ class XmlUnmarshallingTest extends TestCase
 
         $result = $this->service
                 ->unmarshall($xml,
-                        'Level42\NotJaxbBundle\Tests\Entity\NS2Personnes');
+                    'Level42\NotJaxbBundle\Tests\Entity\NS2Personnes');
 
         $this
                 ->assertInstanceOf(
-                        'Level42\NotJaxbBundle\Tests\Entity\NS2Personnes',
-                        $result);
+                    'Level42\NotJaxbBundle\Tests\Entity\NS2Personnes',
+                    $result);
         $this->assertNotNull($result->getPersonnes());
         $this->assertCount(4, $result->getPersonnes());
 
@@ -383,12 +383,12 @@ class XmlUnmarshallingTest extends TestCase
 
         $result = $this->service
                 ->unmarshall($xml,
-                        'Level42\NotJaxbBundle\Tests\Entity\NS2Personnes');
+                    'Level42\NotJaxbBundle\Tests\Entity\NS2Personnes');
 
         $this
                 ->assertInstanceOf(
-                        'Level42\NotJaxbBundle\Tests\Entity\NS2Personnes',
-                        $result);
+                    'Level42\NotJaxbBundle\Tests\Entity\NS2Personnes',
+                    $result);
         $this->assertNotNull($result->getPersonnes());
         $this->assertCount(4, $result->getPersonnes());
 
@@ -457,12 +457,12 @@ class XmlUnmarshallingTest extends TestCase
 
         $result = $this->service
                 ->unmarshall($xml,
-                        'Level42\NotJaxbBundle\Tests\Entity\NS3Personnes');
+                    'Level42\NotJaxbBundle\Tests\Entity\NS3Personnes');
 
         $this
                 ->assertInstanceOf(
-                        'Level42\NotJaxbBundle\Tests\Entity\NS3Personnes',
-                        $result);
+                    'Level42\NotJaxbBundle\Tests\Entity\NS3Personnes',
+                    $result);
 
         $this->assertNotNull($result->getPersonnes());
         $this->assertCount(4, $result->getPersonnes());
