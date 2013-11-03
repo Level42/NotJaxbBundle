@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<test1:personnes xmlns:test1="http://test/namespace1#" xmlns:test2="http://test/namespace2#" xmlns:test3="http://test/namespace3#">
+<test1:personnes xmlns:test1="http://test/namespace1#"
+	xmlns:test2="http://test/namespace2#" xmlns:test3="http://test/namespace3#">
 	<test1:personne id="1">
 		<test1:nom>Dupond</test1:nom>
 		<test1:service>Achats</test1:service>
@@ -22,27 +23,27 @@
 		<test1:nom>Dupont</test1:nom>
 		<test1:service>Personnel</test1:service>
 		<test2:adresses>
-		    <test2:adresse id="1">
-		        <test2:numero>12</test2:numero>
-		        <test2:rue>des docks</test2:rue>
-		        <test2:cp>69000</test2:cp>
-		        <test2:ville>LYON</test2:ville>
-		    </test2:adresse>
-		    <test2:adresse id="2">
-		        <test2:numero>22</test2:numero>
-		        <test2:rue>place de la république</test2:rue>
-		        <test2:cp>01000</test2:cp>
-		        <test2:ville>BOURG EN BRESSE</test2:ville>
-		    </test2:adresse>
-		    <test2:adresse id="3">
-		        <test2:numero>32</test2:numero>
-		        <test2:rue>place de la libération</test2:rue>
-		        <test2:cp>75000</test2:cp>
-		        <test2:ville>PARIS</test2:ville>
-		        <test3:complement>Complément 1</test3:complement>
-		        <test3:complement>Complément 2</test3:complement>
-		        <test3:complement>Complément 3</test3:complement>
-		    </test2:adresse>
+			<test2:adresse id="1">
+				<test2:numero>12</test2:numero>
+				<test2:rue>des docks</test2:rue>
+				<test2:cp>69000</test2:cp>
+				<test2:ville>LYON</test2:ville>
+			</test2:adresse>
+			<test2:adresse id="2">
+				<test2:numero>22</test2:numero>
+				<test2:rue>place de la république</test2:rue>
+				<test2:cp>01000</test2:cp>
+				<test2:ville>BOURG EN BRESSE</test2:ville>
+			</test2:adresse>
+			<test2:adresse id="3">
+				<test2:numero>32</test2:numero>
+				<test2:rue>place de la libération</test2:rue>
+				<test2:cp>75000</test2:cp>
+				<test2:ville>PARIS</test2:ville>
+				<test3:complement>Complément 1</test3:complement>
+				<test3:complement>Complément 2</test3:complement>
+				<test3:complement>Complément 3</test3:complement>
+			</test2:adresse>
 		</test2:adresses>
 	</test1:personne>
 </test1:personnes>

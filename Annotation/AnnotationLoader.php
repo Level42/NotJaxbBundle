@@ -60,25 +60,20 @@ class AnnotationLoader
         if ($depth > 0) {
             $depth--;
             try {
-                foreach ($this->reader->getClassAnnotations($reflClass) as $annotation) 
-                {
-                    if ($annotation instanceof XmlObject) 
-                    {
+                foreach ($this->reader->getClassAnnotations($reflClass) as $annotation) {
+                    if ($annotation instanceof XmlObject) {
                         // If class have name
-                        if ($annotation->name != null) 
-                        {
+                        if ($annotation->name != null) {
                             $metadata->setName($annotation->name);
                         }
-                        
+
                         // If class have namespace
-                        if ($annotation->ns != null) 
-                        {
+                        if ($annotation->ns != null) {
                             $metadata->setNamespace($annotation->ns);
                         }
-                        
+
                         // If class have namespace prefix
-                        if ($annotation->prefix != null) 
-                        {
+                        if ($annotation->prefix != null) {
                             $metadata->setPrefix($annotation->prefix);
                         }
 
@@ -103,15 +98,16 @@ class AnnotationLoader
     {
         $reflClass = $metadata->getReflectionClass();
 
-        foreach ($reflClass->getProperties() as $property) 
-        {
-            foreach ($this->reader->getPropertyAnnotations($property) as $annotation)
-            {
-                if ($annotation instanceof XmlAttribute) 
-                {
-                    $attributeName = !is_null($annotation->name) ? $annotation->name : $property->getName();
+        foreach ($reflClass->getProperties() as $property) {
+            foreach ($this->reader->getPropertyAnnotations($property) as $annotation) {
+                if ($annotation instanceof XmlAttribute) {
+                    $attributeName = !is_null($annotation->name) ? $annotation
+                                    ->name : $property->getName();
                     $nodeName = $annotation->node;
-                    $metadata->addAttribute($attributeName, $property->getName(), $nodeName, $annotation->ns, $annotation->prefix);
+                    $metadata
+                            ->addAttribute($attributeName,
+                                    $property->getName(), $nodeName,
+                                    $annotation->ns, $annotation->prefix);
                 }
             }
         }
@@ -128,19 +124,19 @@ class AnnotationLoader
         $reflClass = $metadata->getReflectionClass();
         $className = $reflClass->getName();
 
-        if ($depth > 0) 
-        {
-            foreach ($reflClass->getProperties() as $property) 
-            {
+        if ($depth > 0) {
+            foreach ($reflClass->getProperties() as $property) {
 
-                foreach ($this->reader->getPropertyAnnotations($property) as $annotation) 
-                {
-                    if ($annotation instanceof XmlElement) 
-                    {
-                        $nodeName = !is_null($annotation->name) ? $annotation->name : $property->getName();
-                        if (is_null($annotation->type)) 
-                        {
-                            $metadata->addElement($nodeName, $property->getName(), $annotation->ns, $annotation->prefix);
+                foreach ($this->reader->getPropertyAnnotations($property) as $annotation) {
+                    if ($annotation instanceof XmlElement) {
+                        $nodeName = !is_null($annotation->name) ? $annotation
+                                        ->name : $property->getName();
+                        if (is_null($annotation->type)) {
+                            $metadata
+                                    ->addElement($nodeName,
+                                            $property->getName(),
+                                            $annotation->ns,
+                                            $annotation->prefix);
                         } else {
                             $embeddedMetadata = new ClassMetadata(
                                     $annotation->type);
@@ -166,25 +162,27 @@ class AnnotationLoader
         $reflClass = $metadata->getReflectionClass();
         $className = $reflClass->getName();
 
-        if ($depth > 0) 
-        {
-            foreach ($reflClass->getProperties() as $property) 
-            {
+        if ($depth > 0) {
+            foreach ($reflClass->getProperties() as $property) {
 
-                foreach ($this->reader->getPropertyAnnotations($property) as $annotation)
-                {
+                foreach ($this->reader->getPropertyAnnotations($property) as $annotation) {
                     if ($annotation instanceof XmlList) {
-                        $nodeName = !is_null($annotation->name) ? $annotation->name : $property->getName();
+                        $nodeName = !is_null($annotation->name) ? $annotation
+                                        ->name : $property->getName();
 
-                        if (!is_null($annotation->type)) 
-                        {
-                            $embeddedMetadata = new ClassMetadata($annotation->type);
+                        if (!is_null($annotation->type)) {
+                            $embeddedMetadata = new ClassMetadata(
+                                    $annotation->type);
                             $this->loadClassMetadata($embeddedMetadata, $depth);
                         } else {
                             $embeddedMetadata = null;
                         }
-                            
-                        $metadata->addList($property->getName(), $nodeName, $annotation->wrapper, $embeddedMetadata, $annotation->ns, $annotation->prefix);
+
+                        $metadata
+                                ->addList($property->getName(), $nodeName,
+                                        $annotation->wrapper,
+                                        $embeddedMetadata, $annotation->ns,
+                                        $annotation->prefix);
                     }
                 }
             }
@@ -200,12 +198,9 @@ class AnnotationLoader
     {
         $reflClass = $metadata->getReflectionClass();
 
-        foreach ($reflClass->getProperties() as $property) 
-        {
-            foreach ($this->reader->getPropertyAnnotations($property) as $annotation) 
-            {
-                if ($annotation instanceof XmlValue) 
-                {
+        foreach ($reflClass->getProperties() as $property) {
+            foreach ($this->reader->getPropertyAnnotations($property) as $annotation) {
+                if ($annotation instanceof XmlValue) {
                     $metadata->setValue($property->getName());
                 }
             }

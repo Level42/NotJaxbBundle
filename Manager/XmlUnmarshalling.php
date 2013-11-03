@@ -66,7 +66,7 @@ class XmlUnmarshalling
     {
         $metadata = $this->classMetadataFactory->getClassMetadata($rootClass);
         $xml = new SimpleXMLElement($xmlString, null, null,
-            $metadata->getNamespace());
+                $metadata->getNamespace());
 
         return $this->parseObject($xml, $metadata);
     }
@@ -77,10 +77,10 @@ class XmlUnmarshalling
      * @param SimpleXmlElement $xml
      * @param ClassMetadata $metadata
      */
-    protected function parseObject(\SimpleXmlElement $xml, ClassMetadata $metadata)
+    protected function parseObject(\SimpleXmlElement $xml,
+            ClassMetadata $metadata)
     {
-        if ($xml->getName() != null)
-        {
+        if ($xml->getName() != null) {
             $class = $metadata->getClassName();
             $obj = new $class();
 
@@ -107,16 +107,15 @@ class XmlUnmarshalling
      * @todo : Ajouter des logs !!
      * @todo : Implémenter l'accès aux attributs public plutot que des set/get si possible
      */
-    protected function parseAttributes(\SimpleXmlElement $xml, ClassMetadata $metadata, $obj)
+    protected function parseAttributes(\SimpleXmlElement $xml,
+            ClassMetadata $metadata, $obj)
     {
-        foreach ($metadata->getAttributes() as $name => $info)
-        {
+        foreach ($metadata->getAttributes() as $name => $info) {
             $property = $info[0];
             $nodeName = $info[1];
             $namespace = $info[2];
 
-            if (!is_null($nodeName))
-            {
+            if (!is_null($nodeName)) {
                 $node = $xml->$nodeName;
             } else {
                 $node = $xml;
@@ -125,8 +124,7 @@ class XmlUnmarshalling
             $attr = $node->attributes($namespace);
             $value = (string) $attr[$name];
 
-            if ($value != null)
-            {
+            if ($value != null) {
                 $setter = 'set' . ucfirst($property);
                 $obj->$setter($value);
             }
@@ -141,19 +139,16 @@ class XmlUnmarshalling
      * @param ClassMetadata $metadata
      * @param stdClass $obj
      */
-    protected function parseElements(\SimpleXmlElement $xml, ClassMetadata $metadata, $obj)
+    protected function parseElements(\SimpleXmlElement $xml,
+            ClassMetadata $metadata, $obj)
     {
-        foreach ($metadata->getElements() as $name => $properties)
-        {
+        foreach ($metadata->getElements() as $name => $properties) {
             $property = $properties[0];
             $namespace = $properties[1];
 
-            if ($namespace == null)
-            {
+            if ($namespace == null) {
                 $value = (string) $xml->$name;
-            }
-            else
-            {
+            } else {
                 $elements = $xml->children($namespace);
                 $value = (string) $elements->$name;
             }
@@ -171,10 +166,10 @@ class XmlUnmarshalling
      * @param ClassMetadata $metadata
      * @param stdClass $obj
      */
-    protected function parseEmbeds(\SimpleXmlElement $xml, ClassMetadata $metadata, $obj)
+    protected function parseEmbeds(\SimpleXmlElement $xml,
+            ClassMetadata $metadata, $obj)
     {
-        foreach ($metadata->getEmbeds() as $nodeName => $info)
-        {
+        foreach ($metadata->getEmbeds() as $nodeName => $info) {
             $property = $info[0];
             $tempMetaData = $info[1];
             $namespace = $tempMetaData->getNamespace();
@@ -185,12 +180,10 @@ class XmlUnmarshalling
                 $tempXml = $xml->children($namespace);
                 $tempXml = $tempXml->$nodeName;
             }
-            
-            if ($tempXml != null)
-            {
+
+            if ($tempXml != null) {
                 $tempObj = $this->parseObject($tempXml, $tempMetaData);
-                if ($tempObj != null)
-                {
+                if ($tempObj != null) {
                     $setter = 'set' . ucfirst($property);
                     $obj->$setter($tempObj);
                 }
@@ -206,10 +199,10 @@ class XmlUnmarshalling
      * @param ClassMetadata $metadata
      * @param stdClass $obj
      */
-    protected function parseLists(\SimpleXmlElement $xml, ClassMetadata $metadata, $obj)
+    protected function parseLists(\SimpleXmlElement $xml,
+            ClassMetadata $metadata, $obj)
     {
-        foreach ($metadata->getLists() as $nodeName => $info)
-        {
+        foreach ($metadata->getLists() as $nodeName => $info) {
             $property = $info[0];
             $wrapperNode = $info[1];
             $listMetadata = $info[2];
@@ -217,18 +210,14 @@ class XmlUnmarshalling
 
             $tempList = array();
 
-            if (!is_null($wrapperNode))
-            {
+            if (!is_null($wrapperNode)) {
                 $xmlChild = $xml->children($namespace);
 
-                if (isset($xmlChild->$wrapperNode))
-                {
-                    foreach ($xmlChild->$wrapperNode->$nodeName as $item)
-                    {
+                if (isset($xmlChild->$wrapperNode)) {
+                    foreach ($xmlChild->$wrapperNode->$nodeName as $item) {
                         if ($item == null) {
                             continue;
-                        } elseif (!is_null($listMetadata))
-                        {
+                        } elseif (!is_null($listMetadata)) {
                             $tempObj = $this->parseObject($item, $listMetadata);
                             $tempList[] = $tempObj;
                         } else {
@@ -239,10 +228,8 @@ class XmlUnmarshalling
 
             } else {
                 $xmlChild = $xml->children($namespace);
-                foreach ($xmlChild->$nodeName as $item)
-                {
-                    if (!is_null($listMetadata))
-                    {
+                foreach ($xmlChild->$nodeName as $item) {
+                    if (!is_null($listMetadata)) {
                         $tempObj = $this->parseObject($item, $listMetadata);
                         $tempList[] = $tempObj;
                     }
@@ -261,10 +248,10 @@ class XmlUnmarshalling
      * @param ClassMetadata $metadata
      * @param stdClass $obj
      */
-    protected function parseValue(\SimpleXmlElement $xml, ClassMetadata $metadata, $obj)
+    protected function parseValue(\SimpleXmlElement $xml,
+            ClassMetadata $metadata, $obj)
     {
-        if (!is_null($metadata->getValue()))
-        {
+        if (!is_null($metadata->getValue())) {
             $setter = 'set' . ucfirst($metadata->getValue());
             $value = (string) $xml;
             $obj->$setter($value);
@@ -276,7 +263,8 @@ class XmlUnmarshalling
      *
      * @param ClassMetadataFactory $classMetadataFactory
      */
-    public function setClassMetadataFactory(ClassMetadataFactory $classMetadataFactory)
+    public function setClassMetadataFactory(
+            ClassMetadataFactory $classMetadataFactory)
     {
         $this->classMetadataFactory = $classMetadataFactory;
     }
@@ -286,8 +274,7 @@ class XmlUnmarshalling
      */
     public function buildClassMetadatas()
     {
-        foreach ($this->rootClasses as $class)
-        {
+        foreach ($this->rootClasses as $class) {
             $this->classMetadataFactory->getClassMetadata($class);
         }
     }

@@ -22,23 +22,23 @@ class XmlAttribute extends Annotation
      * Attribute name
      * @var string
      */
-	public $name;
-	
-	/**
-	 * Attribute node name
-	 * @var string
-	 */
-	public $node;
-	
-	/**
-	 * Attribute namespace
-	 * @var string
-	 */
-	public $ns;
-	
-	/**
-	 * Attribute namespace prefix
-	 * @var string
-	 */
-	public $prefix;
+    public $name;
+
+    /**
+     * Attribute node name
+     * @var string
+     */
+    public $node;
+
+    /**
+     * Attribute namespace
+     * @var string
+     */
+    public $ns;
+
+    /**
+     * Attribute namespace prefix
+     * @var string
+     */
+    public $prefix;
 }

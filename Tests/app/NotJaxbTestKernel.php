@@ -24,8 +24,7 @@ class NotJaxbTestKernel extends Kernel
      */
     public function registerBundles()
     {
-        $bundles = array (
-        		new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
+        $bundles = array(new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
                 //new Symfony\Bundle\SecurityBundle\SecurityBundle(),
                 //new Symfony\Bundle\TwigBundle\TwigBundle(),
                 new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
@@ -33,9 +32,8 @@ class NotJaxbTestKernel extends Kernel
                 //new JMS\AopBundle\JMSAopBundle(),
                 //new JMS\DiExtraBundle\JMSDiExtraBundle($this),
                 // Bundle à tester
-                new Level42\NotJaxbBundle\Level42NotJaxbBundle()
-        	);
-        
+                new Level42\NotJaxbBundle\Level42NotJaxbBundle());
+
         return $bundles;
     }
 

@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <personnes>
-  <personne id="1">
-    <nom>Dupond</nom>
-    <service>Achats</service>
-  </personne>
-  <personne id="2">
-    <nom>Durand</nom>
-    <service>Achats</service>
-  </personne>
-  <personne id="3">
-    <nom>Dupuis</nom>
-    <service>Courrier</service>
-  </personne>
-  <personne id="4">
-    <nom>Dupont</nom>
-    <service>Personnel</service>
-    <adresses>
-      <adresse id="1">
-        <numero>12</numero>
-        <rue>des docks</rue>
-        <cp>69000</cp>
-        <ville>LYON</ville>
-      </adresse>
-      <adresse id="2">
-        <numero>22</numero>
-        <rue>place de la république</rue>
-        <cp>01000</cp>
-        <ville>BOURG EN BRESSE</ville>
-      </adresse>
-      <adresse id="3">
-        <numero>32</numero>
-        <rue>place de la libération</rue>
-        <cp>75000</cp>
-        <ville>PARIS</ville>
-        <complement>Complément 1</complement>
-        <complement>Complément 2</complement>
-        <complement>Complément 3</complement>
-      </adresse>
-    </adresses>
-  </personne>
+	<personne id="1">
+		<nom>Dupond</nom>
+		<service>Achats</service>
+	</personne>
+	<personne id="2">
+		<nom>Durand</nom>
+		<service>Achats</service>
+	</personne>
+	<personne id="3">
+		<nom>Dupuis</nom>
+		<service>Courrier</service>
+	</personne>
+	<personne id="4">
+		<nom>Dupont</nom>
+		<service>Personnel</service>
+		<adresses>
+			<adresse id="1">
+				<numero>12</numero>
+				<rue>des docks</rue>
+				<cp>69000</cp>
+				<ville>LYON</ville>
+			</adresse>
+			<adresse id="2">
+				<numero>22</numero>
+				<rue>place de la république</rue>
+				<cp>01000</cp>
+				<ville>BOURG EN BRESSE</ville>
+			</adresse>
+			<adresse id="3">
+				<numero>32</numero>
+				<rue>place de la libération</rue>
+				<cp>75000</cp>
+				<ville>PARIS</ville>
+				<complement>Complément 1</complement>
+				<complement>Complément 2</complement>
+				<complement>Complément 3</complement>
+			</adresse>
+		</adresses>
+	</personne>
 </personnes>

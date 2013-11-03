@@ -17,13 +17,13 @@ use \NotJaxbTestKernel;
  * support
  */
 class TestCase extends \PHPUnit_Framework_TestCase
-{    
+{
     /**
      * Service container
      * @var Container
      */
     public $container;
-    
+
     /**
      * Testcase constructor with Kernel instanciation
      */

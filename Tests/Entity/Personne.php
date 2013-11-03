@@ -24,7 +24,7 @@ class Personne
      * @XmlAttribute
      */
     private $id;
-    
+
     /**
      * @XmlElement
      */
@@ -39,7 +39,6 @@ class Personne
      * @XmlList(name="adresse", wrapper="adresses", type="Level42\NotJaxbBundle\Tests\Entity\Adresse")
      */
     private $adresses;
-    
 
     /**
      * 

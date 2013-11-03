@@ -23,17 +23,17 @@ class XmlObject extends Annotation
      * Object namespace
      * @var string
      */
-	public $ns;
-	
-	/**
-	 * Attribute namespace prefix
-	 * @var string
-	 */
-	public $prefix;
-	
+    public $ns;
+
+    /**
+     * Attribute namespace prefix
+     * @var string
+     */
+    public $prefix;
+
     /**
      * Object name
      * @var string
      */
-	public $name;
+    public $name;
 }

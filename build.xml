@@ -7,21 +7,21 @@
 	<target name="build" depends="clean, analyse" />
 	<target name="test" depends="clean, prepare, launch-tests" />
 	<target name="build-and-test" depends="clean, analyse, prepare, launch-tests" />
-	
+
 	<target name="clean" description="Nettoyage des dossiers">
 		<delete dir="${build.dir}" />
-		
+
 		<mkdir dir="${build.dir}" />
 		<mkdir dir="${build.dir}/doc" />
 		<mkdir dir="${build.dir}/qualimetry" />
 		<mkdir dir="${build.dir}/tests" />
 		<mkdir dir="${build.dir}/tests/coverage" />
-		
+
 		<delete dir="${env.WORKSPACE}/Tests/app/cache" />
 		<delete dir="${env.WORKSPACE}/Tests/app/logs" />
 	</target>
-	
-	
+
+
 	<target name="prepare" description="Préparation des tests">
 		<exec executable="wget">
 			<arg line="http://getcomposer.org/composer.phar" />
@@ -30,17 +30,18 @@
 			<arg line="composer.phar install" />
 		</exec>
 	</target>
-	
-	
+
+
 	<target name="launch-tests" description="Lancement des tests">
-		<exec executable="phpunit" >
-			<arg line="--log-junit=${build.dir}/tests/phpunit-result.xml
+		<exec executable="phpunit">
+			<arg
+				line="--log-junit=${build.dir}/tests/phpunit-result.xml
                        --coverage-clover=${build.dir}/tests/phpunit-coverage.xml
                        --coverage-html=${build.dir}/tests/coverage
-                       --configuration=${env.WORKSPACE}/phpunit.xml"/>
+                       --configuration=${env.WORKSPACE}/phpunit.xml" />
 		</exec>
 	</target>
-	
+
 	<target name="analyse" description="Analyse des sources">
 		<sequential>
 			<antcall target="php-lint" />
@@ -55,7 +56,8 @@
 
 	<target name="pdepend" description="Analyse de code et métriques">
 		<exec executable="pdepend">
-			<arg line="--jdepend-xml=${build.dir}/qualimetry/jdepend-result.xml 
+			<arg
+				line="--jdepend-xml=${build.dir}/qualimetry/jdepend-result.xml 
 				--jdepend-chart=${build.dir}/qualimetry/jdepend-chart.svg 
 				--overview-pyramid=${build.dir}/qualimetry/jdepend-pyramid.svg 
 				--ignore=${env.WORKSPACE}/vendor/**,${env.WORKSPACE}/Tests/app/cache/**,${env.WORKSPACE}/Tests/app/logs/**
@@ -65,7 +67,8 @@
 
 	<target name="phpmd" description="Détection de la complexité de code">
 		<exec executable="phpmd">
-			<arg line="${env.WORKSPACE} xml codesize,unusedcode,naming
+			<arg
+				line="${env.WORKSPACE} xml codesize,unusedcode,naming
 			--exclude ${env.WORKSPACE}/vendor/**,${env.WORKSPACE}/Tests/app/cache/**,${env.WORKSPACE}/Tests/app/logs/**
 			--reportfile ${build.dir}/qualimetry/phpmd-result.xml" />
 		</exec>
@@ -73,7 +76,8 @@
 
 	<target name="phpcpd" description="Analyse de duplication de code">
 		<exec executable="phpcpd">
-			<arg line="--log-pmd ${build.dir}/qualimetry/phpcpd-result.xml
+			<arg
+				line="--log-pmd ${build.dir}/qualimetry/phpcpd-result.xml
 			--exclude vendor
 			--exclude cache
 			${env.WORKSPACE}" />
@@ -82,13 +86,15 @@
 
 	<target name="phpdoc" description="Génération de la documentation">
 		<exec executable="phpdoc">
-			<arg line="-d ${env.WORKSPACE}/ -t ${build.dir}/doc/ --ignore=${env.WORKSPACE}/vendor/**,${env.WORKSPACE}/Tests/app/cache/**,${env.WORKSPACE}/Tests/app/logs/**" />
+			<arg
+				line="-d ${env.WORKSPACE}/ -t ${build.dir}/doc/ --ignore=${env.WORKSPACE}/vendor/**,${env.WORKSPACE}/Tests/app/cache/**,${env.WORKSPACE}/Tests/app/logs/**" />
 		</exec>
 	</target>
 
 	<target name="phpcs" description="Contrôle de l'indentation">
 		<exec executable="phpcs" output="${build.dir}/qualimetry/phpcs-result.xml">
-			<arg line="--report=checkstyle 
+			<arg
+				line="--report=checkstyle 
 				--standard=Symfony2
 				--extensions=php 
         		--ignore=${env.WORKSPACE}/vendor/**,${env.WORKSPACE}/Tests/app/cache/**,${env.WORKSPACE}/Tests/app/logs/**
@@ -106,5 +112,5 @@
 			</fileset>
 		</apply>
 	</target>
-	
+
 </project>

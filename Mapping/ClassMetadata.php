@@ -40,7 +40,7 @@ class ClassMetadata
      * @var string
      */
     protected $namespace;
-    
+
     /**
      * The class namespace prefix
      *
@@ -110,8 +110,7 @@ class ClassMetadata
      */
     public function getReflectionClass()
     {
-        if (! $this->reflClass) 
-        {
+        if (!$this->reflClass) {
             $this->reflClass = new \ReflectionClass($this->getClassName());
         }
 
@@ -126,116 +125,120 @@ class ClassMetadata
      * @param string $nodeName
      * @param string $namespace
      */
-	public function addAttribute($name, $property, $nodeName, $namespace = null, $prefix = null)
-	{
-		$this->attributes[$name] = array($property, $nodeName, $namespace, $prefix);
-	}
+    public function addAttribute($name, $property, $nodeName, $namespace = null,
+            $prefix = null)
+    {
+        $this->attributes[$name] = array($property, $nodeName, $namespace,
+                $prefix);
+    }
 
-	/**
-	 * Get all of the attributes
-	 * 
-	 * @return array
-	 */
-	public function getAttributes()
-	{
-		return $this->attributes;
-	}
+    /**
+     * Get all of the attributes
+     * 
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
 
-	/**
-	 * Add info for an XML element
-	 * 
-	 * @param string $name
-	 * @param string $property
-	 */
-	public function addElement($name, $property, $ns = null, $prefix = null)
-	{
-		$this->elements[$name] = array($property, $ns, $prefix);
-	}
+    /**
+     * Add info for an XML element
+     * 
+     * @param string $name
+     * @param string $property
+     */
+    public function addElement($name, $property, $ns = null, $prefix = null)
+    {
+        $this->elements[$name] = array($property, $ns, $prefix);
+    }
 
-	/**
-	 * Get all of the XML elements
-	 * 
-	 * @return array
-	 */
-	public function getElements()
-	{
-		return $this->elements;
-	}
+    /**
+     * Get all of the XML elements
+     * 
+     * @return array
+     */
+    public function getElements()
+    {
+        return $this->elements;
+    }
 
-	/**
-	 * Add an embedded ClassMetadata
-	 * 
-	 * @param string $nodeName
-	 * @param string $property
-	 * @param ClassMetadata $metadata
-	 */
-	public function addEmbed($nodeName, $property, ClassMetadata $metadata)
-	{
-		$this->embeds[$nodeName] = array($property, $metadata);
-	}
+    /**
+     * Add an embedded ClassMetadata
+     * 
+     * @param string $nodeName
+     * @param string $property
+     * @param ClassMetadata $metadata
+     */
+    public function addEmbed($nodeName, $property, ClassMetadata $metadata)
+    {
+        $this->embeds[$nodeName] = array($property, $metadata);
+    }
 
-	/**
-	 * Get all of the embedded ClassMetadata(s)
-	 * 
-	 * @return array
-	 */
-	public function getEmbeds()
-	{
-		return $this->embeds;
-	}
+    /**
+     * Get all of the embedded ClassMetadata(s)
+     * 
+     * @return array
+     */
+    public function getEmbeds()
+    {
+        return $this->embeds;
+    }
 
-	/**
-	 * Add info for an XML list
-	 * 
-	 * @param string $property
-	 * @param string $nodeName
-	 * @param string $wrapperNode
-	 * @param ClassMetadata $metadata
-	 */
-	public function addList($property, $nodeName, $wrapperNode = null, ClassMetadata $metadata = null, $namespace = null, $prefix = null)
-	{
-		$this->lists[$nodeName] = array($property, $wrapperNode, $metadata, $namespace, $nodeName, $prefix);
-	}
+    /**
+     * Add info for an XML list
+     * 
+     * @param string $property
+     * @param string $nodeName
+     * @param string $wrapperNode
+     * @param ClassMetadata $metadata
+     */
+    public function addList($property, $nodeName, $wrapperNode = null,
+            ClassMetadata $metadata = null, $namespace = null, $prefix = null)
+    {
+        $this->lists[$nodeName] = array($property, $wrapperNode, $metadata,
+                $namespace, $nodeName, $prefix);
+    }
 
-	/**
-	 * Get all of the XML lists
-	 * 
-	 * @return array
-	 */
-	public function getLists()
-	{
-		return $this->lists;
-	}
+    /**
+     * Get all of the XML lists
+     * 
+     * @return array
+     */
+    public function getLists()
+    {
+        return $this->lists;
+    }
 
-	/**
-	 * Set the node name which holds the value
-	 * 
-	 * @param string $value
-	 */
-	public function setValue($value)
-	{
-		$this->value = $value;
-	}
+    /**
+     * Set the node name which holds the value
+     * 
+     * @param string $value
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+    }
 
-	/**
-	 * Get the value node name
-	 * 
-	 * @return string
-	 */
-	public function getValue()
-	{
-		return $this->value;
-	}
+    /**
+     * Get the value node name
+     * 
+     * @return string
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
 
-	/**
-	 * Get class namespace
-	 * @return string Namespace
-	 */
+    /**
+     * Get class namespace
+     * @return string Namespace
+     */
     public function getNamespace()
     {
         return $this->namespace;
     }
-    
+
     /**
      * Set class namespace
      * @param string Namespace
@@ -249,9 +252,9 @@ class ClassMetadata
     {
         if ($this->name == null) {
             $parts = explode("\\", $this->className);
-            $this->name = $parts[count($parts) - 1];  
+            $this->name = $parts[count($parts) - 1];
         }
-        
+
         return $this->name;
     }
 

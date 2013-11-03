@@ -24,17 +24,17 @@ class NSAdresse
      * @XmlAttribute
      */
     private $id;
-    
+
     /**
      * @XmlElement
      */
     private $numero;
-    
+
     /**
      * @XmlElement
      */
     private $rue;
-    
+
     /**
      * @XmlElement(name="cp")
      */
@@ -49,7 +49,6 @@ class NSAdresse
      * @XmlList(name="complement", type="Level42\NotJaxbBundle\Tests\Entity\NSComplement", ns="http://test/namespace#", prefix="test")
      */
     private $complements;
-    
 
     /**
      * 

@@ -18,6 +18,9 @@ use Level42\NotJaxbBundle\Mapping\ClassMetadataFactory;
 use Level42\NotJaxbBundle\Tests\Entity\Personnes;
 use Level42\NotJaxbBundle\Tests\Entity\Produits;
 
+/**
+ * Test class for XmlMarshalling service
+ */
 class XmlMarshallingTest extends TestCase
 {
     /**
@@ -25,7 +28,7 @@ class XmlMarshallingTest extends TestCase
      * @var XmlMarshalling
      */
     private $service = null;
-    
+
     /**
      * Service
      * @var Manager
@@ -33,90 +36,104 @@ class XmlMarshallingTest extends TestCase
     private $serviceUnmarshaling = null;
 
     /**
-     * 
+     * Test class constructor (set services instance)
      */
     public function __construct()
     {
-        parent::__construct();        
+        parent::__construct();
         $this->service = $this->container->get('notjaxb.xml_marshalling');
-        $this->serviceUnmarshaling = $this->container->get('notjaxb.xml_unmarshalling');
+        $this->serviceUnmarshaling = $this->container
+                ->get('notjaxb.xml_unmarshalling');
     }
-        
+
     /**
      * Test a simple marshalling
      */
     public function testMarshallingSimple()
     {
-        $expected = file_get_contents(__DIR__.'/Resources/xml_expected_simple.xml');
+        $expected = file_get_contents(
+                __DIR__ . '/Resources/xml_expected_simple.xml');
         $expected = str_replace("\r", "", $expected);
-        
+
         $personnes = new Personnes();
-        
-            $personne = new Personne();
-            $personne->setId(1);
-            $personne->setNom("PERINEL");
-            $personne->setService("Ingénieurie");
-            
+
+        $personne = new Personne();
+        $personne->setId(1);
+        $personne->setNom("PERINEL");
+        $personne->setService("Ingénieurie");
+
         $personnes->setPersonnes(array($personne));
-        
+
         $result = $this->service->marshall($personnes);
-        
-        $this->assertEquals($expected, $result);    
+
+        $this->assertEquals($expected, $result);
     }
-        
+
     /**
      * Test a simple marshalling
      */
     public function testMarshallingAfterMarshallingSimple()
     {
-        $expected = file_get_contents(__DIR__.'/Resources/xml_sample_simple.xml');
+        $expected = file_get_contents(
+                __DIR__ . '/Resources/xml_sample_simple.xml');
         $expected = str_replace("\r", "", $expected);
-        
-        $personnes = $this->serviceUnmarshaling->unmarshall($expected, 'Level42\NotJaxbBundle\Tests\Entity\Personnes');
+
+        $personnes = $this->serviceUnmarshaling
+                ->unmarshall($expected,
+                        'Level42\NotJaxbBundle\Tests\Entity\Personnes');
         $result = $this->service->marshall($personnes);
-        
+
         $this->assertEquals($expected, $result);
     }
-        
+
     /**
      * Test a simple marshalling
      */
     public function testMarshallingAfterMarshallingRecursive()
     {
-        $expected = file_get_contents(__DIR__.'/Resources/xml_sample_recursive.xml');
+        $expected = file_get_contents(
+                __DIR__ . '/Resources/xml_sample_recursive.xml');
         $expected = str_replace("\r", "", $expected);
-        
-        $produits = $this->serviceUnmarshaling->unmarshall($expected, 'Level42\NotJaxbBundle\Tests\Entity\Produits');
+
+        $produits = $this->serviceUnmarshaling
+                ->unmarshall($expected,
+                        'Level42\NotJaxbBundle\Tests\Entity\Produits');
         $result = $this->service->marshall($produits);
-        
+
         $this->assertEquals($expected, $result);
     }
-        
+
     /**
      * Test a simple marshalling
      */
     public function _testMarshallingAfterMarshallingWithNamespace()
     {
-        $expected = file_get_contents(__DIR__.'/Resources/xml_sample_withns.xml');
+        $expected = file_get_contents(
+                __DIR__ . '/Resources/xml_sample_withns.xml');
         $expected = str_replace("\r", "", $expected);
-        
-        $produits = $this->serviceUnmarshaling->unmarshall($expected, 'Level42\NotJaxbBundle\Tests\Entity\NSPersonnes');
+
+        $produits = $this->serviceUnmarshaling
+                ->unmarshall($expected,
+                        'Level42\NotJaxbBundle\Tests\Entity\NSPersonnes');
         $result = $this->service->marshall($produits);
-        
+
         $this->assertEquals($expected, $result);
     }
-        
+
     /**
      * Test a simple marshalling
      */
     public function _testMarshallingAfterMarshallingWithMultipleNamespaces()
     {
-        $expected = file_get_contents(__DIR__.'/Resources/xml_sample_withmultins.xml');
+        $expected = file_get_contents(
+                __DIR__ . '/Resources/xml_sample_withmultins.xml');
         $expected = str_replace("\r", "", $expected);
-        
-        $produits = $this->serviceUnmarshaling->unmarshall($expected, 'Level42\NotJaxbBundle\Tests\Entity\NS2Personnes');
+
+        $produits = $this->serviceUnmarshaling
+                ->unmarshall($expected,
+                        'Level42\NotJaxbBundle\Tests\Entity\NS2Personnes');
         $result = $this->service->marshall($produits);
-        
+
         $this->assertEquals($expected, $result);
     }
 }

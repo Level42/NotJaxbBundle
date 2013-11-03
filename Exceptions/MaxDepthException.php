@@ -13,6 +13,7 @@ namespace Level42\NotJaxbBundle\Exceptions;
  * Specific exception if max depth is reached
  * in annotations reading
  */
-class MaxDepthException extends \Exception {
+class MaxDepthException extends \Exception
+{
 
 }

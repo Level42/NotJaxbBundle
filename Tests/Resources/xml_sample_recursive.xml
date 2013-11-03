@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <produits>
-  <produit sku="123456">
-    <libelle>Produit 123456</libelle>
-    <produits_lies>
-      <produit sku="789123">
-        <libelle>Produit lié 789123</libelle>
-      </produit>
-      <produit sku="456123">
-        <libelle>Produit lié 456123</libelle>
-        <produits_lies>
-          <produit sku="789123">
-            <libelle>Produit lié 789123</libelle>
-          </produit>
-          <produit sku="123456">
-            <libelle>Produit lié 123456</libelle>
-          </produit>
-        </produits_lies>
-      </produit>
-    </produits_lies>
-  </produit>
+	<produit sku="123456">
+		<libelle>Produit 123456</libelle>
+		<produits_lies>
+			<produit sku="789123">
+				<libelle>Produit lié 789123</libelle>
+			</produit>
+			<produit sku="456123">
+				<libelle>Produit lié 456123</libelle>
+				<produits_lies>
+					<produit sku="789123">
+						<libelle>Produit lié 789123</libelle>
+					</produit>
+					<produit sku="123456">
+						<libelle>Produit lié 123456</libelle>
+					</produit>
+				</produits_lies>
+			</produit>
+		</produits_lies>
+	</produit>
 </produits>

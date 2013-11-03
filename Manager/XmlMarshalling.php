@@ -34,7 +34,7 @@ class XmlMarshalling
      * @var array
      */
     protected $rootClasses = array();
-    
+
     /**
      * Xml document
      * @var \DomDocument
@@ -73,13 +73,13 @@ class XmlMarshalling
     {
         $rootClass = get_class($object);
         $metadata = $this->classMetadataFactory->getClassMetadata($rootClass);
-        
+
         $this->xml = new \DOMDocument('1.0', 'UTF-8');
         $this->xml->preserveWhiteSpace = false;
         $this->xml->formatOutput = true;
- 
+
         $this->parseObject($object, $metadata);
-        
+
         return trim($this->xml->saveXML());
     }
 
@@ -96,18 +96,20 @@ class XmlMarshalling
         // Create element
         $prefix = null;
         if ($metadata->getPrefix() != null) {
-        	$prefix = ':'.$metadata->getPrefix();
+            $prefix = ':' . $metadata->getPrefix();
         }
-        $xmlElement = $this->xml->createElementNS($metadata->getNamespace(), $prefix.$metadata->getName());
+        $xmlElement = $this->xml
+                ->createElementNS($metadata->getNamespace(),
+                        $prefix . $metadata->getName());
 
         $this->parseAttributes($object, $metadata, $xmlElement);
         $this->parseElements($object, $metadata, $xmlElement);
         //$this->parseEmbeds($object, $metadata, $xml);
         $this->parseLists($object, $metadata, $xmlElement);
         $this->parseValue($object, $metadata, $xmlElement);
-        
+
         $this->xml->appendChild($xmlElement);
-        
+
         return $xmlElement;
     }
 
@@ -121,27 +123,26 @@ class XmlMarshalling
      * 
      * @return \DOMElement
      */
-    protected function parseAttributes($obj, ClassMetadata $metadata, \DOMElement $xml)
+    protected function parseAttributes($obj, ClassMetadata $metadata,
+            \DOMElement $xml)
     {
-        foreach ($metadata->getAttributes() as $name => $info) 
-        {            
+        foreach ($metadata->getAttributes() as $name => $info) {
             $property = $info[0];
             $nodeName = $info[1];
             $namespace = $info[2];
             $prefix = $info[3];
-            
+
             $value = $this->getValueFromProperty($obj, $property);
-            
-            if ($value != null) 
-            {
+
+            if ($value != null) {
                 $name = !is_null($nodeName) ? $nodeName : $name;
                 if ($prefix != null) {
-                    $prefix.=':';
+                    $prefix .= ':';
                 }
-                $xml->setAttributeNS($namespace, $prefix.$name, $value);
+                $xml->setAttributeNS($namespace, $prefix . $name, $value);
             }
         }
-        
+
         return $xml;
     }
 
@@ -153,14 +154,14 @@ class XmlMarshalling
      * @param ClassMetadata $metadata
      * @param DOMElement $xml
      */
-    protected function parseElements($obj, ClassMetadata $metadata, \DOMElement $xml)
+    protected function parseElements($obj, ClassMetadata $metadata,
+            \DOMElement $xml)
     {
-        foreach ($metadata->getElements() as $name => $properties) 
-        {
+        foreach ($metadata->getElements() as $name => $properties) {
             $property = $properties[0];
-            
+
             $value = $this->getValueFromProperty($obj, $property);
-            
+
             if ($value != null) {
                 $xmlElement = $this->xml->createElement($name, $value);
                 $xml->appendChild($xmlElement);
@@ -176,21 +177,19 @@ class XmlMarshalling
      * @param ClassMetadata $metadata
      * @param stdClass $obj
      */
-    protected function parseEmbeds(\SimpleXmlElement $xml, ClassMetadata $metadata, $obj)
+    protected function parseEmbeds(\SimpleXmlElement $xml,
+            ClassMetadata $metadata, $obj)
     {
-        foreach ($metadata->getEmbeds() as $nodeName => $info) 
-        {
+        foreach ($metadata->getEmbeds() as $nodeName => $info) {
             $property = $info[0];
             $tempMetaData = $info[1];
             $namespace = $info[2];
 
             // TODO Ajouter la lecture avec namespace
             $tempXml = $xml->$nodeName;
-            if ($tempXml != null) 
-            {
+            if ($tempXml != null) {
                 $tempObj = $this->parseObject($tempXml, $tempMetaData);
-                if ($tempObj != null) 
-                {
+                if ($tempObj != null) {
                     $setter = 'set' . ucfirst($property);
                     $obj->$setter($tempObj);
                 }
@@ -206,10 +205,10 @@ class XmlMarshalling
      * @param ClassMetadata $metadata
      * @param \DOMElement $xml
      */
-    protected function parseLists($obj, ClassMetadata $metadata, \DOMElement $xml)
+    protected function parseLists($obj, ClassMetadata $metadata,
+            \DOMElement $xml)
     {
-        foreach ($metadata->getLists() as $nodeName => $info) 
-        {            
+        foreach ($metadata->getLists() as $nodeName => $info) {
             $property = $info[0];
             $wrapperNode = $info[1];
             $listMetadata = $info[2];
@@ -217,30 +216,27 @@ class XmlMarshalling
             $name = $info[4];
 
             $values = $this->getValueFromProperty($obj, $property);
-            
-            if ($values != null && count($values) > 0) 
-            {                
+
+            if ($values != null && count($values) > 0) {
                 $xmlList = array();
-                foreach ($values as $value) 
-                {
+                foreach ($values as $value) {
                     $xmlItem = $this->parseObject($value, $listMetadata);
                     $xmlList[] = $xmlItem;
                 }
-                
-                if (!is_null($wrapperNode))
-                {
+
+                if (!is_null($wrapperNode)) {
                     $xmlWrapper = $this->xml->createElement($wrapperNode);
-                    foreach($xmlList as $xmlItem) {
+                    foreach ($xmlList as $xmlItem) {
                         $xmlWrapper->appendChild($xmlItem);
                     }
                     $xml->appendChild($xmlWrapper);
                 } else {
-                    foreach($xmlList as $xmlItem) {
+                    foreach ($xmlList as $xmlItem) {
                         $xml->appendChild($xmlItem);
                     }
-                }             
+                }
             }
-            
+
         }
     }
 
@@ -251,10 +247,10 @@ class XmlMarshalling
      * @param ClassMetadata $metadata
      * @param stdClass $obj
      */
-    protected function parseValue($obj, ClassMetadata $metadata, \DOMElement $xml)
+    protected function parseValue($obj, ClassMetadata $metadata,
+            \DOMElement $xml)
     {
-        if (!is_null($metadata->getValue())) 
-        {
+        if (!is_null($metadata->getValue())) {
             $value = $this->getValueFromProperty($obj, $metadata->getValue());
             $xml->nodeValue = $value;
         }
@@ -265,7 +261,8 @@ class XmlMarshalling
      * 
      * @param ClassMetadataFactory $classMetadataFactory
      */
-    public function setClassMetadataFactory(ClassMetadataFactory $classMetadataFactory)
+    public function setClassMetadataFactory(
+            ClassMetadataFactory $classMetadataFactory)
     {
         $this->classMetadataFactory = $classMetadataFactory;
     }
@@ -275,12 +272,11 @@ class XmlMarshalling
      */
     public function buildClassMetadatas()
     {
-        foreach ($this->rootClasses as $class) 
-        {
+        foreach ($this->rootClasses as $class) {
             $this->classMetadataFactory->getClassMetadata($class);
         }
     }
-    
+
     /**
      * Return value from object property
      * 
@@ -289,12 +285,13 @@ class XmlMarshalling
      * 
      * @return mixed
      */
-    protected function getValueFromProperty($obj, $property) {
-        
+    protected function getValueFromProperty($obj, $property)
+    {
+
         $getAccessor = 'get' . ucfirst($property);
         $isAccessor = 'is' . ucfirst($property);
         $hasAccessor = 'has' . ucfirst($property);
-        
+
         if (method_exists($obj, $getAccessor)) {
             return $obj->$getAccessor();
         } elseif (method_exists($obj, $isAccessor)) {
@@ -302,6 +299,6 @@ class XmlMarshalling
         } elseif (method_exists($obj, $hasAccessor)) {
             return $obj->$hasAccessor();
         }
-        return null;   
+        return null;
     }
 }

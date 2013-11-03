@@ -22,29 +22,29 @@ class XmlList extends Annotation
      * List name
      * @var string
      */
-	public $name;
-	
-	/**
-	 * Type of listed objects
-	 * @var string
-	 */
-	public $type;
-	
-	/**
-	 * Wrapper name
-	 * @var string
-	 */
-	public $wrapper;
-	
-	/**
-	 * Wrapper namespace
-	 * @var string
-	 */
-	public $ns;
-	
-	/**
-	 * Attribute namespace prefix
-	 * @var string
-	 */
-	public $prefix;
+    public $name;
+
+    /**
+     * Type of listed objects
+     * @var string
+     */
+    public $type;
+
+    /**
+     * Wrapper name
+     * @var string
+     */
+    public $wrapper;
+
+    /**
+     * Wrapper namespace
+     * @var string
+     */
+    public $ns;
+
+    /**
+     * Attribute namespace prefix
+     * @var string
+     */
+    public $prefix;
 }

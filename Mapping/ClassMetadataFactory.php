@@ -47,13 +47,13 @@ class ClassMetadataFactory
      * @param LoaderInterface $loader
      * @param AbstractCache $cache
      */
-    public function __construct(AnnotationLoader $loader, AbstractCache $cache = null)
+    public function __construct(AnnotationLoader $loader,
+            AbstractCache $cache = null)
     {
         $this->loader = $loader;
         $this->cache = $cache;
 
-        if ($cache == null) 
-        {
+        if ($cache == null) {
             // Set a default array cache tool
             $this->cache = new ArrayCache();
         }
@@ -68,13 +68,11 @@ class ClassMetadataFactory
     {
         $class = ltrim($class, '\\');
 
-        if (!isset($this->loadedClasses[$class])) 
-        {
+        if (!isset($this->loadedClasses[$class])) {
 
             $cache = $this->getCache();
 
-            if ($cache !== null && $cache->contains($class)) 
-            {
+            if ($cache !== null && $cache->contains($class)) {
                 $this->loadedClasses[$class] = $cache->fetch($class);
             } else {
                 $metadata = $this->createClassMetaData($class);
@@ -82,8 +80,7 @@ class ClassMetadataFactory
 
                 $this->loadedClasses[$class] = $metadata;
 
-                if ($cache !== null) 
-                {
+                if ($cache !== null) {
                     $cache->save($class, $metadata);
                 }
             }

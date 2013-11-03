@@ -22,23 +22,23 @@ class XmlElement extends Annotation
      * Element name
      * @var string
      */
-	public $name;
-	
-	/**
-	 * Element type name 
-	 * @var string
-	 */
-	public $type;
-	
-	/**
-	 * Element namespace prefix
-	 * @var string
-	 */
-	public $prefix;
-	
-	/**
-	 * Element namespace
-	 * @var string
-	 */
-	public $ns;
+    public $name;
+
+    /**
+     * Element type name 
+     * @var string
+     */
+    public $type;
+
+    /**
+     * Element namespace prefix
+     * @var string
+     */
+    public $prefix;
+
+    /**
+     * Element namespace
+     * @var string
+     */
+    public $ns;
 }

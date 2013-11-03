@@ -16,27 +16,27 @@
 		<test:nom>Dupont</test:nom>
 		<test:service>Personnel</test:service>
 		<adresses>
-		    <adresse id="1">
-		        <numero>12</numero>
-		        <rue>des docks</rue>
-		        <cp>69000</cp>
-		        <ville>LYON</ville>
-		    </adresse>
-		    <adresse id="2">
-		        <numero>22</numero>
-		        <rue>place de la république</rue>
-		        <cp>01000</cp>
-		        <ville>BOURG EN BRESSE</ville>
-		    </adresse>
-		    <adresse id="3">
-		        <numero>32</numero>
-		        <rue>place de la libération</rue>
-		        <cp>75000</cp>
-		        <ville>PARIS</ville>
-		        <complement>Complément 1</complement>
-		        <complement>Complément 2</complement>
-		        <complement>Complément 3</complement>
-		    </adresse>
+			<adresse id="1">
+				<numero>12</numero>
+				<rue>des docks</rue>
+				<cp>69000</cp>
+				<ville>LYON</ville>
+			</adresse>
+			<adresse id="2">
+				<numero>22</numero>
+				<rue>place de la république</rue>
+				<cp>01000</cp>
+				<ville>BOURG EN BRESSE</ville>
+			</adresse>
+			<adresse id="3">
+				<numero>32</numero>
+				<rue>place de la libération</rue>
+				<cp>75000</cp>
+				<ville>PARIS</ville>
+				<complement>Complément 1</complement>
+				<complement>Complément 2</complement>
+				<complement>Complément 3</complement>
+			</adresse>
 		</adresses>
 	</test:personne>
 </test:personnes>

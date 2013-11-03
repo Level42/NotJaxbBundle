@@ -24,17 +24,17 @@ class Adresse
      * @XmlAttribute
      */
     private $id;
-    
+
     /**
      * @XmlElement
      */
     private $numero;
-    
+
     /**
      * @XmlElement
      */
     private $rue;
-    
+
     /**
      * @XmlElement(name="cp")
      */
@@ -49,7 +49,6 @@ class Adresse
      * @XmlList(name="complement", type="Level42\NotJaxbBundle\Tests\Entity\Complement")
      */
     private $complements;
-    
 
     /**
      * 

@@ -24,12 +24,12 @@ class Produit
      * @XmlAttribute
      */
     private $sku;
-    
+
     /**
      * @XmlElement
      */
     private $libelle;
-    
+
     /**
      * @XmlList(name="produit", wrapper="produits_lies", type="Level42\NotJaxbBundle\Tests\Entity\Produit")
      */

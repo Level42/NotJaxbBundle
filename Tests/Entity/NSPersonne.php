@@ -24,12 +24,12 @@ class NSPersonne
      * @XmlAttribute
      */
     private $id;
-    
+
     /**
      * @XmlAttribute
      */
     private $enabled;
-    
+
     /**
      * @XmlElement
      */
@@ -44,7 +44,6 @@ class NSPersonne
      * @XmlList(name="adresse", wrapper="adresses", type="Level42\NotJaxbBundle\Tests\Entity\NSAdresse", ns="http://test/namespace#", prefix="test")
      */
     private $adresses;
-    
 
     /**
      * 

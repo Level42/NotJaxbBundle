@@ -26,12 +26,9 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('level42_not_jaxb');
-        
-        $rootNode
-            ->children()
-            ->scalarNode('xmldepth')->end()
-        ->end();
-        
+
+        $rootNode->children()->scalarNode('xmldepth')->end()->end();
+
         return $treeBuilder;
     }
 }
