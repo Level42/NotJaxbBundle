@@ -10,6 +10,7 @@
       <directory>./</directory>
       <exclude>
         <directory>./Tests</directory>
+        <directory>./vendor</directory>
       </exclude>
     </whitelist>
   </filter>
