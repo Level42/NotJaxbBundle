@@ -1,0 +1,49 @@
+imports:
+    - { resource: parameters.yml }
+        
+framework:
+    test:                      ~
+    secret:                    'tua'
+    router:
+        resource:              "%kernel.root_dir%/config/routing.yml"
+        strict_requirements:   %kernel.debug%
+    form:                      true
+    csrf_protection:           true
+    validation:                { enable_annotations: true }
+#    templating:                { engines: ['twig'] } #assets_version: SomeVersionScheme
+    default_locale:            fr
+    trust_proxy_headers:       false # Whether or not the Request object should trust proxy headers (X_FORWARDED_FOR/HTTP_CLIENT_IP)
+    session:
+        storage_id:            session.storage.mock_file
+
+
+# Twig Configuration
+#twig:
+#    debug:                    %kernel.debug%
+#    strict_variables:         %kernel.debug%
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   pdo_sqlite
+        path:    ':memory:'
+        memory:   true
+        host:     localhost
+        port:     null
+        dbname:   junitissues_db_test
+        user:     null
+        password: null
+        charset:  UTF8
+
+        
+    orm:
+        auto_generate_proxy_classes: %kernel.debug%
+        auto_mapping: true
+
+
+#jms_di_extra:
+#    locations:
+#       all_bundles: true
+
+level42_not_jaxb:
+    xmldepth: 10

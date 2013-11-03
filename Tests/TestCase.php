@@ -10,7 +10,7 @@
 namespace Level42\NotJaxbBundle\Tests;
 
 use Symfony\Component\DependencyInjection\Container;
-use \AppKernel;
+use \NotJaxbTestKernel;
 
 /**
  * Parent class to implement test case with service container
@@ -29,7 +29,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
      */
     public function __construct()
     {
-        $kernel = new AppKernel('test', true);
+        $kernel = new NotJaxbTestKernel('test', true);
         $kernel->loadClassCache();
         $kernel->boot();
         $this->container = $kernel->getContainer();
