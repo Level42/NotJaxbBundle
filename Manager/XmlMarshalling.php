@@ -104,7 +104,7 @@ class XmlMarshalling
 
         $this->parseAttributes($object, $metadata, $xmlElement);
         $this->parseElements($object, $metadata, $xmlElement);
-        //$this->parseEmbeds($object, $metadata, $xml);
+        $this->parseEmbeds($object, $metadata, $xmlElement);
         $this->parseLists($object, $metadata, $xmlElement);
         $this->parseValue($object, $metadata, $xmlElement);
 
@@ -170,29 +170,27 @@ class XmlMarshalling
     }
 
     /**
-     * Parse embedded objects from a SimpleXml node
-     * and set them to the given object
+     * Parse embedded objects from a php object 
+     * and set them to the XML Element
      * 
-     * @param SimpleXmlElement $xml
-     * @param ClassMetadata $metadata
      * @param stdClass $obj
+     * @param ClassMetadata $metadata
+     * @param DOMElement $xml
      */
-    protected function parseEmbeds(\SimpleXmlElement $xml,
-            ClassMetadata $metadata, $obj)
+    protected function parseEmbeds($obj, ClassMetadata $metadata,
+            \DOMElement $xml)
     {
-        foreach ($metadata->getEmbeds() as $nodeName => $info) {
-            $property = $info[0];
-            $tempMetaData = $info[1];
-            $namespace = $info[2];
+        foreach ($metadata->getEmbeds() as $name => $properties) {
+            
+            $property = $properties[0];
+            $embedMetadatas = $properties[1];
+            $prefix = $properties[2];
 
-            // TODO Ajouter la lecture avec namespace
-            $tempXml = $xml->$nodeName;
-            if ($tempXml != null) {
-                $tempObj = $this->parseObject($tempXml, $tempMetaData);
-                if ($tempObj != null) {
-                    $setter = 'set' . ucfirst($property);
-                    $obj->$setter($tempObj);
-                }
+            $embedObj = $this->getValueFromProperty($obj, $property);
+                        
+            if ($embedObj != null) {
+                $xmlElement = $this->parseObject($embedObj, $embedMetadatas);
+                $xml->appendChild($xmlElement);
             }
         }
     }

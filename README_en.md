@@ -131,6 +131,10 @@ See https://github.com/Level42/NotJaxbBundle/tree/master/Tests/Entity
 3. Add Json serializer/unserializer
 
 ### 2.4) Changelog
+#### Version 1.4
+Date : 2013-11-11
+Fix marshalling bug
+PSR-0 problem out of Symfony2
 #### Version 1.3
 Date : 2013-05-28
 Fix namespace support on XmlElements

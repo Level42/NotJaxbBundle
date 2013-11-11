@@ -132,6 +132,10 @@ Voir https://github.com/Level42/NotJaxbBundle/tree/master/Tests/Entity
 3. Ajout d'un serialiseur/deserialiseur Json
 
 ### 2.4) Changelog
+#### Version 1.4
+Date : 2013-11-11
+Correction d'un bug lors du marshalling
+Problème PSR-0
 #### Version 1.3
 Date : 2013-05-28
 Correction de la gestion des namespace sur les XmlElements

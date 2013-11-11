@@ -2,6 +2,7 @@ vendor
 Tests/app/cache
 Tests/app/logs
 composer.lock
+composer.phar
 .buildpath
 .settings
 .project
