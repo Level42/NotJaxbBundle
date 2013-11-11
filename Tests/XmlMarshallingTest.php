@@ -104,6 +104,26 @@ class XmlMarshallingTest extends TestCase
     }
 
     /**
+     * Test for internal issue 2 
+     */
+    public function testInternalIssue2()
+    {
+        $expected = file_get_contents(__DIR__ . '/Resources/xml_fix2_embeds.xml');
+        $expected = str_replace("\r", "", $expected);
+        
+        $root = $this->serviceUnmarshaling->unmarshall($expected, 
+            '\Level42\NotJaxbBundle\Tests\Entity\Fix2Root');
+        
+        /* @var $root \Level42\NotJaxbBundle\Tests\Entity\Fix2Root */
+        $this->assertEquals("PERINEL", $root->getEmbed()->getName());
+        $this->assertEquals("Ingénieurie", $root->getEmbed()->getService());
+        
+        $result = $this->service->marshall($root);
+
+        $this->assertEquals($expected, $result);
+    }
+    
+    /**
      * Test a simple marshalling
      */
     public function _testMarshallingAfterMarshallingWithNamespace()
