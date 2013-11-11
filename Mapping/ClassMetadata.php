@@ -147,6 +147,7 @@ class ClassMetadata
      * 
      * @param string $name
      * @param string $property
+     * @param string $prefix
      */
     public function addElement($name, $property, $ns = null, $prefix = null)
     {
@@ -164,15 +165,15 @@ class ClassMetadata
     }
 
     /**
-     * Add an embedded ClassMetadata
+     * Add info for an XML embed element
      * 
      * @param string $nodeName
      * @param string $property
-     * @param ClassMetadata $metadata
+     * @param string $prefix
      */
-    public function addEmbed($nodeName, $property, ClassMetadata $metadata)
+    public function addEmbed($name, $property, $ns = null, $prefix = null)
     {
-        $this->embeds[$nodeName] = array($property, $metadata);
+        $this->embeds[$name] = array($property, $ns, $prefix);
     }
 
     /**
