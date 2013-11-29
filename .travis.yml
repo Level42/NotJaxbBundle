@@ -1,0 +1,15 @@
+language: php
+php:
+    - 5.3
+    - 5.4
+
+before_script:
+    - wget http://getcomposer.org/composer.phar
+    - composer.phar install
+
+script: 
+    - phpunit --coverage-clover clover
+
+notifications:
+  email:
+    - florent@redfroggy.fr
