@@ -80,6 +80,7 @@
 				line="--log-pmd ${build.dir}/qualimetry/phpcpd-result.xml
 			--exclude vendor
 			--exclude cache
+            --exclude Tests
 			${env.WORKSPACE}" />
 		</exec>
 	</target>
