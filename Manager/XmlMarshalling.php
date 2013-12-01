@@ -143,7 +143,7 @@ class XmlMarshalling
         }
         $xmlElement = $this->xml
                 ->createElementNS($metadata->getNamespace(),
-                        $prefix . $metadata->getName());
+                    $prefix . $metadata->getName());
 
         $this->parseAttributes($object, $metadata, $xmlElement);
         $this->parseElements($object, $metadata, $xmlElement);
@@ -160,7 +160,7 @@ class XmlMarshalling
      * Parse all of the xml attributes from a SimpleXml node
      * and set them to the given object
      * 
-     * @param mixed         $object   Objet to parse
+     * @param mixed         $obj      Objet to parse
      * @param ClassMetadata $metadata Metadatas linked to object to parse
      * @param \DOMElement   $xml      DOM object allready hydrated 
      * 
@@ -193,7 +193,7 @@ class XmlMarshalling
      * Parse simple elements from a SimpleXml node
      * and set them to the given object
      * 
-     * @param mixed         $object   Objet to parse
+     * @param mixed         $obj      Objet to parse
      * @param ClassMetadata $metadata Metadatas linked to object to parse
      * @param \DOMElement   $xml      DOM object allready hydrated 
      * 
@@ -220,7 +220,7 @@ class XmlMarshalling
      * Parse embedded objects from a php object 
      * and set them to the XML Element
      * 
-     * @param mixed         $object   Objet to parse
+     * @param mixed         $obj      Objet to parse
      * @param ClassMetadata $metadata Metadatas linked to object to parse
      * @param \DOMElement   $xml      DOM object allready hydrated
      * 
@@ -229,11 +229,11 @@ class XmlMarshalling
     protected function parseEmbeds($obj, ClassMetadata $metadata,
             \DOMElement $xml)
     {
-        foreach ($metadata->getEmbeds() as $name => $properties) {
+        foreach ($metadata->getEmbeds() as $properties) {
 
             $property = $properties[0];
             $embedMetadatas = $properties[1];
-            $prefix = $properties[2];
+            //$prefix = $properties[2];
 
             $embedObj = $this->getValueFromProperty($obj, $property);
 
@@ -250,7 +250,7 @@ class XmlMarshalling
      * Parse arrays from a SimpleXml node
      * and set them to the given object
      * 
-     * @param mixed         $object   Objet to parse
+     * @param mixed         $obj      Objet to parse
      * @param ClassMetadata $metadata Metadatas linked to object to parse
      * @param \DOMElement   $xml      DOM object allready hydrated
      * 
@@ -259,12 +259,12 @@ class XmlMarshalling
     protected function parseLists($obj, ClassMetadata $metadata,
             \DOMElement $xml)
     {
-        foreach ($metadata->getLists() as $nodeName => $info) {
+        foreach ($metadata->getLists() as $info) {
             $property = $info[0];
             $wrapperNode = $info[1];
             $listMetadata = $info[2];
-            $namespace = $info[3];
-            $name = $info[4];
+            //$namespace = $info[3];
+            //$name = $info[4];
 
             $values = $this->getValueFromProperty($obj, $property);
 
@@ -296,7 +296,7 @@ class XmlMarshalling
     /**
      * Parse the value from a SimpleXml node
      * 
-     * @param mixed         $object   Objet to parse
+     * @param mixed         $obj      Objet to parse
      * @param ClassMetadata $metadata Metadatas linked to object to parse
      * @param \DOMElement   $xml      DOM object allready hydrated
      * 
