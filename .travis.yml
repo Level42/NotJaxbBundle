@@ -2,10 +2,16 @@ language: php
 php:
     - 5.3
     - 5.4
-
+	- 5.5
+	
+cache:
+  directories:
+  - vendor
+  composer: true
+  
 before_script:
     - wget http://getcomposer.org/composer.phar
-    - php composer.phar install --dev
+    - php composer.phar --prefer-source --dev install
 
 script: 
     - phpunit --coverage-clover clover
