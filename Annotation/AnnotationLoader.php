@@ -58,7 +58,6 @@ class AnnotationLoader
     {
         $depth = ($depth == null ? $this->maxDepth : $depth);
         $reflClass = $metadata->getReflectionClass();
-        $className = $reflClass->getName();
 
         if ($depth > 0) {
             $depth--;
@@ -90,7 +89,7 @@ class AnnotationLoader
                 echo $ex->getMessage();
             }
         }
-        
+
         return $metadata;
     }
 
@@ -113,12 +112,12 @@ class AnnotationLoader
                     $nodeName = $annotation->node;
                     $metadata
                             ->addAttribute($attributeName,
-                                    $property->getName(), $nodeName,
-                                    $annotation->ns, $annotation->prefix);
+                                $property->getName(), $nodeName,
+                                $annotation->ns, $annotation->prefix);
                 }
             }
         }
-        
+
         return $metadata;
     }
 
@@ -133,7 +132,6 @@ class AnnotationLoader
     protected function loadClassElements(ClassMetadata $metadata, $depth)
     {
         $reflClass = $metadata->getReflectionClass();
-        $className = $reflClass->getName();
 
         if ($depth > 0) {
             foreach ($reflClass->getProperties() as $property) {
@@ -145,22 +143,22 @@ class AnnotationLoader
                         if (is_null($annotation->type)) {
                             $metadata
                                     ->addElement($nodeName,
-                                            $property->getName(),
-                                            $annotation->ns,
-                                            $annotation->prefix);
+                                        $property->getName(),
+                                        $annotation->ns,
+                                        $annotation->prefix);
                         } else {
                             $embeddedMetadata = new ClassMetadata(
-                                    $annotation->type);
+                                $annotation->type);
                             $this->loadClassMetadata($embeddedMetadata, $depth);
                             $metadata
                                     ->addEmbed($nodeName, $property->getName(),
-                                            $embeddedMetadata);
+                                        $embeddedMetadata);
                         }
                     }
                 }
             }
         }
-        
+
         return $metadata;
     }
 
@@ -175,7 +173,6 @@ class AnnotationLoader
     protected function loadClassLists(ClassMetadata $metadata, $depth)
     {
         $reflClass = $metadata->getReflectionClass();
-        $className = $reflClass->getName();
 
         if ($depth > 0) {
             foreach ($reflClass->getProperties() as $property) {
@@ -187,7 +184,7 @@ class AnnotationLoader
 
                         if (!is_null($annotation->type)) {
                             $embeddedMetadata = new ClassMetadata(
-                                    $annotation->type);
+                                $annotation->type);
                             $this->loadClassMetadata($embeddedMetadata, $depth);
                         } else {
                             $embeddedMetadata = null;
@@ -195,14 +192,14 @@ class AnnotationLoader
 
                         $metadata
                                 ->addList($property->getName(), $nodeName,
-                                        $annotation->wrapper,
-                                        $embeddedMetadata, $annotation->ns,
-                                        $annotation->prefix);
+                                    $annotation->wrapper,
+                                    $embeddedMetadata, $annotation->ns,
+                                    $annotation->prefix);
                     }
                 }
             }
         }
-        
+
         return $metadata;
     }
 
@@ -224,7 +221,7 @@ class AnnotationLoader
                 }
             }
         }
-        
+
         return $metadata;
     }
 }
