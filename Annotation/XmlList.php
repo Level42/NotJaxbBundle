@@ -12,38 +12,43 @@ namespace Level42\NotJaxbBundle\Annotation;
 use Doctrine\Common\Annotations\Annotation;
 
 /**
- * XmlList maps a property to a collection of XML nodes
+ * XmlList maps a property to a collection of XML nodes.
  * 
  * @Annotation
  */
 class XmlList extends Annotation
 {
     /**
-     * List name
+     * List name.
+     * 
      * @var string
      */
     public $name;
 
     /**
-     * Type of listed objects
+     * Type of listed objects.
+     * 
      * @var string
      */
     public $type;
 
     /**
-     * Wrapper name
+     * Wrapper name.
+     * 
      * @var string
      */
     public $wrapper;
 
     /**
-     * Wrapper namespace
+     * Wrapper namespace.
+     * 
      * @var string
      */
     public $ns;
 
     /**
-     * Attribute namespace prefix
+     * Attribute namespace prefix.
+     * 
      * @var string
      */
     public $prefix;

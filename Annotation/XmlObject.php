@@ -13,26 +13,29 @@ use Doctrine\Common\Annotations\Annotation;
 
 /**
  * XmlObject maps a class to XML by letting NotJaxb know that the annotated
- * class should be parsed for additional annotations
+ * class should be parsed for additional annotations.
  * 
  * @Annotation
  */
 class XmlObject extends Annotation
 {
     /**
-     * Object namespace
+     * Object namespace.
+     * 
      * @var string
      */
     public $ns;
 
     /**
-     * Attribute namespace prefix
+     * Attribute namespace prefix.
+     * 
      * @var string
      */
     public $prefix;
 
     /**
-     * Object name
+     * Object name.
+     * 
      * @var string
      */
     public $name;

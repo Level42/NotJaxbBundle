@@ -12,32 +12,36 @@ namespace Level42\NotJaxbBundle\Annotation;
 use Doctrine\Common\Annotations\Annotation;
 
 /**
- * XmlAttribute maps a entity property to an XML attribute
+ * XmlAttribute maps a entity property to an XML attribute.
  * 
  * @Annotation
  */
 class XmlAttribute extends Annotation
 {
     /**
-     * Attribute name
+     * Attribute name.
+     * 
      * @var string
      */
     public $name;
 
     /**
-     * Attribute node name
+     * Attribute node name.
+     * 
      * @var string
      */
     public $node;
 
     /**
-     * Attribute namespace
+     * Attribute namespace.
+     * 
      * @var string
      */
     public $ns;
 
     /**
-     * Attribute namespace prefix
+     * Attribute namespace prefix.
+     * 
      * @var string
      */
     public $prefix;

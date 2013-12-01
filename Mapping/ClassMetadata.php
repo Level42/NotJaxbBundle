@@ -10,81 +10,82 @@
 namespace Level42\NotJaxbBundle\Mapping;
 
 /**
- * A ClassMetadata instance holds all of the XML mapping information for an entity
+ * A ClassMetadata instance holds all of the XML mapping information for an entity.
  */
 class ClassMetadata
 {
     /**
-     * Class
+     * Class.
+     * 
      * @var ReflectionClass
      */
     protected $reflClass;
 
     /**
-     * The name of xml node
+     * The name of xml node.
      *
      * @var string
      */
     protected $name;
 
     /**
-     * The class name
+     * The class name.
      *
      * @var string
      */
     protected $className;
 
     /**
-     * The class namespace
+     * The class namespace.
      *
      * @var string
      */
     protected $namespace;
 
     /**
-     * The class namespace prefix
+     * The class namespace prefix.
      *
      * @var string
      */
     protected $prefix;
 
     /**
-     * Array of xml attributes
+     * Array of xml attributes.
      * 
      * @var array
      */
     protected $attributes = array();
 
     /**
-     * Array of child xml elements
+     * Array of child xml elements.
      * 
      * @var array
      */
     protected $elements = array();
 
     /**
-     * Array of embedded ClassMetadata objects
+     * Array of embedded ClassMetadata objects.
      * 
      * @var array
      */
     protected $embeds = array();
 
     /**
-     * Array of xml lists
+     * Array of xml lists.
      * 
      * @var array
      */
     protected $lists = array();
 
     /**
-     * The value node info
+     * The value node info.
      * 
      * @var string
      */
     protected $value;
 
     /**
-     * Constructs a metadata for the given class
+     * Constructs a metadata for the given class.
      *
      * @param string $class
      */
@@ -94,9 +95,9 @@ class ClassMetadata
     }
 
     /**
-     * Returns the fully qualified name of the class
+     * Returns the fully qualified name of the class.
      *
-     * @return string  The fully qualified class name
+     * @return string The fully qualified class name
      */
     public function getClassName()
     {
@@ -106,7 +107,7 @@ class ClassMetadata
     /**
      * Returns a ReflectionClass instance for this class.
      *
-     * @return ReflectionClass
+     * @return ReflectionClass instance for this class.
      */
     public function getReflectionClass()
     {

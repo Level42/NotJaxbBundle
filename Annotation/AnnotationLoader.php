@@ -22,19 +22,20 @@ use Level42\NotJaxbBundle\Mapping\ClassMetadata;
 
 /**
  * AnnotationLoader loads all of the annotations from an entity class and sets
- * them to a ClassMetadata object
+ * them to a ClassMetadata object.
  */
 class AnnotationLoader
 {
 
     /**
-     * Annotation reader
+     * Annotation reader.
+     * 
      * @var AnnotationReader
      */
     protected $reader;
 
     /**
-     * Build the AnnotationLoader with an AnnotationReader
+     * Build the AnnotationLoader with an AnnotationReader.
      *
      * @param AnnotationReader $reader   Annotation reader to use
      * @param integer          $maxDepth Maximum depth analyze
@@ -46,10 +47,12 @@ class AnnotationLoader
     }
 
     /**
-     * Parse all of the annotations for a given ClassMetadata object
+     * Parse all of the annotations for a given ClassMetadata object.
      *
      * @param ClassMetadata $metadata Metadatas description of class
      * @param integer       $depth    Maximum depth to analyze
+     * 
+     * @return ClassMetadata Metadatas description of class
      */
     public function loadClassMetadata(ClassMetadata $metadata, $depth = null)
     {
@@ -87,12 +90,16 @@ class AnnotationLoader
                 echo $ex->getMessage();
             }
         }
+        
+        return $metadata;
     }
 
     /**
-     * Load all of the @XmlAttribute annotations
+     * Load all of the @XmlAttribute annotations.
      * 
      * @param ClassMetadata $metadata Metadatas description of class
+     * 
+     * @return ClassMetadata Metadatas description of class
      */
     protected function loadClassAttributes(ClassMetadata $metadata)
     {
@@ -111,13 +118,17 @@ class AnnotationLoader
                 }
             }
         }
+        
+        return $metadata;
     }
 
     /**
-     * Load all of the @XmlElement annotations
+     * Load all of the @XmlElement annotations.
      * 
      * @param ClassMetadata $metadata Metadatas description of class
      * @param integer       $depth    Current depth
+     * 
+     * @return ClassMetadata Metadatas description of class
      */
     protected function loadClassElements(ClassMetadata $metadata, $depth)
     {
@@ -149,13 +160,17 @@ class AnnotationLoader
                 }
             }
         }
+        
+        return $metadata;
     }
 
     /**
-     * Load all of the @XmlList annotations
+     * Load all of the @XmlList annotations.
      * 
      * @param ClassMetadata $metadata Metadatas description of class
      * @param integer       $depth    Current depth
+     * 
+     * @return ClassMetadata Metadatas description of class
      */
     protected function loadClassLists(ClassMetadata $metadata, $depth)
     {
@@ -187,12 +202,16 @@ class AnnotationLoader
                 }
             }
         }
+        
+        return $metadata;
     }
 
     /**
-     * Load all of the @XmlValue annotations
+     * Load all of the @XmlValue annotations.
      * 
      * @param ClassMetadata $metadata Metadatas description of class
+     * 
+     * @return ClassMetadata Metadatas description of class
      */
     protected function loadClassValue(ClassMetadata $metadata)
     {
@@ -205,5 +224,7 @@ class AnnotationLoader
                 }
             }
         }
+        
+        return $metadata;
     }
 }

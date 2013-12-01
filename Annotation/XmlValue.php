@@ -12,7 +12,7 @@ namespace Level42\NotJaxbBundle\Annotation;
 use Doctrine\Common\Annotations\Annotation;
 
 /**
- * XmlValue maps a entity property to an XML node value
+ * XmlValue maps a entity property to an XML node value.
  * 
  * @Annotation
  */
