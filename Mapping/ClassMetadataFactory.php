@@ -23,29 +23,31 @@ use Level42\NotJaxbBundle\Annotation\AnnotationLoader;
 class ClassMetadataFactory
 {
     /**
-     * The loader for loading the class metadata
-     * @var LoaderInterface
+     * The loader for loading the class metadata.
+     * 
+     * @var LoaderInterface Loader
      */
     protected $loader;
 
     /**
-     * The cache for caching class metadata
-     * @var AbstractCache
+     * The cache for caching class metadata.
+     * 
+     * @var AbstractCache Cache used to store metadatas
      */
     protected $cache;
 
     /**
-     * Already loaded classes
+     * Already loaded classes.
      *
-     * @var array
+     * @var array List of loaded classes
      */
     protected $loadedClasses = array();
 
     /**
-     * Required dependencies
+     * Required dependencies.
      *
-     * @param LoaderInterface $loader
-     * @param AbstractCache $cache
+     * @param LoaderInterface $loader List of loaded classes
+     * @param AbstractCache   $cache  Cache used to store metadatas
      */
     public function __construct(AnnotationLoader $loader,
             AbstractCache $cache = null)
@@ -60,9 +62,11 @@ class ClassMetadataFactory
     }
 
     /**
-     * Returns the class metadata associated to the given class name
+     * Returns the class metadata associated to the given class name.
      *
-     * @param string $class
+     * @param string $class Classname
+     * 
+     * @return array Loaded classes
      */
     public function getClassMetadata($class)
     {
@@ -90,10 +94,11 @@ class ClassMetadataFactory
     }
 
     /**
-     * Create the ClassMetadata for a class name
+     * Create the ClassMetadata for a class name.
      * 
-     * @param string $class
-     * @return ClassMetadata
+     * @param string $class Class to analyse
+     * 
+     * @return ClassMetadata Class metadata
      */
     public function createClassMetadata($class)
     {
@@ -101,7 +106,9 @@ class ClassMetadataFactory
     }
 
     /**
-     * @return the $loader
+     * Return loader for loading the class metadata.
+     * 
+     * @return LoaderInterface The loader for loading the class metadata.
      */
     public function getLoader()
     {
@@ -109,7 +116,9 @@ class ClassMetadataFactory
     }
 
     /**
-     * @param LoaderInterface $loader
+     * Set loader for loading the class metadata.
+     * 
+     * @param LoaderInterface $loader The loader for loading the class metadata.
      */
     public function setLoader($loader)
     {
@@ -117,7 +126,9 @@ class ClassMetadataFactory
     }
 
     /**
-     * @return the $cache
+     * Return Cache used to store metadatas.
+     * 
+     * @return AbstractCache Cache used to store metadatas
      */
     public function getCache()
     {
@@ -125,7 +136,9 @@ class ClassMetadataFactory
     }
 
     /**
-     * @param AbstractCache $cache
+     * Set Cache used to store metadatas.
+     * 
+     * @param AbstractCache $cache Cache used to store metadatas
      */
     public function setCache($cache)
     {
@@ -133,7 +146,9 @@ class ClassMetadataFactory
     }
 
     /**
-     * @return the $loadedClasses
+     * Return List of loaded classes.
+     * 
+     * @return array List of loaded classes
      */
     public function getLoadedClasses()
     {
@@ -141,7 +156,9 @@ class ClassMetadataFactory
     }
 
     /**
-     * @param array $loadedClasses
+     * Set list of loaded classes.
+     * 
+     * @param array $loadedClasses List of loaded classes
      */
     public function setLoadedClasses($loadedClasses)
     {

@@ -87,7 +87,7 @@ class ClassMetadata
     /**
      * Constructs a metadata for the given class.
      *
-     * @param string $class
+     * @param string $className Classname to load
      */
     public function __construct($className)
     {
@@ -119,12 +119,13 @@ class ClassMetadata
     }
 
     /**
-     * Add info for an XML attribute
+     * Add info for an XML attribute.
      * 
-     * @param string $name
-     * @param string $property
-     * @param string $nodeName
-     * @param string $namespace
+     * @param string $name      Name of attribute
+     * @param string $property  Property linked to attribute
+     * @param string $nodeName  XML node name for attribute
+     * @param string $namespace Namespace of attribute
+     * @param string $prefix    Namespace prefix of attribute
      */
     public function addAttribute($name, $property, $nodeName, $namespace = null,
             $prefix = null)
@@ -134,9 +135,9 @@ class ClassMetadata
     }
 
     /**
-     * Get all of the attributes
+     * Get all of the attributes.
      * 
-     * @return array
+     * @return array List of attributes
      */
     public function getAttributes()
     {
@@ -144,11 +145,12 @@ class ClassMetadata
     }
 
     /**
-     * Add info for an XML element
+     * Add info for an XML element.
      * 
-     * @param string $name
-     * @param string $property
-     * @param string $prefix
+     * @param string $name     Name of element
+     * @param string $property Property of element
+     * @param string $ns       Namespace of element
+     * @param string $prefix   Namespace prefix of element
      */
     public function addElement($name, $property, $ns = null, $prefix = null)
     {
@@ -156,9 +158,9 @@ class ClassMetadata
     }
 
     /**
-     * Get all of the XML elements
+     * Get all of the XML elements.
      * 
-     * @return array
+     * @return array List of elements
      */
     public function getElements()
     {
@@ -166,11 +168,12 @@ class ClassMetadata
     }
 
     /**
-     * Add info for an XML embed element
+     * Add info for an XML embed element.
      * 
-     * @param string $nodeName
-     * @param string $property
-     * @param string $prefix
+     * @param string $name     Name of element
+     * @param string $property Property of element
+     * @param string $ns       Namespace of element
+     * @param string $prefix   Namespace prefix of element
      */
     public function addEmbed($name, $property, $ns = null, $prefix = null)
     {
@@ -178,9 +181,9 @@ class ClassMetadata
     }
 
     /**
-     * Get all of the embedded ClassMetadata(s)
+     * Get all of the embedded ClassMetadata(s).
      * 
-     * @return array
+     * @return array List of embed elements
      */
     public function getEmbeds()
     {
@@ -188,12 +191,14 @@ class ClassMetadata
     }
 
     /**
-     * Add info for an XML list
+     * Add info for an XML list.
      * 
-     * @param string $property
-     * @param string $nodeName
-     * @param string $wrapperNode
-     * @param ClassMetadata $metadata
+     * @param string        $property    Property name
+     * @param string        $nodeName    XML node name
+     * @param string        $wrapperNode XML wrapper name
+     * @param ClassMetadata $metadata    Metadatas of class type
+     * @param string        $namespace   Namespace of element
+     * @param string        $prefix      Namespace prefix of element
      */
     public function addList($property, $nodeName, $wrapperNode = null,
             ClassMetadata $metadata = null, $namespace = null, $prefix = null)
@@ -203,9 +208,9 @@ class ClassMetadata
     }
 
     /**
-     * Get all of the XML lists
+     * Get all of the XML lists.
      * 
-     * @return array
+     * @return array List of list
      */
     public function getLists()
     {
@@ -213,9 +218,9 @@ class ClassMetadata
     }
 
     /**
-     * Set the node name which holds the value
+     * Set the node name which holds the value.
      * 
-     * @param string $value
+     * @param string $value Value of XML node
      */
     public function setValue($value)
     {
@@ -223,7 +228,7 @@ class ClassMetadata
     }
 
     /**
-     * Get the value node name
+     * Get the value node name.
      * 
      * @return string
      */
@@ -233,7 +238,8 @@ class ClassMetadata
     }
 
     /**
-     * Get class namespace
+     * Get class namespace.
+     * 
      * @return string Namespace
      */
     public function getNamespace()
@@ -242,7 +248,8 @@ class ClassMetadata
     }
 
     /**
-     * Set class namespace
+     * Set class namespace.
+     * 
      * @param string Namespace
      */
     public function setNamespace($namespace)
@@ -250,6 +257,11 @@ class ClassMetadata
         $this->namespace = $namespace;
     }
 
+    /**
+     * Return class name.
+     * 
+     * @return string Class name
+     */
     public function getName()
     {
         if ($this->name == null) {
@@ -260,16 +272,31 @@ class ClassMetadata
         return $this->name;
     }
 
+    /**
+     * Set class name.
+     * 
+     * @param string $name Class name
+     */
     public function setName($name)
     {
         $this->name = $name;
     }
 
+    /**
+     * Return namespace prefix.
+     * 
+     * @return string Namespace prefix
+     */
     public function getPrefix()
     {
         return $this->prefix;
     }
 
+    /**
+     * Set namespace prefix.
+     *
+     * @param string $prefix Namespace prefix
+     */
     public function setPrefix($prefix)
     {
         $this->prefix = $prefix;
