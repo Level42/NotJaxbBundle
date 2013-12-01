@@ -17,14 +17,27 @@ use Doctrine\Common\Cache\Cache;
 use \SimpleXmlElement;
 
 /**
- * Manager manages all operations
+ * Manager for all operations used to convert 
+ * PHP Object to XML file
  */
 class XmlMarshalling
 {
     /**
+     * XML encoding
+     * @var string
+     */
+    const XML_ENCODE = 'UTF-8';
+    
+    /**
+     * XML version
+     * @var string
+     */
+    const XML_VERSION = '1.0';
+    
+    /**
      * The ClassMetadata factory
      * 
-     * @var ClassMetadataFactory
+     * @var ClassMetadataFactory Used to construct metadatas of classes
      */
     protected $classMetadataFactory;
 
@@ -44,7 +57,8 @@ class XmlMarshalling
     /**
      * Manager constructor with required dependecy injection
      * 
-     * @param ClassMetadataFactory $classMetadataFactory
+     * @param ClassMetadataFactory $classMetadataFactory 
+     *     Service used to generate metadatas from class
      */
     public function __construct(ClassMetadataFactory $classMetadataFactory)
     {
@@ -54,27 +68,30 @@ class XmlMarshalling
     /**
      * Register a root class name for pre-caching
      * 
-     * @param string $class
+     * @param string $class Classname to register
+     * 
+     * @return XmlMarshalling
      */
     public function registerRootClass($class)
     {
         $this->rootClasses[] = $class;
+        
         return $this;
     }
 
     /**
      * Marshall an object into an XML string
      * 
-     * @param mixed $object Object 
+     * @param mixed $object Object to transform to XML
      * 
-     * @return string $xmlString
+     * @return string Xml string
      */
     public function marshall($object)
     {
         $rootClass = get_class($object);
         $metadata = $this->classMetadataFactory->getClassMetadata($rootClass);
 
-        $this->xml = new \DOMDocument('1.0', 'UTF-8');
+        $this->xml = new \DOMDocument(self::XML_VERSION, self::XML_ENCODE);
         $this->xml->preserveWhiteSpace = false;
         $this->xml->formatOutput = true;
 
@@ -84,12 +101,38 @@ class XmlMarshalling
     }
 
     /**
+     * Set the ClassMetadataFactory
+     * 
+     * @param ClassMetadataFactory $classMetadataFactory 
+     *     Service used to generate metadatas from class
+     * 
+     * @return XmlMarshalling
+     */
+    public function setClassMetadataFactory(
+            ClassMetadataFactory $classMetadataFactory)
+    {
+        $this->classMetadataFactory = $classMetadataFactory;
+        
+        return $this;
+    }
+
+    /**
+     * Pre-build the ClassMetadata for all the registered root classes
+     */
+    public function buildClassMetadatas()
+    {
+        foreach ($this->rootClasses as $class) {
+            $this->classMetadataFactory->getClassMetadata($class);
+        }
+    }
+
+    /**
      * Parse an object from a SimpleXml node
      * 
-     * @param mixed $object
-     * @param ClassMetadata $metadata
+     * @param mixed         $object   Objet to parse
+     * @param ClassMetadata $metadata Metadatas linked to object to parse
      * 
-     * @return \DOMElement
+     * @return \DOMElement DOM object allready hydrated
      */
     protected function parseObject($object, ClassMetadata $metadata)
     {
@@ -117,11 +160,11 @@ class XmlMarshalling
      * Parse all of the xml attributes from a SimpleXml node
      * and set them to the given object
      * 
-     * @param stdClass $obj
-     * @param ClassMetadata $metadata
-     * @param \DOMElement $xml
+     * @param mixed         $object   Objet to parse
+     * @param ClassMetadata $metadata Metadatas linked to object to parse
+     * @param \DOMElement   $xml      DOM object allready hydrated 
      * 
-     * @return \DOMElement
+     * @return \DOMElement DOM object completed with parsed object
      */
     protected function parseAttributes($obj, ClassMetadata $metadata,
             \DOMElement $xml)
@@ -150,9 +193,11 @@ class XmlMarshalling
      * Parse simple elements from a SimpleXml node
      * and set them to the given object
      * 
-     * @param stdClass $obj
-     * @param ClassMetadata $metadata
-     * @param DOMElement $xml
+     * @param mixed         $object   Objet to parse
+     * @param ClassMetadata $metadata Metadatas linked to object to parse
+     * @param \DOMElement   $xml      DOM object allready hydrated 
+     * 
+     * @return \DOMElement DOM object completed with parsed object
      */
     protected function parseElements($obj, ClassMetadata $metadata,
             \DOMElement $xml)
@@ -167,15 +212,19 @@ class XmlMarshalling
                 $xml->appendChild($xmlElement);
             }
         }
+        
+        return $xml;
     }
 
     /**
      * Parse embedded objects from a php object 
      * and set them to the XML Element
      * 
-     * @param stdClass $obj
-     * @param ClassMetadata $metadata
-     * @param DOMElement $xml
+     * @param mixed         $object   Objet to parse
+     * @param ClassMetadata $metadata Metadatas linked to object to parse
+     * @param \DOMElement   $xml      DOM object allready hydrated
+     * 
+     * @return \DOMElement DOM object completed with parsed object
      */
     protected function parseEmbeds($obj, ClassMetadata $metadata,
             \DOMElement $xml)
@@ -193,15 +242,19 @@ class XmlMarshalling
                 $xml->appendChild($xmlElement);
             }
         }
+        
+        return $xml;
     }
 
     /**
      * Parse arrays from a SimpleXml node
      * and set them to the given object
      * 
-     * @param stdClass $obj
-     * @param ClassMetadata $metadata
-     * @param \DOMElement $xml
+     * @param mixed         $object   Objet to parse
+     * @param ClassMetadata $metadata Metadatas linked to object to parse
+     * @param \DOMElement   $xml      DOM object allready hydrated
+     * 
+     * @return \DOMElement DOM object completed with parsed object
      */
     protected function parseLists($obj, ClassMetadata $metadata,
             \DOMElement $xml)
@@ -236,14 +289,18 @@ class XmlMarshalling
             }
 
         }
+        
+        return $xml;
     }
 
     /**
      * Parse the value from a SimpleXml node
      * 
-     * @param SimpleXmlElement $xml
-     * @param ClassMetadata $metadata
-     * @param stdClass $obj
+     * @param mixed         $object   Objet to parse
+     * @param ClassMetadata $metadata Metadatas linked to object to parse
+     * @param \DOMElement   $xml      DOM object allready hydrated
+     * 
+     * @return \DOMElement DOM object completed with parsed object
      */
     protected function parseValue($obj, ClassMetadata $metadata,
             \DOMElement $xml)
@@ -252,36 +309,17 @@ class XmlMarshalling
             $value = $this->getValueFromProperty($obj, $metadata->getValue());
             $xml->nodeValue = $value;
         }
-    }
-
-    /**
-     * Set the ClassMetadataFactory
-     * 
-     * @param ClassMetadataFactory $classMetadataFactory
-     */
-    public function setClassMetadataFactory(
-            ClassMetadataFactory $classMetadataFactory)
-    {
-        $this->classMetadataFactory = $classMetadataFactory;
-    }
-
-    /**
-     * Pre-build the ClassMetadata for all the registered root classes
-     */
-    public function buildClassMetadatas()
-    {
-        foreach ($this->rootClasses as $class) {
-            $this->classMetadataFactory->getClassMetadata($class);
-        }
+        
+        return $xml;
     }
 
     /**
      * Return value from object property
      * 
-     * @param mixed $obj
-     * @param string $property
+     * @param mixed  $obj      Object to read
+     * @param string $property Property of object to read
      * 
-     * @return mixed
+     * @return mixed Value of property
      */
     protected function getValueFromProperty($obj, $property)
     {
@@ -297,6 +335,7 @@ class XmlMarshalling
         } elseif (method_exists($obj, $hasAccessor)) {
             return $obj->$hasAccessor();
         }
+        
         return null;
     }
 }
