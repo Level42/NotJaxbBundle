@@ -56,9 +56,9 @@ class XmlUnmarshalling
      */
     public function registerRootClass($class)
     {
-    	$this->rootClasses[] = $class;
-    
-    	return $this;
+        $this->rootClasses[] = $class;
+
+        return $this;
     }
 
     /**
@@ -90,7 +90,7 @@ class XmlUnmarshalling
             ClassMetadataFactory $classMetadataFactory)
     {
         $this->classMetadataFactory = $classMetadataFactory;
-        
+
         return $this;
     }
 
@@ -163,7 +163,7 @@ class XmlUnmarshalling
                 $obj->$setter($value);
             }
         }
-        
+
         return $obj;
     }
 
@@ -194,7 +194,7 @@ class XmlUnmarshalling
             $setter = 'set' . ucfirst($property);
             $obj->$setter($value);
         }
-        
+
         return $obj;
     }
 
@@ -231,7 +231,7 @@ class XmlUnmarshalling
                 }
             }
         }
-        
+
         return $obj;
     }
 
@@ -285,7 +285,7 @@ class XmlUnmarshalling
             $setter = 'set' . ucfirst($property);
             $obj->$setter($tempList);
         }
-        
+
         return $obj;
     }
 
@@ -306,7 +306,7 @@ class XmlUnmarshalling
             $value = (string) $xml;
             $obj->$setter($value);
         }
-        
+
         return $obj;
     }
 }

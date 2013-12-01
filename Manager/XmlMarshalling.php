@@ -27,13 +27,13 @@ class XmlMarshalling
      * @var string
      */
     const XML_ENCODE = 'UTF-8';
-    
+
     /**
      * XML version
      * @var string
      */
     const XML_VERSION = '1.0';
-    
+
     /**
      * The ClassMetadata factory
      * 
@@ -75,7 +75,7 @@ class XmlMarshalling
     public function registerRootClass($class)
     {
         $this->rootClasses[] = $class;
-        
+
         return $this;
     }
 
@@ -112,7 +112,7 @@ class XmlMarshalling
             ClassMetadataFactory $classMetadataFactory)
     {
         $this->classMetadataFactory = $classMetadataFactory;
-        
+
         return $this;
     }
 
@@ -212,7 +212,7 @@ class XmlMarshalling
                 $xml->appendChild($xmlElement);
             }
         }
-        
+
         return $xml;
     }
 
@@ -230,19 +230,19 @@ class XmlMarshalling
             \DOMElement $xml)
     {
         foreach ($metadata->getEmbeds() as $name => $properties) {
-            
+
             $property = $properties[0];
             $embedMetadatas = $properties[1];
             $prefix = $properties[2];
 
             $embedObj = $this->getValueFromProperty($obj, $property);
-                        
+
             if ($embedObj != null) {
                 $xmlElement = $this->parseObject($embedObj, $embedMetadatas);
                 $xml->appendChild($xmlElement);
             }
         }
-        
+
         return $xml;
     }
 
@@ -289,7 +289,7 @@ class XmlMarshalling
             }
 
         }
-        
+
         return $xml;
     }
 
@@ -309,7 +309,7 @@ class XmlMarshalling
             $value = $this->getValueFromProperty($obj, $metadata->getValue());
             $xml->nodeValue = $value;
         }
-        
+
         return $xml;
     }
 
@@ -335,7 +335,7 @@ class XmlMarshalling
         } elseif (method_exists($obj, $hasAccessor)) {
             return $obj->$hasAccessor();
         }
-        
+
         return null;
     }
 }
