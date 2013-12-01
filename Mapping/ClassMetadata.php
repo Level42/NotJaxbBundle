@@ -10,83 +10,84 @@
 namespace Level42\NotJaxbBundle\Mapping;
 
 /**
- * A ClassMetadata instance holds all of the XML mapping information for an entity
+ * A ClassMetadata instance holds all of the XML mapping information for an entity.
  */
 class ClassMetadata
 {
     /**
-     * Class
+     * Class.
+     * 
      * @var ReflectionClass
      */
     protected $reflClass;
 
     /**
-     * The name of xml node
+     * The name of xml node.
      *
      * @var string
      */
     protected $name;
 
     /**
-     * The class name
+     * The class name.
      *
      * @var string
      */
     protected $className;
 
     /**
-     * The class namespace
+     * The class namespace.
      *
      * @var string
      */
     protected $namespace;
 
     /**
-     * The class namespace prefix
+     * The class namespace prefix.
      *
      * @var string
      */
     protected $prefix;
 
     /**
-     * Array of xml attributes
+     * Array of xml attributes.
      * 
      * @var array
      */
     protected $attributes = array();
 
     /**
-     * Array of child xml elements
+     * Array of child xml elements.
      * 
      * @var array
      */
     protected $elements = array();
 
     /**
-     * Array of embedded ClassMetadata objects
+     * Array of embedded ClassMetadata objects.
      * 
      * @var array
      */
     protected $embeds = array();
 
     /**
-     * Array of xml lists
+     * Array of xml lists.
      * 
      * @var array
      */
     protected $lists = array();
 
     /**
-     * The value node info
+     * The value node info.
      * 
      * @var string
      */
     protected $value;
 
     /**
-     * Constructs a metadata for the given class
+     * Constructs a metadata for the given class.
      *
-     * @param string $class
+     * @param string $className Classname to load
      */
     public function __construct($className)
     {
@@ -94,9 +95,9 @@ class ClassMetadata
     }
 
     /**
-     * Returns the fully qualified name of the class
+     * Returns the fully qualified name of the class.
      *
-     * @return string  The fully qualified class name
+     * @return string The fully qualified class name
      */
     public function getClassName()
     {
@@ -106,7 +107,7 @@ class ClassMetadata
     /**
      * Returns a ReflectionClass instance for this class.
      *
-     * @return ReflectionClass
+     * @return ReflectionClass instance for this class.
      */
     public function getReflectionClass()
     {
@@ -118,12 +119,13 @@ class ClassMetadata
     }
 
     /**
-     * Add info for an XML attribute
+     * Add info for an XML attribute.
      * 
-     * @param string $name
-     * @param string $property
-     * @param string $nodeName
-     * @param string $namespace
+     * @param string $name      Name of attribute
+     * @param string $property  Property linked to attribute
+     * @param string $nodeName  XML node name for attribute
+     * @param string $namespace Namespace of attribute
+     * @param string $prefix    Namespace prefix of attribute
      */
     public function addAttribute($name, $property, $nodeName, $namespace = null,
             $prefix = null)
@@ -133,9 +135,9 @@ class ClassMetadata
     }
 
     /**
-     * Get all of the attributes
+     * Get all of the attributes.
      * 
-     * @return array
+     * @return array List of attributes
      */
     public function getAttributes()
     {
@@ -143,21 +145,22 @@ class ClassMetadata
     }
 
     /**
-     * Add info for an XML element
+     * Add info for an XML element.
      * 
-     * @param string $name
-     * @param string $property
-     * @param string $prefix
+     * @param string $name      Name of element
+     * @param string $property  Property of element
+     * @param string $namespace Namespace of element
+     * @param string $prefix    Namespace prefix of element
      */
-    public function addElement($name, $property, $ns = null, $prefix = null)
+    public function addElement($name, $property, $namespace = null, $prefix = null)
     {
-        $this->elements[$name] = array($property, $ns, $prefix);
+        $this->elements[$name] = array($property, $namespace, $prefix);
     }
 
     /**
-     * Get all of the XML elements
+     * Get all of the XML elements.
      * 
-     * @return array
+     * @return array List of elements
      */
     public function getElements()
     {
@@ -165,21 +168,22 @@ class ClassMetadata
     }
 
     /**
-     * Add info for an XML embed element
+     * Add info for an XML embed element.
      * 
-     * @param string $nodeName
-     * @param string $property
-     * @param string $prefix
+     * @param string $name      Name of element
+     * @param string $property  Property of element
+     * @param string $namespace Namespace of element
+     * @param string $prefix    Namespace prefix of element
      */
-    public function addEmbed($name, $property, $ns = null, $prefix = null)
+    public function addEmbed($name, $property, $namespace = null, $prefix = null)
     {
-        $this->embeds[$name] = array($property, $ns, $prefix);
+        $this->embeds[$name] = array($property, $namespace, $prefix);
     }
 
     /**
-     * Get all of the embedded ClassMetadata(s)
+     * Get all of the embedded ClassMetadata(s).
      * 
-     * @return array
+     * @return array List of embed elements
      */
     public function getEmbeds()
     {
@@ -187,12 +191,14 @@ class ClassMetadata
     }
 
     /**
-     * Add info for an XML list
+     * Add info for an XML list.
      * 
-     * @param string $property
-     * @param string $nodeName
-     * @param string $wrapperNode
-     * @param ClassMetadata $metadata
+     * @param string        $property    Property name
+     * @param string        $nodeName    XML node name
+     * @param string        $wrapperNode XML wrapper name
+     * @param ClassMetadata $metadata    Metadatas of class type
+     * @param string        $namespace   Namespace of element
+     * @param string        $prefix      Namespace prefix of element
      */
     public function addList($property, $nodeName, $wrapperNode = null,
             ClassMetadata $metadata = null, $namespace = null, $prefix = null)
@@ -202,9 +208,9 @@ class ClassMetadata
     }
 
     /**
-     * Get all of the XML lists
+     * Get all of the XML lists.
      * 
-     * @return array
+     * @return array List of list
      */
     public function getLists()
     {
@@ -212,9 +218,9 @@ class ClassMetadata
     }
 
     /**
-     * Set the node name which holds the value
+     * Set the node name which holds the value.
      * 
-     * @param string $value
+     * @param string $value Value of XML node
      */
     public function setValue($value)
     {
@@ -222,7 +228,7 @@ class ClassMetadata
     }
 
     /**
-     * Get the value node name
+     * Get the value node name.
      * 
      * @return string
      */
@@ -232,7 +238,8 @@ class ClassMetadata
     }
 
     /**
-     * Get class namespace
+     * Get class namespace.
+     * 
      * @return string Namespace
      */
     public function getNamespace()
@@ -241,14 +248,20 @@ class ClassMetadata
     }
 
     /**
-     * Set class namespace
-     * @param string Namespace
+     * Set class namespace.
+     * 
+     * @param string $namespace Namespace
      */
     public function setNamespace($namespace)
     {
         $this->namespace = $namespace;
     }
 
+    /**
+     * Return class name.
+     * 
+     * @return string Class name
+     */
     public function getName()
     {
         if ($this->name == null) {
@@ -259,16 +272,31 @@ class ClassMetadata
         return $this->name;
     }
 
+    /**
+     * Set class name.
+     * 
+     * @param string $name Class name
+     */
     public function setName($name)
     {
         $this->name = $name;
     }
 
+    /**
+     * Return namespace prefix.
+     * 
+     * @return string Namespace prefix
+     */
     public function getPrefix()
     {
         return $this->prefix;
     }
 
+    /**
+     * Set namespace prefix.
+     *
+     * @param string $prefix Namespace prefix
+     */
     public function setPrefix($prefix)
     {
         $this->prefix = $prefix;

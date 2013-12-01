@@ -22,19 +22,20 @@ use Level42\NotJaxbBundle\Mapping\ClassMetadata;
 
 /**
  * AnnotationLoader loads all of the annotations from an entity class and sets
- * them to a ClassMetadata object
+ * them to a ClassMetadata object.
  */
 class AnnotationLoader
 {
 
     /**
-     * Annotation reader
+     * Annotation reader.
+     * 
      * @var AnnotationReader
      */
     protected $reader;
 
     /**
-     * Build the AnnotationLoader with an AnnotationReader
+     * Build the AnnotationLoader with an AnnotationReader.
      *
      * @param AnnotationReader $reader   Annotation reader to use
      * @param integer          $maxDepth Maximum depth analyze
@@ -46,16 +47,17 @@ class AnnotationLoader
     }
 
     /**
-     * Parse all of the annotations for a given ClassMetadata object
+     * Parse all of the annotations for a given ClassMetadata object.
      *
-     * @param ClassMetadata $metadata Metadatas linked to class
+     * @param ClassMetadata $metadata Metadatas description of class
      * @param integer       $depth    Maximum depth to analyze
+     * 
+     * @return ClassMetadata Metadatas description of class
      */
     public function loadClassMetadata(ClassMetadata $metadata, $depth = null)
     {
         $depth = ($depth == null ? $this->maxDepth : $depth);
         $reflClass = $metadata->getReflectionClass();
-        $className = $reflClass->getName();
 
         if ($depth > 0) {
             $depth--;
@@ -87,12 +89,16 @@ class AnnotationLoader
                 echo $ex->getMessage();
             }
         }
+
+        return $metadata;
     }
 
     /**
-     * Load all of the @XmlAttribute annotations
+     * Load all of the @XmlAttribute annotations.
      * 
-     * @param ClassMetadata $metadata
+     * @param ClassMetadata $metadata Metadatas description of class
+     * 
+     * @return ClassMetadata Metadatas description of class
      */
     protected function loadClassAttributes(ClassMetadata $metadata)
     {
@@ -106,23 +112,26 @@ class AnnotationLoader
                     $nodeName = $annotation->node;
                     $metadata
                             ->addAttribute($attributeName,
-                                    $property->getName(), $nodeName,
-                                    $annotation->ns, $annotation->prefix);
+                                $property->getName(), $nodeName,
+                                $annotation->ns, $annotation->prefix);
                 }
             }
         }
+
+        return $metadata;
     }
 
     /**
-     * Load all of the @XmlElement annotations
+     * Load all of the @XmlElement annotations.
      * 
-     * @param ClassMetadata $metadata
-     * @param integer       $depth
+     * @param ClassMetadata $metadata Metadatas description of class
+     * @param integer       $depth    Current depth
+     * 
+     * @return ClassMetadata Metadatas description of class
      */
     protected function loadClassElements(ClassMetadata $metadata, $depth)
     {
         $reflClass = $metadata->getReflectionClass();
-        $className = $reflClass->getName();
 
         if ($depth > 0) {
             foreach ($reflClass->getProperties() as $property) {
@@ -134,33 +143,36 @@ class AnnotationLoader
                         if (is_null($annotation->type)) {
                             $metadata
                                     ->addElement($nodeName,
-                                            $property->getName(),
-                                            $annotation->ns,
-                                            $annotation->prefix);
+                                        $property->getName(),
+                                        $annotation->ns,
+                                        $annotation->prefix);
                         } else {
                             $embeddedMetadata = new ClassMetadata(
-                                    $annotation->type);
+                                $annotation->type);
                             $this->loadClassMetadata($embeddedMetadata, $depth);
                             $metadata
                                     ->addEmbed($nodeName, $property->getName(),
-                                            $embeddedMetadata);
+                                        $embeddedMetadata);
                         }
                     }
                 }
             }
         }
+
+        return $metadata;
     }
 
     /**
-     * Load all of the @XmlList annotations
+     * Load all of the @XmlList annotations.
      * 
-     * @param ClassMetadata $metadata
-     * @param integer       $depth
+     * @param ClassMetadata $metadata Metadatas description of class
+     * @param integer       $depth    Current depth
+     * 
+     * @return ClassMetadata Metadatas description of class
      */
     protected function loadClassLists(ClassMetadata $metadata, $depth)
     {
         $reflClass = $metadata->getReflectionClass();
-        $className = $reflClass->getName();
 
         if ($depth > 0) {
             foreach ($reflClass->getProperties() as $property) {
@@ -172,7 +184,7 @@ class AnnotationLoader
 
                         if (!is_null($annotation->type)) {
                             $embeddedMetadata = new ClassMetadata(
-                                    $annotation->type);
+                                $annotation->type);
                             $this->loadClassMetadata($embeddedMetadata, $depth);
                         } else {
                             $embeddedMetadata = null;
@@ -180,19 +192,23 @@ class AnnotationLoader
 
                         $metadata
                                 ->addList($property->getName(), $nodeName,
-                                        $annotation->wrapper,
-                                        $embeddedMetadata, $annotation->ns,
-                                        $annotation->prefix);
+                                    $annotation->wrapper,
+                                    $embeddedMetadata, $annotation->ns,
+                                    $annotation->prefix);
                     }
                 }
             }
         }
+
+        return $metadata;
     }
 
     /**
-     * Load all of the @XmlValue annotations
+     * Load all of the @XmlValue annotations.
      * 
-     * @param ClassMetadata $metadata
+     * @param ClassMetadata $metadata Metadatas description of class
+     * 
+     * @return ClassMetadata Metadatas description of class
      */
     protected function loadClassValue(ClassMetadata $metadata)
     {
@@ -205,5 +221,7 @@ class AnnotationLoader
                 }
             }
         }
+
+        return $metadata;
     }
 }

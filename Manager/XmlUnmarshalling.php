@@ -17,28 +17,30 @@ use Doctrine\Common\Cache\Cache;
 use \SimpleXmlElement;
 
 /**
- * Manager manages all operations
+ * Manager for all operations used to convert 
+ * XML file to PHP Object.
  */
 class XmlUnmarshalling
 {
     /**
-     * The ClassMetadata factory
-     *
-     * @var ClassMetadataFactory
+     * The ClassMetadata factory.
+     * 
+     * @var ClassMetadataFactory Used to construct metadatas of classes
      */
     protected $classMetadataFactory;
 
     /**
-     * Array to store root class names
+     * Array to store root class names.
      *
      * @var array
      */
     protected $rootClasses = array();
 
     /**
-     * Manager constructor with required dependecy injection
-     *
+     * Manager constructor with required dependecy injection.
+     * 
      * @param ClassMetadataFactory $classMetadataFactory
+     *     Service used to generate metadatas from class
      */
     public function __construct(ClassMetadataFactory $classMetadataFactory)
     {
@@ -46,36 +48,69 @@ class XmlUnmarshalling
     }
 
     /**
-     * Register a root class name for pre-caching
+     * Register a root class name for pre-caching.
      *
-     * @param string $class
+     * @param string $class Classname to register
+     *
+     * @return XmlMarshalling
      */
     public function registerRootClass($class)
     {
         $this->rootClasses[] = $class;
+
         return $this;
     }
 
     /**
-     * Unmarshall an XML string into an object graph
+     * Unmarshall an XML string into an object graph.
      *
-     * @param string $xmlString
-     * @param string $rootClass
+     * @param string $xmlString XML string to read
+     * @param string $rootClass Classname to hydrate
+     * 
+     * @return mixed $object Object to transform to XML
      */
     public function unmarshall($xmlString, $rootClass)
     {
         $metadata = $this->classMetadataFactory->getClassMetadata($rootClass);
         $xml = new SimpleXMLElement($xmlString, null, null,
-                $metadata->getNamespace());
+            $metadata->getNamespace());
 
         return $this->parseObject($xml, $metadata);
     }
 
     /**
-     * Parse an object from a SimpleXml node
+     * Set the ClassMetadataFactory.
+     * 
+     * @param ClassMetadataFactory $classMetadataFactory
+     *     Service used to generate metadatas from class
+     * 
+     * @return XmlMarshalling
+     */
+    public function setClassMetadataFactory(
+            ClassMetadataFactory $classMetadataFactory)
+    {
+        $this->classMetadataFactory = $classMetadataFactory;
+
+        return $this;
+    }
+
+    /**
+     * Pre-build the ClassMetadata for all the registered root classes
+     */
+    public function buildClassMetadatas()
+    {
+        foreach ($this->rootClasses as $class) {
+            $this->classMetadataFactory->getClassMetadata($class);
+        }
+    }
+
+    /**
+     * Parse an object from a SimpleXml node.
      *
-     * @param SimpleXmlElement $xml
-     * @param ClassMetadata $metadata
+     * @param SimpleXmlElement $xml      XML object to read
+     * @param ClassMetadata    $metadata Metadatas linked to object to parse
+     * 
+     * @return mixed $object Object to transform to XML
      */
     protected function parseObject(\SimpleXmlElement $xml,
             ClassMetadata $metadata)
@@ -98,14 +133,13 @@ class XmlUnmarshalling
 
     /**
      * Parse all of the xml attributes from a SimpleXml node
-     * and set them to the given object
+     * and set them to the given object.
      *
-     * @param SimpleXmlElement $xml
-     * @param ClassMetadata $metadata
-     * @param stdClass $obj
-     *
-     * @todo : Ajouter des logs !!
-     * @todo : Implémenter l'accès aux attributs public plutot que des set/get si possible
+     * @param SimpleXmlElement $xml      XML object to read
+     * @param ClassMetadata    $metadata Metadatas linked to object to parse
+     * @param mixed            $obj      Object to transform to XML
+     * 
+     * @return mixed Object to transform to XML
      */
     protected function parseAttributes(\SimpleXmlElement $xml,
             ClassMetadata $metadata, $obj)
@@ -129,15 +163,19 @@ class XmlUnmarshalling
                 $obj->$setter($value);
             }
         }
+
+        return $obj;
     }
 
     /**
      * Parse simple elements from a SimpleXml node
-     * and set them to the given object
+     * and set them to the given object.
      *
-     * @param SimpleXmlElement $xml
-     * @param ClassMetadata $metadata
-     * @param stdClass $obj
+     * @param SimpleXmlElement $xml      XML object to read
+     * @param ClassMetadata    $metadata Metadatas linked to object to parse
+     * @param mixed            $obj      Object to transform to XML
+     * 
+     * @return mixed Object to transform to XML
      */
     protected function parseElements(\SimpleXmlElement $xml,
             ClassMetadata $metadata, $obj)
@@ -156,15 +194,19 @@ class XmlUnmarshalling
             $setter = 'set' . ucfirst($property);
             $obj->$setter($value);
         }
+
+        return $obj;
     }
 
     /**
      * Parse embedded objects from a SimpleXml node
-     * and set them to the given object
+     * and set them to the given object.
      *
-     * @param SimpleXmlElement $xml
-     * @param ClassMetadata $metadata
-     * @param stdClass $obj
+     * @param SimpleXmlElement $xml      XML object to read
+     * @param ClassMetadata    $metadata Metadatas linked to object to parse
+     * @param mixed            $obj      Object to transform to XML
+     * 
+     * @return mixed Object to transform to XML
      */
     protected function parseEmbeds(\SimpleXmlElement $xml,
             ClassMetadata $metadata, $obj)
@@ -189,15 +231,19 @@ class XmlUnmarshalling
                 }
             }
         }
+
+        return $obj;
     }
 
     /**
      * Parse arrays from a SimpleXml node
-     * and set them to the given object
+     * and set them to the given object.
      *
-     * @param SimpleXmlElement $xml
-     * @param ClassMetadata $metadata
-     * @param stdClass $obj
+     * @param SimpleXmlElement $xml      XML object to read
+     * @param ClassMetadata    $metadata Metadatas linked to object to parse
+     * @param mixed            $obj      Object to transform to XML
+     * 
+     * @return mixed Object to transform to XML
      */
     protected function parseLists(\SimpleXmlElement $xml,
             ClassMetadata $metadata, $obj)
@@ -239,14 +285,18 @@ class XmlUnmarshalling
             $setter = 'set' . ucfirst($property);
             $obj->$setter($tempList);
         }
+
+        return $obj;
     }
 
     /**
-     * Parse the value from a SimpleXml node
+     * Parse the value from a SimpleXml node.
      *
-     * @param SimpleXmlElement $xml
-     * @param ClassMetadata $metadata
-     * @param stdClass $obj
+     * @param SimpleXmlElement $xml      XML object to read
+     * @param ClassMetadata    $metadata Metadatas linked to object to parse
+     * @param mixed            $obj      Object to transform to XML
+     * 
+     * @return mixed Object to transform to XML
      */
     protected function parseValue(\SimpleXmlElement $xml,
             ClassMetadata $metadata, $obj)
@@ -256,26 +306,7 @@ class XmlUnmarshalling
             $value = (string) $xml;
             $obj->$setter($value);
         }
-    }
 
-    /**
-     * Set the ClassMetadataFactory
-     *
-     * @param ClassMetadataFactory $classMetadataFactory
-     */
-    public function setClassMetadataFactory(
-            ClassMetadataFactory $classMetadataFactory)
-    {
-        $this->classMetadataFactory = $classMetadataFactory;
-    }
-
-    /**
-     * Pre-build the ClassMetadata for all the registered root classes
-     */
-    public function buildClassMetadatas()
-    {
-        foreach ($this->rootClasses as $class) {
-            $this->classMetadataFactory->getClassMetadata($class);
-        }
+        return $obj;
     }
 }
