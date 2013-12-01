@@ -48,7 +48,7 @@ class AnnotationLoader
     /**
      * Parse all of the annotations for a given ClassMetadata object
      *
-     * @param ClassMetadata $metadata Metadatas linked to class
+     * @param ClassMetadata $metadata Metadatas description of class
      * @param integer       $depth    Maximum depth to analyze
      */
     public function loadClassMetadata(ClassMetadata $metadata, $depth = null)
@@ -92,7 +92,7 @@ class AnnotationLoader
     /**
      * Load all of the @XmlAttribute annotations
      * 
-     * @param ClassMetadata $metadata
+     * @param ClassMetadata $metadata Metadatas description of class
      */
     protected function loadClassAttributes(ClassMetadata $metadata)
     {
@@ -116,8 +116,8 @@ class AnnotationLoader
     /**
      * Load all of the @XmlElement annotations
      * 
-     * @param ClassMetadata $metadata
-     * @param integer       $depth
+     * @param ClassMetadata $metadata Metadatas description of class
+     * @param integer       $depth    Current depth
      */
     protected function loadClassElements(ClassMetadata $metadata, $depth)
     {
@@ -154,8 +154,8 @@ class AnnotationLoader
     /**
      * Load all of the @XmlList annotations
      * 
-     * @param ClassMetadata $metadata
-     * @param integer       $depth
+     * @param ClassMetadata $metadata Metadatas description of class
+     * @param integer       $depth    Current depth
      */
     protected function loadClassLists(ClassMetadata $metadata, $depth)
     {
@@ -192,7 +192,7 @@ class AnnotationLoader
     /**
      * Load all of the @XmlValue annotations
      * 
-     * @param ClassMetadata $metadata
+     * @param ClassMetadata $metadata Metadatas description of class
      */
     protected function loadClassValue(ClassMetadata $metadata)
     {
