@@ -18,46 +18,49 @@ use \SimpleXmlElement;
 
 /**
  * Manager for all operations used to convert 
- * PHP Object to XML file
+ * PHP Object to XML file.
  */
 class XmlMarshalling
 {
     /**
-     * XML encoding
+     * XML encoding.
+     * 
      * @var string
      */
     const XML_ENCODE = 'UTF-8';
 
     /**
-     * XML version
+     * XML version.
+     * 
      * @var string
      */
     const XML_VERSION = '1.0';
 
     /**
-     * The ClassMetadata factory
+     * The ClassMetadata factory.
      * 
      * @var ClassMetadataFactory Used to construct metadatas of classes
      */
     protected $classMetadataFactory;
 
     /**
-     * Array to store root class names
+     * Array to store root class names.
      * 
-     * @var array
+     * @var array List of classes
      */
     protected $rootClasses = array();
 
     /**
-     * Xml document
-     * @var \DomDocument
+     * Xml document.
+     * 
+     * @var \DomDocument XML document in construction
      */
     protected $xml;
 
     /**
      * Manager constructor with required dependecy injection
      * 
-     * @param ClassMetadataFactory $classMetadataFactory 
+     * @param ClassMetadataFactory $classMetadataFactory
      *     Service used to generate metadatas from class
      */
     public function __construct(ClassMetadataFactory $classMetadataFactory)
@@ -66,7 +69,7 @@ class XmlMarshalling
     }
 
     /**
-     * Register a root class name for pre-caching
+     * Register a root class name for pre-caching.
      * 
      * @param string $class Classname to register
      * 
@@ -80,7 +83,7 @@ class XmlMarshalling
     }
 
     /**
-     * Marshall an object into an XML string
+     * Marshall an object into an XML string.
      * 
      * @param mixed $object Object to transform to XML
      * 
@@ -101,9 +104,9 @@ class XmlMarshalling
     }
 
     /**
-     * Set the ClassMetadataFactory
+     * Set the ClassMetadataFactory.
      * 
-     * @param ClassMetadataFactory $classMetadataFactory 
+     * @param ClassMetadataFactory $classMetadataFactory
      *     Service used to generate metadatas from class
      * 
      * @return XmlMarshalling
@@ -117,7 +120,7 @@ class XmlMarshalling
     }
 
     /**
-     * Pre-build the ClassMetadata for all the registered root classes
+     * Pre-build the ClassMetadata for all the registered root classes.
      */
     public function buildClassMetadatas()
     {
@@ -127,7 +130,7 @@ class XmlMarshalling
     }
 
     /**
-     * Parse an object from a SimpleXml node
+     * Parse an object from a SimpleXml node.
      * 
      * @param mixed         $object   Objet to parse
      * @param ClassMetadata $metadata Metadatas linked to object to parse
@@ -158,7 +161,7 @@ class XmlMarshalling
 
     /**
      * Parse all of the xml attributes from a SimpleXml node
-     * and set them to the given object
+     * and set them to the given object.
      * 
      * @param mixed         $obj      Objet to parse
      * @param ClassMetadata $metadata Metadatas linked to object to parse
@@ -191,7 +194,7 @@ class XmlMarshalling
 
     /**
      * Parse simple elements from a SimpleXml node
-     * and set them to the given object
+     * and set them to the given object.
      * 
      * @param mixed         $obj      Objet to parse
      * @param ClassMetadata $metadata Metadatas linked to object to parse
@@ -218,7 +221,7 @@ class XmlMarshalling
 
     /**
      * Parse embedded objects from a php object 
-     * and set them to the XML Element
+     * and set them to the XML Element.
      * 
      * @param mixed         $obj      Objet to parse
      * @param ClassMetadata $metadata Metadatas linked to object to parse
@@ -248,7 +251,7 @@ class XmlMarshalling
 
     /**
      * Parse arrays from a SimpleXml node
-     * and set them to the given object
+     * and set them to the given object.
      * 
      * @param mixed         $obj      Objet to parse
      * @param ClassMetadata $metadata Metadatas linked to object to parse
@@ -294,7 +297,7 @@ class XmlMarshalling
     }
 
     /**
-     * Parse the value from a SimpleXml node
+     * Parse the value from a SimpleXml node.
      * 
      * @param mixed         $obj      Objet to parse
      * @param ClassMetadata $metadata Metadatas linked to object to parse
@@ -314,7 +317,7 @@ class XmlMarshalling
     }
 
     /**
-     * Return value from object property
+     * Return value from object property.
      * 
      * @param mixed  $obj      Object to read
      * @param string $property Property of object to read

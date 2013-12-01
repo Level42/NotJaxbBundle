@@ -147,14 +147,14 @@ class ClassMetadata
     /**
      * Add info for an XML element.
      * 
-     * @param string $name     Name of element
-     * @param string $property Property of element
-     * @param string $ns       Namespace of element
-     * @param string $prefix   Namespace prefix of element
+     * @param string $name      Name of element
+     * @param string $property  Property of element
+     * @param string $namespace Namespace of element
+     * @param string $prefix    Namespace prefix of element
      */
-    public function addElement($name, $property, $ns = null, $prefix = null)
+    public function addElement($name, $property, $namespace = null, $prefix = null)
     {
-        $this->elements[$name] = array($property, $ns, $prefix);
+        $this->elements[$name] = array($property, $namespace, $prefix);
     }
 
     /**
@@ -170,14 +170,14 @@ class ClassMetadata
     /**
      * Add info for an XML embed element.
      * 
-     * @param string $name     Name of element
-     * @param string $property Property of element
-     * @param string $ns       Namespace of element
-     * @param string $prefix   Namespace prefix of element
+     * @param string $name      Name of element
+     * @param string $property  Property of element
+     * @param string $namespace Namespace of element
+     * @param string $prefix    Namespace prefix of element
      */
-    public function addEmbed($name, $property, $ns = null, $prefix = null)
+    public function addEmbed($name, $property, $namespace = null, $prefix = null)
     {
-        $this->embeds[$name] = array($property, $ns, $prefix);
+        $this->embeds[$name] = array($property, $namespace, $prefix);
     }
 
     /**
@@ -250,7 +250,7 @@ class ClassMetadata
     /**
      * Set class namespace.
      * 
-     * @param string Namespace
+     * @param string $namespace Namespace
      */
     public function setNamespace($namespace)
     {

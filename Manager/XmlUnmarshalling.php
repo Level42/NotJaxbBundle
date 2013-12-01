@@ -18,28 +18,28 @@ use \SimpleXmlElement;
 
 /**
  * Manager for all operations used to convert 
- * XML file to PHP Object
+ * XML file to PHP Object.
  */
 class XmlUnmarshalling
 {
     /**
-     * The ClassMetadata factory
+     * The ClassMetadata factory.
      * 
      * @var ClassMetadataFactory Used to construct metadatas of classes
      */
     protected $classMetadataFactory;
 
     /**
-     * Array to store root class names
+     * Array to store root class names.
      *
      * @var array
      */
     protected $rootClasses = array();
 
     /**
-     * Manager constructor with required dependecy injection
+     * Manager constructor with required dependecy injection.
      * 
-     * @param ClassMetadataFactory $classMetadataFactory 
+     * @param ClassMetadataFactory $classMetadataFactory
      *     Service used to generate metadatas from class
      */
     public function __construct(ClassMetadataFactory $classMetadataFactory)
@@ -48,7 +48,7 @@ class XmlUnmarshalling
     }
 
     /**
-     * Register a root class name for pre-caching
+     * Register a root class name for pre-caching.
      *
      * @param string $class Classname to register
      *
@@ -62,7 +62,7 @@ class XmlUnmarshalling
     }
 
     /**
-     * Unmarshall an XML string into an object graph
+     * Unmarshall an XML string into an object graph.
      *
      * @param string $xmlString XML string to read
      * @param string $rootClass Classname to hydrate
@@ -73,15 +73,15 @@ class XmlUnmarshalling
     {
         $metadata = $this->classMetadataFactory->getClassMetadata($rootClass);
         $xml = new SimpleXMLElement($xmlString, null, null,
-                $metadata->getNamespace());
+            $metadata->getNamespace());
 
         return $this->parseObject($xml, $metadata);
     }
 
     /**
-     * Set the ClassMetadataFactory
+     * Set the ClassMetadataFactory.
      * 
-     * @param ClassMetadataFactory $classMetadataFactory 
+     * @param ClassMetadataFactory $classMetadataFactory
      *     Service used to generate metadatas from class
      * 
      * @return XmlMarshalling
@@ -105,7 +105,7 @@ class XmlUnmarshalling
     }
 
     /**
-     * Parse an object from a SimpleXml node
+     * Parse an object from a SimpleXml node.
      *
      * @param SimpleXmlElement $xml      XML object to read
      * @param ClassMetadata    $metadata Metadatas linked to object to parse
@@ -133,7 +133,7 @@ class XmlUnmarshalling
 
     /**
      * Parse all of the xml attributes from a SimpleXml node
-     * and set them to the given object
+     * and set them to the given object.
      *
      * @param SimpleXmlElement $xml      XML object to read
      * @param ClassMetadata    $metadata Metadatas linked to object to parse
@@ -169,7 +169,7 @@ class XmlUnmarshalling
 
     /**
      * Parse simple elements from a SimpleXml node
-     * and set them to the given object
+     * and set them to the given object.
      *
      * @param SimpleXmlElement $xml      XML object to read
      * @param ClassMetadata    $metadata Metadatas linked to object to parse
@@ -200,7 +200,7 @@ class XmlUnmarshalling
 
     /**
      * Parse embedded objects from a SimpleXml node
-     * and set them to the given object
+     * and set them to the given object.
      *
      * @param SimpleXmlElement $xml      XML object to read
      * @param ClassMetadata    $metadata Metadatas linked to object to parse
@@ -237,7 +237,7 @@ class XmlUnmarshalling
 
     /**
      * Parse arrays from a SimpleXml node
-     * and set them to the given object
+     * and set them to the given object.
      *
      * @param SimpleXmlElement $xml      XML object to read
      * @param ClassMetadata    $metadata Metadatas linked to object to parse
@@ -290,7 +290,7 @@ class XmlUnmarshalling
     }
 
     /**
-     * Parse the value from a SimpleXml node
+     * Parse the value from a SimpleXml node.
      *
      * @param SimpleXmlElement $xml      XML object to read
      * @param ClassMetadata    $metadata Metadatas linked to object to parse
