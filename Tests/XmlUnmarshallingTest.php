@@ -36,6 +36,27 @@ class XmlUnmarshallingTest extends TestCase
     }
 
     /**
+     * Test a simple unmarshalling with xmlRow Annotation
+     */
+    public function testUnmarshallingSimpleWithXmlRow()
+    {
+        $xml = file_get_contents(
+          __DIR__ . '/Resources/xml_sample_xmlrow.xml');
+
+        $result = $this->service
+          ->unmarshall($xml,
+            'Level42\NotJaxbBundle\Tests\Entity\NS4Personnes');
+
+        $this
+          ->assertInstanceOf(
+            'Level42\NotJaxbBundle\Tests\Entity\NS4Personnes',
+            $result);
+
+        $this->assertNotNull($result->getPersonne());
+        $this->assertEquals('<test:personne><nom>Nom</nom><prenom>Prenom</prenom><email>Email</email></test:personne>', $result->getPersonne());
+    }
+
+    /**
      * Test a simple unmarshalling
      */
     public function testUnmarshallingSimple()
@@ -508,24 +529,5 @@ class XmlUnmarshallingTest extends TestCase
         $this->assertEquals('Complément 3', $complements[2]->getValeur());
     }
 
-    /**
-     * Test a simple unmarshalling with xmlRow Annotation
-     */
-    public function testUnmarshallingSimpleWithXmlRow()
-    {
-        $xml = file_get_contents(
-                __DIR__ . '/Resources/xml_sample_xmlrow.xml');
 
-        $result = $this->service
-                ->unmarshall($xml,
-                    'Level42\NotJaxbBundle\Tests\Entity\NS4Personnes');
-
-        $this
-                ->assertInstanceOf(
-                    'Level42\NotJaxbBundle\Tests\Entity\NS4Personnes',
-                    $result);
-
-        $this->assertNotNull($result->getPersonne());
-        $this->assertEquals('<personne><nom>Nom</nom><prenom>Prenom</prenom><email>Email</email></personne>', $result->getPersonne());
-    }
 }

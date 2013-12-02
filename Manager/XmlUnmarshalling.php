@@ -124,6 +124,7 @@ class XmlUnmarshalling
             $this->parseEmbeds($xml, $metadata, $obj);
             $this->parseLists($xml, $metadata, $obj);
             $this->parseValue($xml, $metadata, $obj);
+            $this->parseRow($xml, $metadata, $obj);
 
             return $obj;
         } else {
@@ -308,5 +309,36 @@ class XmlUnmarshalling
         }
 
         return $obj;
+    }
+
+    /**
+     * Parse the value from a SimpleXml node
+     *
+     * @param SimpleXmlElement $xml     XML object to read
+     * @param ClassMetadata    $metadata Metadatas linked to object to parse
+     * @param mixed            $obj      Object to transform to XML
+     *
+     * @return mixed Object to transform to XML
+     */
+    protected function parseRow(\SimpleXmlElement $xml, ClassMetadata $metadata, $obj)
+    {
+        foreach ($metadata->getRows() as $nodeName => $info)
+        {
+            $property = $info[0];
+            $namespace = $info[1];
+            if ($namespace == null) {
+                $node = $xml->$nodeName;
+            } else {
+                $node = $xml->children($namespace);
+                $node = $node->$nodeName;
+            }
+
+            $value = $node->asXML();
+            if ($value != null)
+            {
+                $setter = 'set' . ucfirst($property);
+                $obj->$setter($value);
+            }
+        }
     }
 }

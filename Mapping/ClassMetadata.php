@@ -85,6 +85,13 @@ class ClassMetadata
     protected $value;
 
     /**
+     * Array of xml rows
+     *
+     * @var array
+     */
+    protected $rows = array();
+
+    /**
      * Constructs a metadata for the given class.
      *
      * @param string $className Classname to load
@@ -235,6 +242,27 @@ class ClassMetadata
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * Add info for an XML element
+     *
+     * @param string $name
+     * @param string $property
+     */
+    public function addRow($name, $property, $ns = null, $prefix = null)
+    {
+        $this->rows[$name] = array($property, $ns, $prefix);
+    }
+
+    /**
+     * Get all of the XML elements
+     *
+     * @return array
+     */
+    public function getRows()
+    {
+        return $this->rows;
     }
 
     /**
