@@ -13,12 +13,12 @@ use Level42\NotJaxbBundle\Annotation\XmlObject;
 use Level42\NotJaxbBundle\Annotation\XmlRow;
 
 /**
- * @XmlObject(name="personnes")
+ * @XmlObject(ns="http://test/namespace#", name="personnes", prefix="test")
  */
-class NS4Personnes
+class NS5Personnes
 {
     /**
-     * @XmlRow(name="personne")
+     * @XmlRow(name="personne", ns="http://test/namespace#")
      */
     private $personne;
 
