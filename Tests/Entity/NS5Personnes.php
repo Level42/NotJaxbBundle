@@ -13,7 +13,7 @@ use Level42\NotJaxbBundle\Annotation\XmlObject;
 use Level42\NotJaxbBundle\Annotation\XmlRow;
 
 /**
- * @XmlObject(ns="http://test/namespace#", name="personnes", prefix="test")
+ * @XmlObject(name="personnes", ns="http://test/namespace#")
  */
 class NS5Personnes
 {
@@ -23,20 +23,39 @@ class NS5Personnes
     private $personne;
 
     /**
-     * 
-     * @return 
+     * @XmlRow(name="amis", ns="http://test/namespace#")
      */
-    public function getPersonne()
+    private $friends;
+
+    /**
+     * @param mixed $friends
+     */
+    public function setFriends($friends)
     {
-        return $this->personne;
+        $this->friends = $friends;
     }
 
     /**
-     * 
-     * @param $personne
+     * @return mixed
+     */
+    public function getFriends()
+    {
+        return $this->friends;
+    }
+
+    /**
+     * @param mixed $personne
      */
     public function setPersonne($personne)
     {
         $this->personne = $personne;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPersonne()
+    {
+        return $this->personne;
     }
 }

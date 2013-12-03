@@ -5,4 +5,8 @@
         <prenom>Prenom</prenom>
         <email>Email</email>
     </personne>
+    <amis>
+        <nom>Nom</nom>
+        <prenom>Prenom</prenom>
+    </amis>
 </personnes>

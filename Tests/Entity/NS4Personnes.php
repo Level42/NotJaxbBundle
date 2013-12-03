@@ -23,20 +23,40 @@ class NS4Personnes
     private $personne;
 
     /**
-     * 
-     * @return 
+     * @XmlRow()
+     */
+    private $amis;
+
+    /**
+     * @param mixed $amis
+     */
+    public function setAmis($amis)
+    {
+        $this->amis = $amis;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAmis()
+    {
+        return $this->amis;
+    }
+
+    /**
+     * @param mixed $personne
+     */
+    public function setPersonne($personne)
+    {
+        $this->personne = $personne;
+    }
+
+    /**
+     * @return mixed
      */
     public function getPersonne()
     {
         return $this->personne;
     }
 
-    /**
-     * 
-     * @param $personne
-     */
-    public function setPersonne($personne)
-    {
-        $this->personne = $personne;
-    }
 }

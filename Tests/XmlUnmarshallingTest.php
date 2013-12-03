@@ -525,14 +525,16 @@ class XmlUnmarshallingTest extends TestCase
             'Level42\NotJaxbBundle\Tests\Entity\NS4Personnes',
             $result);
 
-        $this->assertNotNull($result->getPersonne());
+        // Test with name option
         $this->assertEquals('<nom>Nom</nom><prenom>Prenom</prenom><email>Email</email>', $result->getPersonne());
+        // Test without option
+        $this->assertEquals('<nom>Nom</nom><prenom>Prenom</prenom>', $result->getAmis());
     }
 
     /**
-     * Test a simple unmarshalling with xmlRow Annotation
+     * Test a simple unmarshalling with xmlRow Annotation with Namespace
      */
-    public function testUnmarshallingSimpleWithXmlRowAndNamespace()
+    public function testUnmarshallingSimpleWithXmlRowWithNs()
     {
         $xml = file_get_contents(
           __DIR__ . '/Resources/xml_sample_xmlrow_withns.xml');
@@ -546,7 +548,9 @@ class XmlUnmarshallingTest extends TestCase
             'Level42\NotJaxbBundle\Tests\Entity\NS5Personnes',
             $result);
 
-        $this->assertNotNull($result->getPersonne());
-        $this->assertEquals('<nom>Nom</nom><prenom>Prenom</prenom><email>Email</email>', $result->getPersonne());
+        // Test with name and namespace options
+        $this->assertEquals('<test:nom>Nom</test:nom><test:prenom>Prenom</test:prenom><test:email>Email</test:email>', $result->getPersonne());
+        // Test with name and namespace options (node name different from property)
+        $this->assertEquals('<test:nom>Nom</test:nom><test:prenom>Prenom</test:prenom>', $result->getFriends());
     }
 }

@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<personnes xmlns:test="http://test/namespace#">
+<test:personnes xmlns:test="http://test/namespace#">
     <test:personne>
-        <nom>Nom</nom>
-        <prenom>Prenom</prenom>
-        <email>Email</email>
+        <test:nom>Nom</test:nom>
+        <test:prenom>Prenom</test:prenom>
+        <test:email>Email</test:email>
     </test:personne>
-</personnes>
+    <test:amis>
+        <test:nom>Nom</test:nom>
+        <test:prenom>Prenom</test:prenom>
+    </test:amis>
+</test:personnes>

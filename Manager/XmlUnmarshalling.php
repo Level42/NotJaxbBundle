@@ -326,6 +326,7 @@ class XmlUnmarshalling
         {
             $property = $info[0];
             $namespace = $info[1];
+
             if ($namespace == null) {
                 $node = $xml->$nodeName;
             } else {
@@ -333,7 +334,7 @@ class XmlUnmarshalling
                 $node = $node->$nodeName;
             }
 
-            $children = $xml->$property->children();
+            $children = $xml->$nodeName->children($namespace);
 
             if ($children != null) {
                 $value = '';
