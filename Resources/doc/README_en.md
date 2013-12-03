@@ -119,7 +119,26 @@ PHP
          * @XmlValue
          */
         private $description;
-        
+
+#### @XmlRow
+This annotation allows you to get a XML node as string.
+Options :
+- name : Attribute name in XML (if different of class attribute name)
+- ns : Attribute namespace
+
+XML
+
+        <personne>
+          < .../>
+        </personne>
+
+PHP
+
+        /**
+         * @XmlRow (name="personne", [ns="http://..."])
+         */
+        private $personne;
+
 #### Use
 - To serialize an object to XML, use "notjaxb.xml_unmarshalling" service.
 - To unserialize XML XML to object, use "notjaxb.xml_marshalling" service.

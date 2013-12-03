@@ -121,6 +121,25 @@ PHP
          */
         private $poste;
 
+#### @XmlRow
+Cette annotation est utilisée pour obtenir le contenu d'un noeud XML sous forme de chaine de caractères.
+Options :
+- name : Nom de l'attribut dans le XML (si différent du nom de l'attribut de la classe)
+- ns : Namespace de l'objet dans le XML
+
+XML
+
+        <personne>
+          < .../>
+        </personne>
+
+PHP
+
+        /**
+         * @XmlRow (name="personne", [ns="http://..."])
+         */
+        private $personne;
+
 #### Utilisation
 - Pour serialiser un objet en XML, utiliser le service "notjaxb.xml_unmarshalling".
 - Pour déserialiser un XML en objet, utiliser le service "notjaxb.xml_marshalling".
