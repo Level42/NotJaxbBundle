@@ -333,9 +333,15 @@ class XmlUnmarshalling
                 $node = $node->$nodeName;
             }
 
-            $value = $node->asXML();
-            if ($value != null)
-            {
+            $children = $xml->$property->children();
+
+            if ($children != null) {
+                $value = '';
+
+                foreach ($children as $child) {
+                    $value .= $child->asXML();
+                }
+
                 $setter = 'set' . ucfirst($property);
                 $obj->$setter($value);
             }
