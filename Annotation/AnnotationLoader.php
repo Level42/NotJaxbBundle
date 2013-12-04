@@ -113,8 +113,8 @@ class AnnotationLoader
                     $nodeName = $annotation->node;
                     $metadata
                             ->addAttribute($attributeName,
-                                $property->getName(), $nodeName,
-                                $annotation->ns, $annotation->prefix);
+                                    $property->getName(), $nodeName,
+                                    $annotation->ns, $annotation->prefix);
                 }
             }
         }
@@ -144,16 +144,16 @@ class AnnotationLoader
                         if (is_null($annotation->type)) {
                             $metadata
                                     ->addElement($nodeName,
-                                        $property->getName(),
-                                        $annotation->ns,
-                                        $annotation->prefix);
+                                            $property->getName(),
+                                            $annotation->ns,
+                                            $annotation->prefix);
                         } else {
                             $embeddedMetadata = new ClassMetadata(
-                                $annotation->type);
+                                    $annotation->type);
                             $this->loadClassMetadata($embeddedMetadata, $depth);
                             $metadata
                                     ->addEmbed($nodeName, $property->getName(),
-                                        $embeddedMetadata);
+                                            $embeddedMetadata);
                         }
                     }
                 }
@@ -185,7 +185,7 @@ class AnnotationLoader
 
                         if (!is_null($annotation->type)) {
                             $embeddedMetadata = new ClassMetadata(
-                                $annotation->type);
+                                    $annotation->type);
                             $this->loadClassMetadata($embeddedMetadata, $depth);
                         } else {
                             $embeddedMetadata = null;
@@ -193,9 +193,9 @@ class AnnotationLoader
 
                         $metadata
                                 ->addList($property->getName(), $nodeName,
-                                    $annotation->wrapper,
-                                    $embeddedMetadata, $annotation->ns,
-                                    $annotation->prefix);
+                                        $annotation->wrapper,
+                                        $embeddedMetadata, $annotation->ns,
+                                        $annotation->prefix);
                     }
                 }
             }
@@ -236,12 +236,15 @@ class AnnotationLoader
     protected function loadClassRaw(ClassMetadata $metadata)
     {
         $reflClass = $metadata->getReflectionClass();
-        
+
         foreach ($reflClass->getProperties() as $property) {
             foreach ($this->reader->getPropertyAnnotations($property) as $annotation) {
                 if ($annotation instanceof XmlRaw) {
-                    $nodeName = !is_null($annotation->name) ? $annotation->name : $property->getName();
-                    $metadata->addRaw($nodeName, $property->getName(), $annotation->ns, null);
+                    $nodeName = !is_null($annotation->name) ? $annotation->name
+                            : $property->getName();
+                    $metadata
+                            ->addRaw($nodeName, $property->getName(),
+                                    $annotation->ns, null);
                 }
             }
         }
