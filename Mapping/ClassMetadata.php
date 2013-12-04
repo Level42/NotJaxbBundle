@@ -85,6 +85,13 @@ class ClassMetadata
     protected $value;
 
     /**
+     * Array of xml raws
+     *
+     * @var array
+     */
+    protected $raws = array();
+
+    /**
      * Constructs a metadata for the given class.
      *
      * @param string $className Classname to load
@@ -235,6 +242,27 @@ class ClassMetadata
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * Add info for an XML element
+     *
+     * @param string $name
+     * @param string $property
+     */
+    public function addRaw($name, $property, $ns = null, $prefix = null)
+    {
+        $this->raws[$name] = array($property, $ns, $prefix);
+    }
+
+    /**
+     * Get all of the XML elements
+     *
+     * @return array
+     */
+    public function getRaws()
+    {
+        return $this->raws;
     }
 
     /**
