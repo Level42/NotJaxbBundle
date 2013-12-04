@@ -111,10 +111,9 @@ class AnnotationLoader
                     $attributeName = !is_null($annotation->name) ? $annotation
                                     ->name : $property->getName();
                     $nodeName = $annotation->node;
-                    $metadata
-                            ->addAttribute($attributeName,
-                                    $property->getName(), $nodeName,
-                                    $annotation->ns, $annotation->prefix);
+                    $metadata->addAttribute($attributeName,
+                        $property->getName(), $nodeName,
+                        $annotation->ns, $annotation->prefix);
                 }
             }
         }
@@ -142,18 +141,17 @@ class AnnotationLoader
                         $nodeName = !is_null($annotation->name) ? $annotation
                                         ->name : $property->getName();
                         if (is_null($annotation->type)) {
-                            $metadata
-                                    ->addElement($nodeName,
-                                            $property->getName(),
-                                            $annotation->ns,
-                                            $annotation->prefix);
+                            $metadata->addElement($nodeName,
+                                $property->getName(),
+                                $annotation->ns,
+                                $annotation->prefix);
                         } else {
                             $embeddedMetadata = new ClassMetadata(
                                     $annotation->type);
                             $this->loadClassMetadata($embeddedMetadata, $depth);
-                            $metadata
-                                    ->addEmbed($nodeName, $property->getName(),
-                                            $embeddedMetadata);
+                            $metadata->addEmbed($nodeName,
+                                $property->getName(),
+                                $embeddedMetadata);
                         }
                     }
                 }
@@ -180,8 +178,8 @@ class AnnotationLoader
 
                 foreach ($this->reader->getPropertyAnnotations($property) as $annotation) {
                     if ($annotation instanceof XmlList) {
-                        $nodeName = !is_null($annotation->name) ? $annotation
-                                        ->name : $property->getName();
+                        $nodeName = !is_null($annotation->name) 
+                            ? $annotation->name : $property->getName();
 
                         if (!is_null($annotation->type)) {
                             $embeddedMetadata = new ClassMetadata(
@@ -191,11 +189,11 @@ class AnnotationLoader
                             $embeddedMetadata = null;
                         }
 
-                        $metadata
-                                ->addList($property->getName(), $nodeName,
-                                        $annotation->wrapper,
-                                        $embeddedMetadata, $annotation->ns,
-                                        $annotation->prefix);
+                        $metadata->addList($property->getName(), 
+                            $nodeName,
+                            $annotation->wrapper,
+                            $embeddedMetadata, $annotation->ns,
+                            $annotation->prefix);
                     }
                 }
             }
@@ -240,11 +238,11 @@ class AnnotationLoader
         foreach ($reflClass->getProperties() as $property) {
             foreach ($this->reader->getPropertyAnnotations($property) as $annotation) {
                 if ($annotation instanceof XmlRaw) {
-                    $nodeName = !is_null($annotation->name) ? $annotation->name
-                            : $property->getName();
-                    $metadata
-                            ->addRaw($nodeName, $property->getName(),
-                                    $annotation->ns, null);
+                    $nodeName = !is_null($annotation->name) 
+                        ? $annotation->name : $property->getName();
+                    $metadata->addRaw($nodeName, 
+                        $property->getName(),
+                        $annotation->ns, null);
                 }
             }
         }
