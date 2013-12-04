@@ -507,4 +507,50 @@ class XmlUnmarshallingTest extends TestCase
         $this->assertEquals('Complément 2', $complements[1]->getValeur());
         $this->assertEquals('Complément 3', $complements[2]->getValeur());
     }
+
+    /**
+     * Test a simple unmarshalling with xmlRaw Annotation
+     */
+    public function testUnmarshallingSimpleWithXmlRaw()
+    {
+        $xml = file_get_contents(
+          __DIR__ . '/Resources/xml_sample_xmlraw.xml');
+
+        $result = $this->service
+          ->unmarshall($xml,
+            'Level42\NotJaxbBundle\Tests\Entity\NS4Personnes');
+
+        $this
+          ->assertInstanceOf(
+            'Level42\NotJaxbBundle\Tests\Entity\NS4Personnes',
+            $result);
+
+        // Test with name option
+        $this->assertEquals('<nom>Nom</nom><prenom>Prenom</prenom><email>Email</email>', $result->getPersonne());
+        // Test without option
+        $this->assertEquals('<nom>Nom</nom><prenom>Prenom</prenom>', $result->getAmis());
+    }
+
+    /**
+     * Test a simple unmarshalling with xmlRaw Annotation with Namespace
+     */
+    public function testUnmarshallingSimpleWithXmlRawWithNs()
+    {
+        $xml = file_get_contents(
+          __DIR__ . '/Resources/xml_sample_xmlraw_withns.xml');
+
+        $result = $this->service
+          ->unmarshall($xml,
+            'Level42\NotJaxbBundle\Tests\Entity\NS5Personnes');
+
+        $this
+          ->assertInstanceOf(
+            'Level42\NotJaxbBundle\Tests\Entity\NS5Personnes',
+            $result);
+
+        // Test with name and namespace options
+        $this->assertEquals('<test:nom>Nom</test:nom><test:prenom>Prenom</test:prenom><test:email>Email</test:email>', $result->getPersonne());
+        // Test with name and namespace options (node name different from property)
+        $this->assertEquals('<test:nom>Nom</test:nom><test:prenom>Prenom</test:prenom>', $result->getFriends());
+    }
 }
