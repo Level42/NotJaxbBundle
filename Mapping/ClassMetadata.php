@@ -159,7 +159,8 @@ class ClassMetadata
      * @param string $namespace Namespace of element
      * @param string $prefix    Namespace prefix of element
      */
-    public function addElement($name, $property, $namespace = null, $prefix = null)
+    public function addElement($name, $property, $namespace = null,
+            $prefix = null)
     {
         $this->elements[$name] = array($property, $namespace, $prefix);
     }
@@ -182,7 +183,8 @@ class ClassMetadata
      * @param string $namespace Namespace of element
      * @param string $prefix    Namespace prefix of element
      */
-    public function addEmbed($name, $property, $namespace = null, $prefix = null)
+    public function addEmbed($name, $property, $namespace = null,
+            $prefix = null)
     {
         $this->embeds[$name] = array($property, $namespace, $prefix);
     }
@@ -246,13 +248,15 @@ class ClassMetadata
 
     /**
      * Add info for an XML element
-     *
-     * @param string $name
-     * @param string $property
+     * 
+     * @param string $name      XML node name
+     * @param string $property  Property name
+     * @param string $namespace Namespace of element
+     * @param string $prefix    Namespace prefix of element
      */
-    public function addRaw($name, $property, $ns = null, $prefix = null)
+    public function addRaw($name, $property, $namespace = null, $prefix = null)
     {
-        $this->raws[$name] = array($property, $ns, $prefix);
+        $this->raws[$name] = array($property, $namespace, $prefix);
     }
 
     /**
