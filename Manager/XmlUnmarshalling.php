@@ -322,7 +322,7 @@ class XmlUnmarshalling
      */
     protected function parseRaw(\SimpleXmlElement $xml, ClassMetadata $metadata, $obj)
     {
-        foreach ($metadata->getRows() as $nodeName => $info)
+        foreach ($metadata->getRaws() as $nodeName => $info)
         {
             $property = $info[0];
             $namespace = $info[1];

@@ -85,11 +85,11 @@ class ClassMetadata
     protected $value;
 
     /**
-     * Array of xml rows
+     * Array of xml raws
      *
      * @var array
      */
-    protected $rows = array();
+    protected $raws = array();
 
     /**
      * Constructs a metadata for the given class.
@@ -252,7 +252,7 @@ class ClassMetadata
      */
     public function addRaw($name, $property, $ns = null, $prefix = null)
     {
-        $this->rows[$name] = array($property, $ns, $prefix);
+        $this->raws[$name] = array($property, $ns, $prefix);
     }
 
     /**
@@ -260,9 +260,9 @@ class ClassMetadata
      *
      * @return array
      */
-    public function getRows()
+    public function getRaws()
     {
-        return $this->rows;
+        return $this->raws;
     }
 
     /**
