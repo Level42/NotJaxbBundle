@@ -229,24 +229,23 @@ class AnnotationLoader
     /**
      * Load all of the @XmlRaw annotations
      *
-     * @param ClassMetadata $metadata
+     * @param ClassMetadata $metadata Metadatas description of class
      *
      * @return ClassMetadata Metadatas description of class
      */
     protected function loadClassRaw(ClassMetadata $metadata)
     {
-
         $reflClass = $metadata->getReflectionClass();
-        foreach ($reflClass->getProperties() as $property)
-        {
-            foreach ($this->reader->getPropertyAnnotations($property) as $annotation)
-            {
-                if ($annotation instanceof XmlRaw)
-                {
+        
+        foreach ($reflClass->getProperties() as $property) {
+            foreach ($this->reader->getPropertyAnnotations($property) as $annotation) {
+                if ($annotation instanceof XmlRaw) {
                     $nodeName = !is_null($annotation->name) ? $annotation->name : $property->getName();
                     $metadata->addRaw($nodeName, $property->getName(), $annotation->ns, null);
                 }
             }
         }
+
+        return $metadata;
     }
 }
