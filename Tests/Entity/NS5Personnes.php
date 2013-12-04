@@ -10,7 +10,7 @@
 namespace Level42\NotJaxbBundle\Tests\Entity;
 
 use Level42\NotJaxbBundle\Annotation\XmlObject;
-use Level42\NotJaxbBundle\Annotation\XmlRow;
+use Level42\NotJaxbBundle\Annotation\XmlRaw;
 
 /**
  * @XmlObject(name="personnes", ns="http://test/namespace#")
@@ -18,12 +18,12 @@ use Level42\NotJaxbBundle\Annotation\XmlRow;
 class NS5Personnes
 {
     /**
-     * @XmlRow(name="personne", ns="http://test/namespace#")
+     * @XmlRaw(name="personne", ns="http://test/namespace#")
      */
     private $personne;
 
     /**
-     * @XmlRow(name="amis", ns="http://test/namespace#")
+     * @XmlRaw(name="amis", ns="http://test/namespace#")
      */
     private $friends;
 

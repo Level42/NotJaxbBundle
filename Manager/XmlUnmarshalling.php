@@ -124,7 +124,7 @@ class XmlUnmarshalling
             $this->parseEmbeds($xml, $metadata, $obj);
             $this->parseLists($xml, $metadata, $obj);
             $this->parseValue($xml, $metadata, $obj);
-            $this->parseRow($xml, $metadata, $obj);
+            $this->parseRaw($xml, $metadata, $obj);
 
             return $obj;
         } else {
@@ -320,7 +320,7 @@ class XmlUnmarshalling
      *
      * @return mixed Object to transform to XML
      */
-    protected function parseRow(\SimpleXmlElement $xml, ClassMetadata $metadata, $obj)
+    protected function parseRaw(\SimpleXmlElement $xml, ClassMetadata $metadata, $obj)
     {
         foreach ($metadata->getRows() as $nodeName => $info)
         {

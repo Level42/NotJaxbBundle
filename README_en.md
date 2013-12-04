@@ -118,7 +118,7 @@ PHP
          */
         private $description;
 
-#### @XmlRow
+#### @XmlRaw
 This annotation allows you to get a XML node as string.
 Options :
 - name : Attribute name in XML (if different of class attribute name)
@@ -133,7 +133,7 @@ XML
 PHP
 
         /**
-         * @XmlRow (name="personne", [ns="http://..."])
+         * @XmlRaw (name="personne", [ns="http://..."])
          */
         private $personne;
 

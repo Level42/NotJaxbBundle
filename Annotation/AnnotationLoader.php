@@ -83,7 +83,7 @@ class AnnotationLoader
                         $this->loadClassElements($metadata, $depth);
                         $this->loadClassLists($metadata, $depth);
                         $this->loadClassValue($metadata);
-                        $this->loadClassRow($metadata);
+                        $this->loadClassRaw($metadata);
                     }
                 }
             } catch (MaxDepthException $ex) {
@@ -227,13 +227,13 @@ class AnnotationLoader
     }
 
     /**
-     * Load all of the @XmlRow annotations
+     * Load all of the @XmlRaw annotations
      *
      * @param ClassMetadata $metadata
      *
      * @return ClassMetadata Metadatas description of class
      */
-    protected function loadClassRow(ClassMetadata $metadata)
+    protected function loadClassRaw(ClassMetadata $metadata)
     {
 
         $reflClass = $metadata->getReflectionClass();
@@ -241,10 +241,10 @@ class AnnotationLoader
         {
             foreach ($this->reader->getPropertyAnnotations($property) as $annotation)
             {
-                if ($annotation instanceof XmlRow)
+                if ($annotation instanceof XmlRaw)
                 {
                     $nodeName = !is_null($annotation->name) ? $annotation->name : $property->getName();
-                    $metadata->addRow($nodeName, $property->getName(), $annotation->ns, null);
+                    $metadata->addRaw($nodeName, $property->getName(), $annotation->ns, null);
                 }
             }
         }

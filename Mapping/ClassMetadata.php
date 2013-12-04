@@ -250,7 +250,7 @@ class ClassMetadata
      * @param string $name
      * @param string $property
      */
-    public function addRow($name, $property, $ns = null, $prefix = null)
+    public function addRaw($name, $property, $ns = null, $prefix = null)
     {
         $this->rows[$name] = array($property, $ns, $prefix);
     }

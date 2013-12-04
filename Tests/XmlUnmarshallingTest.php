@@ -509,12 +509,12 @@ class XmlUnmarshallingTest extends TestCase
     }
 
     /**
-     * Test a simple unmarshalling with xmlRow Annotation
+     * Test a simple unmarshalling with xmlRaw Annotation
      */
-    public function testUnmarshallingSimpleWithXmlRow()
+    public function testUnmarshallingSimpleWithXmlRaw()
     {
         $xml = file_get_contents(
-          __DIR__ . '/Resources/xml_sample_xmlrow.xml');
+          __DIR__ . '/Resources/xml_sample_xmlraw.xml');
 
         $result = $this->service
           ->unmarshall($xml,
@@ -532,12 +532,12 @@ class XmlUnmarshallingTest extends TestCase
     }
 
     /**
-     * Test a simple unmarshalling with xmlRow Annotation with Namespace
+     * Test a simple unmarshalling with xmlRaw Annotation with Namespace
      */
-    public function testUnmarshallingSimpleWithXmlRowWithNs()
+    public function testUnmarshallingSimpleWithXmlRawWithNs()
     {
         $xml = file_get_contents(
-          __DIR__ . '/Resources/xml_sample_xmlrow_withns.xml');
+          __DIR__ . '/Resources/xml_sample_xmlraw_withns.xml');
 
         $result = $this->service
           ->unmarshall($xml,

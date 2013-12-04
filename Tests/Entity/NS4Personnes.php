@@ -10,7 +10,7 @@
 namespace Level42\NotJaxbBundle\Tests\Entity;
 
 use Level42\NotJaxbBundle\Annotation\XmlObject;
-use Level42\NotJaxbBundle\Annotation\XmlRow;
+use Level42\NotJaxbBundle\Annotation\XmlRaw;
 
 /**
  * @XmlObject(name="personnes")
@@ -18,12 +18,12 @@ use Level42\NotJaxbBundle\Annotation\XmlRow;
 class NS4Personnes
 {
     /**
-     * @XmlRow(name="personne")
+     * @XmlRaw(name="personne")
      */
     private $personne;
 
     /**
-     * @XmlRow()
+     * @XmlRaw()
      */
     private $amis;
 

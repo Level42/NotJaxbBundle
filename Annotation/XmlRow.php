@@ -12,11 +12,11 @@ namespace Level42\NotJaxbBundle\Annotation;
 use Doctrine\Common\Annotations\Annotation;
 
 /**
- * XmlRow maps a entity property to an XML node value.
+ * XmlRaw maps a entity property to an XML node value.
  * 
  * @Annotation
  */
-class XmlRow extends Annotation
+class XmlRaw extends Annotation
 {
     /**
      * Attribute name

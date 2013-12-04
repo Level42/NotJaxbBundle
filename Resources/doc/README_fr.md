@@ -121,7 +121,7 @@ PHP
          */
         private $poste;
 
-#### @XmlRow
+#### @XmlRaw
 Cette annotation est utilisée pour obtenir le contenu d'un noeud XML sous forme de chaine de caractères.
 Options :
 - name : Nom de l'attribut dans le XML (si différent du nom de l'attribut de la classe)
@@ -136,7 +136,7 @@ XML
 PHP
 
         /**
-         * @XmlRow (name="personne", [ns="http://..."])
+         * @XmlRaw (name="personne", [ns="http://..."])
          */
         private $personne;
 
