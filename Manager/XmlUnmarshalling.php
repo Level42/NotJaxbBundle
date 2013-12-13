@@ -314,16 +314,15 @@ class XmlUnmarshalling
     /**
      * Parse the value from a SimpleXml node
      *
-     * @param SimpleXmlElement $xml     XML object to read
+     * @param SimpleXmlElement $xml      XML object to read
      * @param ClassMetadata    $metadata Metadatas linked to object to parse
      * @param mixed            $obj      Object to transform to XML
-     *
+     * 
      * @return mixed Object to transform to XML
      */
     protected function parseRaw(\SimpleXmlElement $xml, ClassMetadata $metadata, $obj)
     {
-        foreach ($metadata->getRaws() as $nodeName => $info)
-        {
+        foreach ($metadata->getRaws() as $nodeName => $info) {
             $property = $info[0];
             $namespace = $info[1];
 
@@ -347,5 +346,7 @@ class XmlUnmarshalling
                 $obj->$setter($value);
             }
         }
+
+        return $obj;
     }
 }
