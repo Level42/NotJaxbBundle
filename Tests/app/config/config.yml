@@ -30,7 +30,7 @@ doctrine:
         memory:   true
         host:     localhost
         port:     null
-        dbname:   junitissues_db_test
+        dbname:   notjaxb
         user:     null
         password: null
         charset:  UTF8
