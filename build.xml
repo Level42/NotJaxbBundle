@@ -20,7 +20,10 @@
 		<delete dir="${env.WORKSPACE}/Tests/app/cache" />
 		<delete dir="${env.WORKSPACE}/Tests/app/logs" />
 	</target>
-
+    
+    <target name="clean-vendors" description="Nettoyage des dossiers vendor">
+        <delete dir="${env.WORKSPACE}/vendor" />
+    </target>
 
 	<target name="prepare" description="Préparation des tests">
 		<exec executable="wget">
