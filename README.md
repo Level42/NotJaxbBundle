@@ -3,6 +3,10 @@ NotJaxbBundle
 
 [![Build Status](https://api.travis-ci.org/Level42/NotJaxbBundle.png?branch=master)](http://travis-ci.org/Level42/NotJaxbBundle)
 
+[![Latest Stable Version](https://poser.pugx.org/level42/notjaxb-bundle/v/stable.png)](https://packagist.org/packages/level42/notjaxb-bundle)
+
+[![Latest Unstable Version](https://poser.pugx.org/level42/notjaxb-bundle/v/unstable.png)](https://packagist.org/packages/level42/notjaxb-bundle)
+
 
 Ce bundle permet d'hydrater des objets PHP à partir d'un fichier XML en utilisant des annotations ou de la même manière, de générer un flux XML à partir d'un objet. Un peu comme SAX en Java ;)
 A l'origine il s'agit de l'outil https://raw.github.com/lampjunkie/xml-hitch intégré dans un bundle et avec quelques fonctionnalités supplémentaires (namespace, recursivité des objets)
