@@ -17,14 +17,14 @@ use Doctrine\Common\Cache\Cache;
 use \SimpleXmlElement;
 
 /**
- * Manager for all operations used to convert 
+ * Manager for all operations used to convert
  * XML file to PHP Object.
  */
 class XmlUnmarshalling
 {
     /**
      * The ClassMetadata factory.
-     * 
+     *
      * @var ClassMetadataFactory Used to construct metadatas of classes
      */
     protected $classMetadataFactory;
@@ -38,7 +38,7 @@ class XmlUnmarshalling
 
     /**
      * Manager constructor with required dependecy injection.
-     * 
+     *
      * @param ClassMetadataFactory $classMetadataFactory
      *     Service used to generate metadatas from class
      */
@@ -66,7 +66,7 @@ class XmlUnmarshalling
      *
      * @param string $xmlString XML string to read
      * @param string $rootClass Classname to hydrate
-     * 
+     *
      * @return mixed $object Object to transform to XML
      */
     public function unmarshall($xmlString, $rootClass)
@@ -80,14 +80,14 @@ class XmlUnmarshalling
 
     /**
      * Set the ClassMetadataFactory.
-     * 
+     *
      * @param ClassMetadataFactory $classMetadataFactory
      *     Service used to generate metadatas from class
-     * 
+     *
      * @return XmlMarshalling
      */
     public function setClassMetadataFactory(
-            ClassMetadataFactory $classMetadataFactory)
+        ClassMetadataFactory $classMetadataFactory)
     {
         $this->classMetadataFactory = $classMetadataFactory;
 
@@ -109,11 +109,11 @@ class XmlUnmarshalling
      *
      * @param SimpleXmlElement $xml      XML object to read
      * @param ClassMetadata    $metadata Metadatas linked to object to parse
-     * 
+     *
      * @return mixed $object Object to transform to XML
      */
     protected function parseObject(\SimpleXmlElement $xml,
-            ClassMetadata $metadata)
+        ClassMetadata $metadata)
     {
         if ($xml->getName() != null) {
             $class = $metadata->getClassName();
@@ -139,11 +139,11 @@ class XmlUnmarshalling
      * @param SimpleXmlElement $xml      XML object to read
      * @param ClassMetadata    $metadata Metadatas linked to object to parse
      * @param mixed            $obj      Object to transform to XML
-     * 
+     *
      * @return mixed Object to transform to XML
      */
     protected function parseAttributes(\SimpleXmlElement $xml,
-            ClassMetadata $metadata, $obj)
+        ClassMetadata $metadata, $obj)
     {
         foreach ($metadata->getAttributes() as $name => $info) {
             $property = $info[0];
@@ -175,22 +175,19 @@ class XmlUnmarshalling
      * @param SimpleXmlElement $xml      XML object to read
      * @param ClassMetadata    $metadata Metadatas linked to object to parse
      * @param mixed            $obj      Object to transform to XML
-     * 
+     *
      * @return mixed Object to transform to XML
      */
     protected function parseElements(\SimpleXmlElement $xml,
-            ClassMetadata $metadata, $obj)
+        ClassMetadata $metadata, $obj)
     {
+        $parentNamespace = $metadata->getNamespace();
         foreach ($metadata->getElements() as $name => $properties) {
             $property = $properties[0];
-            $namespace = $properties[1];
+            $namespace = $this->getPropertyNamespace($parentNamespace, $properties[1]);
 
-            if ($namespace == null) {
-                $value = (string) $xml->$name;
-            } else {
-                $elements = $xml->children($namespace);
-                $value = (string) $elements->$name;
-            }
+            $elements = $xml->children($namespace);
+            $value = (string) $elements->$name;
 
             $setter = 'set' . ucfirst($property);
             $obj->$setter($value);
@@ -206,23 +203,19 @@ class XmlUnmarshalling
      * @param SimpleXmlElement $xml      XML object to read
      * @param ClassMetadata    $metadata Metadatas linked to object to parse
      * @param mixed            $obj      Object to transform to XML
-     * 
+     *
      * @return mixed Object to transform to XML
      */
     protected function parseEmbeds(\SimpleXmlElement $xml,
-            ClassMetadata $metadata, $obj)
+        ClassMetadata $metadata, $obj)
     {
         foreach ($metadata->getEmbeds() as $nodeName => $info) {
             $property = $info[0];
             $tempMetaData = $info[1];
             $namespace = $tempMetaData->getNamespace();
 
-            if ($namespace == null) {
-                $tempXml = $xml->$nodeName;
-            } else {
-                $tempXml = $xml->children($namespace);
-                $tempXml = $tempXml->$nodeName;
-            }
+            $tempXml = $xml->children($namespace);
+            $tempXml = $tempXml->$nodeName;
 
             if ($tempXml != null) {
                 $tempObj = $this->parseObject($tempXml, $tempMetaData);
@@ -243,11 +236,11 @@ class XmlUnmarshalling
      * @param SimpleXmlElement $xml      XML object to read
      * @param ClassMetadata    $metadata Metadatas linked to object to parse
      * @param mixed            $obj      Object to transform to XML
-     * 
+     *
      * @return mixed Object to transform to XML
      */
     protected function parseLists(\SimpleXmlElement $xml,
-            ClassMetadata $metadata, $obj)
+        ClassMetadata $metadata, $obj)
     {
         foreach ($metadata->getLists() as $nodeName => $info) {
             $property = $info[0];
@@ -296,11 +289,11 @@ class XmlUnmarshalling
      * @param SimpleXmlElement $xml      XML object to read
      * @param ClassMetadata    $metadata Metadatas linked to object to parse
      * @param mixed            $obj      Object to transform to XML
-     * 
+     *
      * @return mixed Object to transform to XML
      */
     protected function parseValue(\SimpleXmlElement $xml,
-            ClassMetadata $metadata, $obj)
+        ClassMetadata $metadata, $obj)
     {
         if (!is_null($metadata->getValue())) {
             $setter = 'set' . ucfirst($metadata->getValue());
@@ -317,7 +310,7 @@ class XmlUnmarshalling
      * @param SimpleXmlElement $xml      XML object to read
      * @param ClassMetadata    $metadata Metadatas linked to object to parse
      * @param mixed            $obj      Object to transform to XML
-     * 
+     *
      * @return mixed Object to transform to XML
      */
     protected function parseRaw(\SimpleXmlElement $xml, ClassMetadata $metadata, $obj)
@@ -326,14 +319,7 @@ class XmlUnmarshalling
             $property = $info[0];
             $namespace = $info[1];
 
-            if ($namespace == null) {
-                $node = $xml->$nodeName;
-            } else {
-                $node = $xml->children($namespace);
-                $node = $node->$nodeName;
-            }
-
-            $children = $xml->$nodeName->children($namespace);
+            $children = $xml->children($namespace)->$nodeName->children($namespace);
 
             if ($children != null) {
                 $value = '';
@@ -348,5 +334,35 @@ class XmlUnmarshalling
         }
 
         return $obj;
+    }
+
+    /**
+     * Decide which namespace should be used for given $parentNamespace and $propertyNamespace.
+     * The purpose is to give ability to configure a node without namespace on a parent node that use namespace.
+     * If the user configure that a node MUST not use any namespace, he have to give a blank value :
+     *  [a]XmlElement(ns="")
+     *
+     * @param string|null $parentNamespace   The property class configured namespace
+     * @param string|null $propertyNamespace The property configured namespace
+     *
+     * @return string|null
+     */
+    protected function getPropertyNamespace($parentNamespace, $propertyNamespace)
+    {
+        if ('' === $propertyNamespace) {
+            //Blank namespace configured
+            return null;
+        }
+        if (null === $propertyNamespace) {
+            //Undefined namespace
+            if ('' === $parentNamespace) {
+                //Blank namespace configured
+                return null;
+            }
+
+            return $parentNamespace;
+        }
+
+        return $propertyNamespace;
     }
 }

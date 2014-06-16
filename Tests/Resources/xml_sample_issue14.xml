@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<foo:wrapper xmlns:foo="http://www.foo-bar.com/"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.foo-bar.com/ http://www.foo-bar.com/schema.xsd">
+    <foo:bar>BAR</foo:bar>
+    <object id="1">
+        <title>Test 1</title>
+        <foo:description>Test description 1</foo:description>
+    </object>
+    <collection>
+        <object id="2">
+            <title>Test 2</title>
+            <foo:description>Test description 2</foo:description>
+        </object>
+        <object id="3">
+            <title>Test 3</title>
+            <foo:description>Test description 3</foo:description>
+        </object>
+    </collection>
+    <raw>
+        <foo>BAR</foo>
+        <bar>BAZ</bar>
+    </raw>
+</foo:wrapper>
