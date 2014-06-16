@@ -553,4 +553,44 @@ class XmlUnmarshallingTest extends TestCase
         // Test with name and namespace options (node name different from property)
         $this->assertEquals('<test:nom>Nom</test:nom><test:prenom>Prenom</test:prenom>', $result->getFriends());
     }
+
+    /**
+     * Test the bugfix of the issue #14
+     * @link https://github.com/Level42/NotJaxbBundle/issues/14
+     */
+    public function testIssue14()
+    {
+        $xml = file_get_contents(__DIR__ . '/Resources/xml_sample_issue14.xml');
+
+        $wrapperClass = 'Level42\NotJaxbBundle\Tests\Entity\Issue14\TestWrapper';
+        $objectClass  = 'Level42\NotJaxbBundle\Tests\Entity\Issue14\TestObject';
+
+        $result = $this->service->unmarshall($xml, $wrapperClass);
+
+        $this->assertInstanceOf($wrapperClass, $result);
+
+        /* @var $result \Level42\NotJaxbBundle\Tests\Entity\Issue14\TestWrapper */
+
+        $this->assertEquals('BAR', $result->getBar());
+
+        $object = $result->getObject();
+        $this->assertInstanceOf($objectClass, $object);
+        $this->assertEquals('1', $object->getId());
+        $this->assertEquals('Test 1', $object->getTitle());
+        $this->assertEquals('Test description 1', $object->getDescription());
+
+        $collection = $result->getCollection();
+        $this->assertInternalType('array', $collection);
+        $this->assertCount(2, $collection);
+        $this->assertInstanceOf($objectClass, $collection[0]);
+        $this->assertEquals('2', $collection[0]->getId());
+        $this->assertEquals('Test 2', $collection[0]->getTitle());
+        $this->assertEquals('Test description 2', $collection[0]->getDescription());
+        $this->assertInstanceOf($objectClass, $collection[1]);
+        $this->assertEquals('3', $collection[1]->getId());
+        $this->assertEquals('Test 3', $collection[1]->getTitle());
+        $this->assertEquals('Test description 3', $collection[1]->getDescription());
+
+        $this->assertEquals('<foo>BAR</foo><bar>BAZ</bar>', $result->getRaw());
+    }
 }
